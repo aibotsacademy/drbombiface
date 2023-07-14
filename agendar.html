@@ -104,9 +104,22 @@
 						<div class="home_content">
 							<div class="home_title">Agendar Cita</div>
 							<div class="home_text">¡Elige la mejor fecha y horario para vos! 👇</div>
-
-!-- Google Calendar Appointment Scheduling begin -->
-<iframe src="https://calendar.google.com/calendar/appointments/AcZssZ3Oi4TucWQNlRCesZE-T68e_lx1I46-P1313iw=?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+<!-- Google Calendar Appointment Scheduling begin -->
+<link href="https://calendar.google.com/calendar/scheduling-button-script.css" rel="stylesheet">
+<script src="https://calendar.google.com/calendar/scheduling-button-script.js" async></script>
+<script>
+(function() {
+  var target = document.currentScript;
+  window.addEventListener('load', function() {
+    calendar.schedulingButton.load({
+      url: 'https://calendar.google.com/calendar/appointments/AcZssZ3Oi4TucWQNlRCesZE-T68e_lx1I46-P1313iw=?gv=true',
+      color: '#039BE5',
+      label: "Agendar Cita",
+      target,
+    });
+  });
+})();
+</script>
 <!-- end Google Calendar Appointment Scheduling -->
 
 
@@ -130,6 +143,10 @@
 						<div class="section_title_container">
 							<div class="section_subtitle">Ella es la Dra. Bombi Face</div>
 							<div class="section_title"><h2>Bienvenid@ a nuestra clínica</h2></div>
+<!-- Google Calendar Appointment Scheduling begin -->
+<iframe src="https://calendar.google.com/calendar/appointments/AcZssZ3Oi4TucWQNlRCesZE-T68e_lx1I46-P1313iw=?gv=true" style="border: 0" width="100%" height="600" frameborder="0"></iframe>
+<!-- end Google Calendar Appointment Scheduling -->
+
 						</div>
 						<div class="intro_text">
 							<p>Médico General graduada de la UCIMED en Costa Rica, y especializada en Medicina Estética en Buenos Aires, Argentina.</p>
