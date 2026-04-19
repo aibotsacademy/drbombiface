@@ -1,0 +1,1186 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clínica Dra. Jenireé Gutiérrez | Medicina Estética · Costa Rica</title>
+<meta name="description" content="Especialistas en medicina estética en Costa Rica. Bioestimuladores, rellenos, ultherapy, láser, toxina botulínica y más. Santa Ana Town Center.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+  :root {
+    --gold: #C9A96E;
+    --gold-light: #E8D5B0;
+    --gold-dark: #A07840;
+    --rose: #F2C4CE;
+    --rose-light: #FAF0F2;
+    --rose-mid: #E8A8B8;
+    --rose-deep: #C97088;
+    --white: #FFFDFЕ;
+    --off-white: #FDF8F5;
+    --text-dark: #2A1F1A;
+    --text-mid: #5C4A42;
+    --text-light: #9B8880;
+    --font-display: 'Cormorant Garamond', Georgia, serif;
+    --font-body: 'Jost', sans-serif;
+  }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    font-family: var(--font-body);
+    color: var(--text-dark);
+    background: #fff;
+    overflow-x: hidden;
+  }
+
+  /* ── NAV ── */
+  nav {
+    position: fixed; top: 0; left: 0; right: 0; z-index: 1000;
+    display: flex; align-items: center; justify-content: space-between;
+    padding: 1.2rem 3rem;
+    background: rgba(255,255,255,0.08);
+    backdrop-filter: blur(14px);
+    -webkit-backdrop-filter: blur(14px);
+    border-bottom: 1px solid rgba(201,169,110,0.2);
+    transition: background 0.4s, padding 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(255,253,250,0.96);
+    padding: 0.8rem 3rem;
+    border-bottom: 1px solid rgba(201,169,110,0.35);
+    box-shadow: 0 4px 30px rgba(201,169,110,0.08);
+  }
+  .nav-logo {
+    font-family: var(--font-display);
+    font-size: 1.1rem;
+    font-weight: 300;
+    color: #fff;
+    text-decoration: none;
+    letter-spacing: 0.08em;
+    transition: color 0.4s;
+  }
+  nav.scrolled .nav-logo { color: var(--text-dark); }
+  .nav-logo span { color: var(--gold); font-style: italic; }
+  .nav-links {
+    display: flex; gap: 2.5rem; list-style: none; align-items: center;
+  }
+  .nav-links a {
+    font-size: 0.72rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.85); text-decoration: none; font-weight: 300;
+    transition: color 0.3s;
+  }
+  nav.scrolled .nav-links a { color: var(--text-mid); }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-cta {
+    font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase;
+    border: 1px solid rgba(201,169,110,0.7); color: var(--gold);
+    padding: 0.55rem 1.4rem; text-decoration: none;
+    transition: all 0.3s; font-weight: 400;
+  }
+  .nav-cta:hover { background: var(--gold); color: #fff; }
+  .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+  .hamburger span { display: block; width: 24px; height: 1.5px; background: #fff; transition: background 0.4s; }
+  nav.scrolled .hamburger span { background: var(--text-dark); }
+
+  /* ── HERO ── */
+  .hero {
+    position: relative; height: 100vh; min-height: 600px;
+    display: flex; align-items: center; justify-content: center;
+    overflow: hidden;
+  }
+  .hero-video-bg {
+    position: absolute; inset: 0;
+    background: linear-gradient(135deg, #1a0e14 0%, #2d1520 30%, #1f1018 60%, #0d0a08 100%);
+    z-index: 0;
+  }
+  /* Animated gradient overlay simulating video atmosphere */
+  .hero-video-bg::before {
+    content: '';
+    position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 70% 60% at 80% 30%, rgba(201,169,110,0.12) 0%, transparent 60%),
+      radial-gradient(ellipse 50% 70% at 20% 80%, rgba(242,196,206,0.10) 0%, transparent 55%),
+      radial-gradient(ellipse 40% 40% at 50% 10%, rgba(201,169,110,0.07) 0%, transparent 50%);
+    animation: atmoshimmer 8s ease-in-out infinite alternate;
+  }
+  .hero-video-bg::after {
+    content: '';
+    position: absolute; inset: 0;
+    background: radial-gradient(ellipse 120% 80% at 50% 50%, transparent 40%, rgba(0,0,0,0.5) 100%);
+  }
+  @keyframes atmoshimmer {
+    0% { opacity: 0.6; }
+    100% { opacity: 1; }
+  }
+  /* Particle-like sparkle dots */
+  .hero-particles {
+    position: absolute; inset: 0; z-index: 1; overflow: hidden;
+  }
+  .hero-particles span {
+    position: absolute; width: 1px; height: 1px;
+    background: var(--gold-light);
+    border-radius: 50%;
+    animation: sparkle var(--d, 4s) var(--delay, 0s) ease-in-out infinite alternate;
+    opacity: 0;
+  }
+  @keyframes sparkle {
+    0% { opacity: 0; transform: scale(1); }
+    50% { opacity: 0.9; transform: scale(2.5); }
+    100% { opacity: 0; transform: scale(1); }
+  }
+  .hero-content {
+    position: relative; z-index: 2; text-align: center;
+    padding: 0 2rem;
+    animation: heroin 1.4s cubic-bezier(0.22, 1, 0.36, 1) forwards;
+    opacity: 0; transform: translateY(30px);
+  }
+  @keyframes heroin {
+    to { opacity: 1; transform: translateY(0); }
+  }
+  .hero-eyebrow {
+    font-size: 0.65rem; letter-spacing: 0.35em; text-transform: uppercase;
+    color: var(--gold); font-weight: 400; margin-bottom: 1.5rem;
+    display: flex; align-items: center; justify-content: center; gap: 1rem;
+  }
+  .hero-eyebrow::before, .hero-eyebrow::after {
+    content: ''; display: block; width: 40px; height: 1px; background: var(--gold); opacity: 0.5;
+  }
+  .hero-title {
+    font-family: var(--font-display);
+    font-size: clamp(3rem, 8vw, 6.5rem);
+    font-weight: 300; line-height: 1.05;
+    color: #fff; letter-spacing: 0.02em;
+    margin-bottom: 0.3rem;
+  }
+  .hero-title em {
+    font-style: italic; color: var(--gold);
+    display: block; font-size: 0.85em;
+  }
+  .hero-sub {
+    font-family: var(--font-display);
+    font-size: clamp(1rem, 2.5vw, 1.4rem);
+    color: rgba(255,255,255,0.5); font-weight: 300;
+    letter-spacing: 0.12em; margin-bottom: 2.8rem;
+  }
+  .hero-actions {
+    display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap;
+  }
+  .btn-gold {
+    display: inline-flex; align-items: center; gap: 0.5rem;
+    background: linear-gradient(135deg, var(--gold) 0%, #A07840 100%);
+    color: #fff; padding: 0.85rem 2.2rem;
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none; font-weight: 400;
+    transition: all 0.35s; border: none; cursor: pointer;
+    position: relative; overflow: hidden;
+  }
+  .btn-gold::after {
+    content: ''; position: absolute; inset: 0;
+    background: rgba(255,255,255,0.1);
+    transform: translateX(-100%); transition: transform 0.3s;
+  }
+  .btn-gold:hover::after { transform: translateX(0); }
+  .btn-gold:hover { transform: translateY(-2px); box-shadow: 0 8px 30px rgba(201,169,110,0.4); }
+  .btn-outline {
+    display: inline-flex; align-items: center;
+    border: 1px solid rgba(255,255,255,0.35); color: #fff;
+    padding: 0.85rem 2.2rem;
+    font-size: 0.7rem; letter-spacing: 0.2em; text-transform: uppercase;
+    text-decoration: none; font-weight: 300;
+    transition: all 0.3s;
+  }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* Scroll indicator */
+  .scroll-cue {
+    position: absolute; bottom: 2.5rem; left: 50%; transform: translateX(-50%);
+    z-index: 2; text-align: center; cursor: pointer;
+    animation: bouncein 1.8s 1.4s ease-out forwards; opacity: 0;
+  }
+  @keyframes bouncein {
+    0% { opacity: 0; transform: translateX(-50%) translateY(10px); }
+    100% { opacity: 1; transform: translateX(-50%) translateY(0); }
+  }
+  .scroll-cue p {
+    font-size: 0.58rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-bottom: 0.6rem; font-weight: 300;
+  }
+  .scroll-arrow {
+    width: 24px; height: 24px; margin: 0 auto;
+    border-right: 1px solid var(--gold); border-bottom: 1px solid var(--gold);
+    transform: rotate(45deg);
+    animation: bounce 1.8s ease-in-out infinite;
+    opacity: 0.7;
+  }
+  @keyframes bounce { 0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(6px)} }
+
+  /* ── SECTION COMMONS ── */
+  section { padding: 7rem 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .section-eyebrow {
+    font-size: 0.62rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); font-weight: 400; margin-bottom: 1rem;
+    display: flex; align-items: center; gap: 0.8rem;
+  }
+  .section-eyebrow::before {
+    content: ''; display: block; width: 30px; height: 1px; background: var(--gold); opacity: 0.6;
+  }
+  .section-title {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.2rem);
+    font-weight: 300; line-height: 1.15; letter-spacing: 0.01em;
+    color: var(--text-dark); margin-bottom: 1.2rem;
+  }
+  .section-title em { font-style: italic; color: var(--rose-deep); }
+  .section-lead {
+    font-size: 1rem; line-height: 1.8; color: var(--text-light);
+    max-width: 540px; font-weight: 300;
+  }
+
+  /* ── DIVIDER ── */
+  .divider-gold {
+    display: flex; align-items: center; gap: 1rem; margin: 0.8rem 0 2rem;
+  }
+  .divider-gold span { display: block; height: 1px; background: var(--gold-light); flex: 1; }
+  .divider-gold i { width: 6px; height: 6px; border: 1px solid var(--gold); transform: rotate(45deg); flex-shrink: 0; }
+
+  /* ── SERVICES ── */
+  .services { background: var(--off-white); }
+  .services-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+    gap: 1.5px; margin-top: 4rem;
+    border: 1.5px solid var(--gold-light);
+  }
+  .service-card {
+    background: #fff; padding: 2.8rem 2.2rem;
+    transition: all 0.35s;
+    cursor: pointer; text-decoration: none; display: block;
+    border-right: 1.5px solid var(--gold-light);
+    border-bottom: 1.5px solid var(--gold-light);
+    position: relative; overflow: hidden;
+  }
+  .service-card::before {
+    content: ''; position: absolute; bottom: 0; left: 0; right: 0; height: 2px;
+    background: linear-gradient(90deg, var(--gold), var(--rose-mid));
+    transform: scaleX(0); transform-origin: left;
+    transition: transform 0.35s;
+  }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: var(--rose-light); transform: translateY(-3px); }
+  .service-icon {
+    font-size: 1.6rem; margin-bottom: 1.3rem;
+    width: 52px; height: 52px; display: flex; align-items: center; justify-content: center;
+    border: 1px solid var(--gold-light);
+    background: linear-gradient(135deg, rgba(201,169,110,0.06), rgba(242,196,206,0.1));
+  }
+  .service-name {
+    font-family: var(--font-display);
+    font-size: 1.15rem; font-weight: 400; color: var(--text-dark);
+    margin-bottom: 0.6rem; letter-spacing: 0.01em;
+  }
+  .service-desc {
+    font-size: 0.82rem; color: var(--text-light);
+    line-height: 1.7; font-weight: 300;
+  }
+  .service-arrow {
+    display: inline-block; margin-top: 1.2rem;
+    font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); opacity: 0; transform: translateX(-8px);
+    transition: all 0.3s;
+  }
+  .service-card:hover .service-arrow { opacity: 1; transform: translateX(0); }
+
+  /* ── ABOUT / DRA ── */
+  .about { background: #fff; }
+  .about-grid {
+    display: grid; grid-template-columns: 1fr 1fr;
+    gap: 5rem; align-items: center;
+  }
+  .about-image-wrap {
+    position: relative;
+  }
+  .about-image-frame {
+    width: 100%; padding-top: 125%;
+    background: linear-gradient(160deg, var(--rose-light) 0%, var(--gold-light) 100%);
+    position: relative; overflow: hidden;
+  }
+  .about-image-frame img {
+    position: absolute; inset: 0; width: 100%; height: 100%;
+    object-fit: cover; object-position: top center;
+  }
+  .about-image-frame-placeholder {
+    position: absolute; inset: 0;
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 1rem;
+  }
+  .about-image-frame-placeholder p {
+    font-family: var(--font-display); font-size: 1.2rem; color: var(--text-light);
+    letter-spacing: 0.05em; font-style: italic;
+  }
+  .about-badge {
+    position: absolute; bottom: -1.5rem; right: -1.5rem; z-index: 2;
+    background: var(--text-dark); color: var(--gold);
+    width: 120px; height: 120px; display: flex; flex-direction: column;
+    align-items: center; justify-content: center; text-align: center;
+    border: 1px solid rgba(201,169,110,0.3);
+  }
+  .about-badge strong {
+    font-family: var(--font-display);
+    font-size: 2.2rem; font-weight: 300; line-height: 1;
+    display: block; color: var(--gold);
+  }
+  .about-badge span {
+    font-size: 0.58rem; letter-spacing: 0.15em; text-transform: uppercase;
+    color: rgba(255,255,255,0.5); font-weight: 300;
+  }
+  .about-deco {
+    position: absolute; top: -1rem; left: -1rem;
+    width: 120px; height: 120px;
+    border-top: 1.5px solid var(--gold-light);
+    border-left: 1.5px solid var(--gold-light);
+    z-index: 0;
+  }
+  .credentials {
+    margin-top: 2.5rem; display: flex; flex-direction: column; gap: 1rem;
+  }
+  .credential-item {
+    display: flex; align-items: flex-start; gap: 1rem;
+    padding-bottom: 1rem; border-bottom: 1px solid var(--rose-light);
+  }
+  .credential-dot {
+    width: 6px; height: 6px; border: 1px solid var(--gold);
+    transform: rotate(45deg); margin-top: 0.45rem; flex-shrink: 0;
+  }
+  .credential-text { font-size: 0.85rem; color: var(--text-mid); line-height: 1.6; font-weight: 300; }
+  .credential-text strong { color: var(--text-dark); font-weight: 400; display: block; margin-bottom: 0.1rem; }
+
+  /* ── STATS ── */
+  .stats-strip {
+    background: var(--text-dark);
+    padding: 0;
+  }
+  .stats-inner {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+  }
+  .stat-item {
+    padding: 3.5rem 2rem; text-align: center;
+    border-right: 1px solid rgba(201,169,110,0.15);
+  }
+  .stat-item:last-child { border-right: none; }
+  .stat-num {
+    font-family: var(--font-display);
+    font-size: clamp(2.5rem, 4vw, 3.8rem);
+    font-weight: 300; color: var(--gold); line-height: 1;
+    display: block;
+  }
+  .stat-label {
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: rgba(255,255,255,0.4); margin-top: 0.6rem; font-weight: 300;
+  }
+
+  /* ── PROCESO / CTA ── */
+  .proceso { background: var(--off-white); }
+  .steps-grid {
+    display: grid; grid-template-columns: repeat(4, 1fr);
+    gap: 0; margin-top: 4rem;
+    position: relative;
+  }
+  .steps-grid::before {
+    content: ''; position: absolute;
+    top: 2.5rem; left: 12%; right: 12%; height: 1px;
+    background: linear-gradient(90deg, transparent, var(--gold-light), transparent);
+  }
+  .step-item {
+    text-align: center; padding: 0 1.5rem;
+  }
+  .step-num {
+    width: 50px; height: 50px; margin: 0 auto 1.5rem;
+    border: 1px solid var(--gold-light); display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 1.1rem; color: var(--gold);
+    background: #fff; position: relative; z-index: 1;
+  }
+  .step-title {
+    font-family: var(--font-display); font-size: 1.05rem; font-weight: 400;
+    color: var(--text-dark); margin-bottom: 0.5rem;
+  }
+  .step-text { font-size: 0.8rem; color: var(--text-light); line-height: 1.7; font-weight: 300; }
+
+  /* ── CTA BANNER ── */
+  .cta-banner {
+    background: linear-gradient(135deg, #1a0e14 0%, #2a1820 50%, #1a0e14 100%);
+    position: relative; overflow: hidden;
+    padding: 6rem 0;
+  }
+  .cta-banner::before {
+    content: ''; position: absolute; inset: 0;
+    background:
+      radial-gradient(ellipse 60% 80% at 90% 50%, rgba(201,169,110,0.08) 0%, transparent 60%),
+      radial-gradient(ellipse 40% 60% at 10% 50%, rgba(242,196,206,0.06) 0%, transparent 50%);
+  }
+  .cta-banner-inner {
+    position: relative; z-index: 1; text-align: center;
+  }
+  .cta-banner h2 {
+    font-family: var(--font-display);
+    font-size: clamp(2rem, 4vw, 3.2rem); font-weight: 300;
+    color: #fff; margin-bottom: 0.5rem; letter-spacing: 0.02em;
+  }
+  .cta-banner h2 em { font-style: italic; color: var(--gold); }
+  .cta-banner p { color: rgba(255,255,255,0.4); font-size: 0.9rem; margin-bottom: 2.5rem; font-weight: 300; }
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* ── ESTÉTICA FEED (antes Blog) ── */
+  .feed { background: #fff; }
+  .feed-header {
+    display: flex; align-items: flex-end; justify-content: space-between;
+    margin-bottom: 3.5rem; flex-wrap: wrap; gap: 1.5rem;
+  }
+  .feed-filters {
+    display: flex; gap: 0.8rem; flex-wrap: wrap;
+  }
+  .filter-btn {
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+    padding: 0.45rem 1.1rem; border: 1px solid var(--gold-light);
+    background: transparent; color: var(--text-light); cursor: pointer;
+    transition: all 0.25s; font-family: var(--font-body); font-weight: 300;
+  }
+  .filter-btn.active, .filter-btn:hover { background: var(--gold); border-color: var(--gold); color: #fff; }
+  .feed-grid {
+    display: grid; grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+    gap: 2rem;
+  }
+  .feed-card {
+    display: block; text-decoration: none; group: true;
+    transition: transform 0.3s;
+  }
+  .feed-card:hover { transform: translateY(-4px); }
+  .feed-img {
+    width: 100%; aspect-ratio: 4/3; overflow: hidden;
+    background: linear-gradient(135deg, var(--rose-light), var(--gold-light));
+    position: relative;
+  }
+  .feed-img-inner {
+    position: absolute; inset: 0;
+    display: flex; align-items: center; justify-content: center;
+    font-family: var(--font-display); font-size: 2.5rem;
+    color: rgba(201,169,110,0.4);
+  }
+  .feed-tag {
+    position: absolute; top: 1rem; left: 1rem;
+    font-size: 0.58rem; letter-spacing: 0.2em; text-transform: uppercase;
+    background: var(--text-dark); color: var(--gold);
+    padding: 0.3rem 0.8rem; font-weight: 400;
+  }
+  .feed-body { padding: 1.5rem 0; }
+  .feed-date { font-size: 0.65rem; letter-spacing: 0.15em; color: var(--text-light); text-transform: uppercase; font-weight: 300; }
+  .feed-title {
+    font-family: var(--font-display);
+    font-size: 1.2rem; font-weight: 400; color: var(--text-dark);
+    line-height: 1.35; margin: 0.5rem 0 0.8rem; letter-spacing: 0.01em;
+  }
+  .feed-excerpt { font-size: 0.82rem; color: var(--text-light); line-height: 1.7; font-weight: 300; }
+  .feed-read {
+    display: inline-flex; align-items: center; gap: 0.5rem; margin-top: 1rem;
+    font-size: 0.62rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: var(--gold); font-weight: 400;
+  }
+  .feed-read::after { content: '→'; }
+
+  /* ── NEWSLETTER ── */
+  .newsletter-section {
+    background: linear-gradient(160deg, var(--rose-light) 0%, rgba(255,255,255,0) 60%),
+                var(--off-white);
+    padding: 6rem 0;
+  }
+  .newsletter-wrap {
+    max-width: 700px; margin: 0 auto; text-align: center;
+  }
+  .newsletter-wrap .section-title { margin-bottom: 0.5rem; }
+  .newsletter-wrap p { font-size: 0.9rem; color: var(--text-light); margin-bottom: 2.5rem; font-weight: 300; line-height: 1.7; }
+  .newsletter-form {
+    display: flex; gap: 0; max-width: 480px; margin: 0 auto;
+    border: 1px solid var(--gold-light);
+  }
+  .newsletter-form input[type="email"] {
+    flex: 1; padding: 0.9rem 1.2rem;
+    font-family: var(--font-body); font-size: 0.85rem; font-weight: 300;
+    border: none; outline: none; background: #fff; color: var(--text-dark);
+  }
+  .newsletter-form input::placeholder { color: var(--text-light); }
+  .newsletter-form button {
+    padding: 0.9rem 1.5rem;
+    background: var(--gold); color: #fff; border: none; cursor: pointer;
+    font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase;
+    font-family: var(--font-body); font-weight: 400;
+    transition: background 0.3s;
+  }
+  .newsletter-form button:hover { background: var(--gold-dark); }
+  .newsletter-perks {
+    display: flex; justify-content: center; gap: 2rem; margin-top: 1.8rem; flex-wrap: wrap;
+  }
+  .newsletter-perk {
+    display: flex; align-items: center; gap: 0.5rem;
+    font-size: 0.72rem; color: var(--text-light); font-weight: 300;
+  }
+  .newsletter-perk::before {
+    content: '✦'; color: var(--gold); font-size: 0.55rem;
+  }
+
+  /* ── INSTAGRAM STRIP ── */
+  .insta-strip {
+    background: var(--text-dark); padding: 5rem 0;
+  }
+  .insta-inner { text-align: center; }
+  .insta-inner p {
+    font-size: 0.65rem; letter-spacing: 0.3em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 2.5rem;
+  }
+  .insta-grid {
+    display: grid; grid-template-columns: repeat(6, 1fr); gap: 3px;
+    margin-bottom: 2.5rem;
+  }
+  .insta-cell {
+    aspect-ratio: 1;
+    background: linear-gradient(135deg, #2a1820, #1a1410);
+    display: flex; align-items: center; justify-content: center;
+    font-size: 1.5rem; opacity: 0.6;
+    cursor: pointer; transition: opacity 0.3s;
+    position: relative; overflow: hidden;
+  }
+  .insta-cell:hover { opacity: 1; }
+  .insta-cell::after {
+    content: 'Ver'; position: absolute; inset: 0;
+    background: rgba(201,169,110,0.3); display: flex; align-items: center; justify-content: center;
+    font-size: 0.65rem; letter-spacing: 0.2em; text-transform: uppercase;
+    color: #fff; opacity: 0; transition: opacity 0.3s;
+    font-family: var(--font-body);
+  }
+  .insta-cell:hover::after { opacity: 1; }
+
+  /* ── FOOTER ── */
+  footer {
+    background: #0d0a08; padding: 5rem 0 2rem;
+    border-top: 1px solid rgba(201,169,110,0.12);
+  }
+  .footer-grid {
+    display: grid; grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 3rem; margin-bottom: 4rem;
+  }
+  .footer-brand p {
+    font-family: var(--font-display); font-size: 0.9rem;
+    color: rgba(255,255,255,0.35); line-height: 1.8; margin-top: 1.2rem; font-weight: 300;
+    max-width: 260px;
+  }
+  .footer-logo-txt {
+    font-family: var(--font-display);
+    font-size: 1.1rem; font-weight: 300; color: #fff; letter-spacing: 0.05em;
+  }
+  .footer-logo-txt span { color: var(--gold); font-style: italic; }
+  .footer-logo-sub { font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase; color: rgba(255,255,255,0.25); margin-top: 0.2rem; }
+  .footer-social {
+    display: flex; gap: 0.8rem; margin-top: 1.5rem;
+  }
+  .social-icon {
+    width: 36px; height: 36px; border: 1px solid rgba(201,169,110,0.25);
+    display: flex; align-items: center; justify-content: center;
+    color: rgba(255,255,255,0.4); text-decoration: none; font-size: 0.75rem;
+    transition: all 0.3s;
+  }
+  .social-icon:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-col-title {
+    font-size: 0.6rem; letter-spacing: 0.25em; text-transform: uppercase;
+    color: var(--gold); margin-bottom: 1.5rem; font-weight: 400;
+  }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: 0.7rem; }
+  .footer-links a {
+    font-size: 0.82rem; color: rgba(255,255,255,0.3); text-decoration: none;
+    font-weight: 300; transition: color 0.3s;
+  }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-info { list-style: none; display: flex; flex-direction: column; gap: 0.8rem; }
+  .footer-info li { font-size: 0.8rem; color: rgba(255,255,255,0.3); font-weight: 300; line-height: 1.5; }
+  .footer-info li strong { color: rgba(255,255,255,0.5); font-weight: 400; display: block; font-size: 0.65rem; text-transform: uppercase; letter-spacing: 0.1em; margin-bottom: 0.1rem; }
+  .footer-bar {
+    border-top: 1px solid rgba(255,255,255,0.05); padding-top: 2rem;
+    display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem;
+  }
+  .footer-bar p { font-size: 0.72rem; color: rgba(255,255,255,0.15); font-weight: 300; }
+  .footer-bar a { color: rgba(201,169,110,0.5); text-decoration: none; }
+
+  /* ── MOBILE MENU ── */
+  .mobile-menu {
+    position: fixed; inset: 0; z-index: 999;
+    background: rgba(10,6,5,0.97);
+    display: flex; flex-direction: column; align-items: center; justify-content: center;
+    gap: 2rem; opacity: 0; pointer-events: none;
+    transition: opacity 0.4s;
+  }
+  .mobile-menu.open { opacity: 1; pointer-events: all; }
+  .mobile-menu a {
+    font-family: var(--font-display);
+    font-size: 2rem; color: rgba(255,255,255,0.7); text-decoration: none;
+    font-weight: 300; letter-spacing: 0.05em;
+    transition: color 0.2s;
+  }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-close {
+    position: absolute; top: 1.5rem; right: 2rem;
+    font-size: 1.5rem; color: rgba(255,255,255,0.4); cursor: pointer;
+    background: none; border: none; font-family: var(--font-body);
+  }
+
+  /* ── WHATSAPP FLOAT ── */
+  .wa-float {
+    position: fixed; bottom: 2rem; right: 2rem; z-index: 900;
+    width: 54px; height: 54px; border-radius: 50%;
+    background: #25D366; display: flex; align-items: center; justify-content: center;
+    text-decoration: none; box-shadow: 0 4px 20px rgba(37,211,102,0.35);
+    transition: transform 0.3s, box-shadow 0.3s;
+    animation: wapop 0.5s 2s ease-out backwards;
+  }
+  @keyframes wapop { from { transform: scale(0); } to { transform: scale(1); } }
+  .wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 30px rgba(37,211,102,0.5); }
+  .wa-float svg { width: 26px; height: 26px; fill: #fff; }
+
+  /* ── REVEAL ANIMATIONS ── */
+  .reveal { opacity: 0; transform: translateY(24px); transition: opacity 0.7s ease, transform 0.7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* ── RESPONSIVE ── */
+  @media (max-width: 900px) {
+    nav { padding: 1rem 1.5rem; }
+    nav.scrolled { padding: 0.7rem 1.5rem; }
+    .nav-links { display: none; }
+    .hamburger { display: flex; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .stats-inner { grid-template-columns: repeat(2, 1fr); }
+    .stat-item { border-bottom: 1px solid rgba(201,169,110,0.15); }
+    .steps-grid { grid-template-columns: repeat(2, 1fr); gap: 2rem; }
+    .steps-grid::before { display: none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .insta-grid { grid-template-columns: repeat(3, 1fr); }
+  }
+  @media (max-width: 600px) {
+    section { padding: 4rem 0; }
+    .hero-actions { flex-direction: column; align-items: center; }
+    .stats-inner { grid-template-columns: 1fr 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .insta-grid { grid-template-columns: repeat(3, 1fr); }
+    .nav-cta { display: none; }
+    .services-grid { grid-template-columns: 1fr; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAVIGATION -->
+<nav id="mainNav">
+  <a href="#inicio" class="nav-logo">Dra. <span>Jenireé</span> Gutiérrez</a>
+  <ul class="nav-links">
+    <li><a href="#servicios">Servicios</a></li>
+    <li><a href="#sobre-la-dra">La Dra.</a></li>
+    <li><a href="#proceso">Proceso</a></li>
+    <li><a href="#aprende">Aprende</a></li>
+    <li><a href="#contacto">Contacto</a></li>
+  </ul>
+  <a href="https://api.whatsapp.com/send/?phone=%2B50662987582" class="nav-cta" target="_blank">Agendar Cita</a>
+  <div class="hamburger" id="hamburger" onclick="toggleMenu()">
+    <span></span><span></span><span></span>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#servicios" onclick="toggleMenu()">Servicios</a>
+  <a href="#sobre-la-dra" onclick="toggleMenu()">La Dra.</a>
+  <a href="#proceso" onclick="toggleMenu()">Proceso</a>
+  <a href="#aprende" onclick="toggleMenu()">Aprende</a>
+  <a href="https://api.whatsapp.com/send/?phone=%2B50662987582" target="_blank" onclick="toggleMenu()">Agendar Cita</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-video-bg"></div>
+  <div class="hero-particles" id="particles"></div>
+
+  <div class="hero-content">
+    <div class="hero-eyebrow">Medicina Estética · Santa Ana, Costa Rica</div>
+    <h1 class="hero-title">
+      Bienvenida a la<br>
+      <em>Clínica Dra. Jenireé</em>
+    </h1>
+    <p class="hero-sub">Donde la ciencia y la belleza se encuentran</p>
+    <div class="hero-actions">
+      <a href="https://api.whatsapp.com/send/?phone=%2B50662987582" class="btn-gold" target="_blank">
+        ✦ &nbsp;Agendar mi cita
+      </a>
+      <a href="#servicios" class="btn-outline">Ver servicios</a>
+    </div>
+  </div>
+
+  <div class="scroll-cue" onclick="document.querySelector('#servicios').scrollIntoView({behavior:'smooth'})">
+    <p>Descubrir</p>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="servicios">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow">Tratamientos</div>
+      <h2 class="section-title">Nuestros <em>servicios</em></h2>
+      <div class="divider-gold"><span></span><i></i><span></span></div>
+      <p class="section-lead">Cada tratamiento es diseñado a medida para resaltar tu belleza natural, con tecnología de vanguardia y productos de primera línea.</p>
+    </div>
+
+    <div class="services-grid reveal" style="transition-delay: 0.15s;">
+
+      <a class="service-card" href="#aprende">
+        <div class="service-icon">✦</div>
+        <div class="service-name">Bioestimuladores</div>
+        <div class="service-desc">Estimula la producción natural de colágeno y elastina. Resultados progresivos y duraderos para una piel más firme y luminosa.</div>
+        <div class="service-arrow">Conocer más →</div>
+      </a>
+
+      <a class="service-card" href="#aprende">
+        <div class="service-icon">◈</div>
+        <div class="service-name">Péptidos</div>
+        <div class="service-desc">Tratamientos con péptidos bioactivos que regeneran la piel desde adentro, reduciendo signos de envejecimiento con precisión molecular.</div>
+        <div class="service-arrow">Conocer más →</div>
+      </a>
+
+      <a class="service-card" href="#aprende">
+        <div class="service-icon">◇</div>
+        <div class="service-name">Rellenos de Ácido Hialurónico</div>
+        <div class="service-desc">Labios, pómulos, ojeras, mentón y más. Resultados naturales e inmediatos que respetan tus rasgos únicos.</div>
+        <div class="service-arrow">Conocer más →</div>
+      </a>
+
+      <a class="service-card" href="#aprende">
+        <div class="service-icon">⬡</div>
+        <div class="service-name">Ultherapy</div>
+        <div class="service-desc">Ultrasonido microfocalizado que levanta y tensa el tejido sin cirugía. El lifting no invasivo más avanzado del mercado.</div>
+        <div class="service-arrow">Conocer más →</div>
+      </a>
+
+      <a class="service-card" href="#aprende">
+        <div class="service-icon">✧</div>
+        <div class="service-name">Tecnología Láser</div>
+        <div class="service-desc">Fotona, Starwalker, CO₂, IPL y más. Manchas, rejuvenecimiento, poros y textura — resueltos con precisión láser.</div>
+        <div class="service-arrow">Conocer más →</div>
+      </a>
+
+      <a class="service-card" href="#aprende">
+        <div class="service-icon">◉</div>
+        <div class="service-name">Toxina Botulínica</div>
+        <div class="service-desc">Tratamiento experto de arrugas de expresión: frente, entrecejo, patas de gallo y más, preservando tu expresividad natural.</div>
+        <div class="service-arrow">Conocer más →</div>
+      </a>
+
+      <a class="service-card" href="#aprende">
+        <div class="service-icon">♡</div>
+        <div class="service-name">Estética Vaginal</div>
+        <div class="service-desc">Tratamientos íntimos con tecnología de última generación para bienestar, rejuvenecimiento y mayor calidad de vida femenina.</div>
+        <div class="service-arrow">Conocer más →</div>
+      </a>
+
+      <a class="service-card" href="#aprende">
+        <div class="service-icon">☽</div>
+        <div class="service-name">Depilación Láser</div>
+        <div class="service-desc">Eliminación definitiva del vello no deseado con tecnología láser de diodo de última generación. Segura y efectiva en todo tipo de piel.</div>
+        <div class="service-arrow">Conocer más →</div>
+      </a>
+
+      <a class="service-card" href="#aprende">
+        <div class="service-icon">⁂</div>
+        <div class="service-name">Facial & Spa</div>
+        <div class="service-desc">Limpiezas profundas, peelings, mesoterapia y tratamientos relajantes que renuevan tu piel y revitalizan tu mente.</div>
+        <div class="service-arrow">Conocer más →</div>
+      </a>
+
+    </div>
+  </div>
+</section>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="container" style="padding:0;">
+    <div class="stats-inner">
+      <div class="stat-item reveal">
+        <span class="stat-num" data-count="2000">0</span>
+        <div class="stat-label">Pacientes satisfechos</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay:0.1s">
+        <span class="stat-num" data-count="6500">0</span>
+        <div class="stat-label">Jeringas aplicadas</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay:0.2s">
+        <span class="stat-num" data-count="1000">0</span>
+        <div class="stat-label">Rostros tratados</div>
+      </div>
+      <div class="stat-item reveal" style="transition-delay:0.3s">
+        <span class="stat-num">8+</span>
+        <div class="stat-label">Años de experiencia</div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="sobre-la-dra">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image-wrap reveal">
+        <div class="about-deco"></div>
+        <div class="about-image-frame">
+          <div class="about-image-frame-placeholder">
+            <p>Dra. Jenireé Gutiérrez</p>
+          </div>
+        </div>
+        <div class="about-badge">
+          <strong>UCR</strong>
+          <span>UBA Especialidad</span>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:0.2s">
+        <div class="section-eyebrow">La Doctora</div>
+        <h2 class="section-title">Una experta <em>internacional</em> a tu servicio</h2>
+        <div class="divider-gold"><span></span><i></i><span></span></div>
+        <p class="section-lead">Médico Cirujana graduada de la UCIMED, especializada en Medicina Estética en la Universidad de Buenos Aires, Argentina. Reconocida internacionalmente por su enfoque en resultados naturales y atención personalizada.</p>
+        <div class="credentials">
+          <div class="credential-item">
+            <div class="credential-dot"></div>
+            <div class="credential-text"><strong>Médico Cirujana — UCIMED, Costa Rica</strong>Formación médica integral con énfasis en el paciente y su bienestar.</div>
+          </div>
+          <div class="credential-item">
+            <div class="credential-dot"></div>
+            <div class="credential-text"><strong>Especialista en Medicina Estética — UBA, Argentina</strong>Posgrado en las técnicas más avanzadas de medicina estética y rejuvenecimiento.</div>
+          </div>
+          <div class="credential-item">
+            <div class="credential-dot"></div>
+            <div class="credential-text"><strong>Formación continua internacional</strong>Entrenamiento constante con líderes mundiales en bioestimulación, láser y armonización facial.</div>
+          </div>
+        </div>
+        <div style="margin-top: 2.5rem; display:flex; gap:1rem; flex-wrap:wrap;">
+          <a href="https://api.whatsapp.com/send/?phone=%2B50662987582" class="btn-gold" target="_blank">Agendar consulta</a>
+          <a href="https://www.instagram.com/dra.jenireegutierrez/" class="btn-outline" target="_blank" style="border-color: var(--gold-light); color: var(--text-mid);">Ver en Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="proceso" id="proceso">
+  <div class="container">
+    <div class="reveal" style="text-align:center; max-width:600px; margin:0 auto;">
+      <div class="section-eyebrow" style="justify-content:center;">Tu experiencia</div>
+      <h2 class="section-title">El camino <em>Bombis</em></h2>
+      <div class="divider-gold" style="justify-content:center;"><span></span><i></i><span></span></div>
+      <p class="section-lead" style="margin:0 auto;">Cuatro pasos para que vivas la transformación más natural y segura de tu vida.</p>
+    </div>
+    <div class="steps-grid reveal" style="transition-delay:0.2s;">
+      <div class="step-item">
+        <div class="step-num">01</div>
+        <div class="step-title">Consulta</div>
+        <div class="step-text">Analizamos tus objetivos, historial y expectativas en un espacio de total confianza.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">02</div>
+        <div class="step-title">Diagnóstico</div>
+        <div class="step-text">Diseñamos un plan personalizado con los tratamientos más adecuados para ti.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">03</div>
+        <div class="step-title">Tratamiento</div>
+        <div class="step-text">Aplicamos los procedimientos con la máxima precisión, seguridad y confort.</div>
+      </div>
+      <div class="step-item">
+        <div class="step-num">04</div>
+        <div class="step-title">Seguimiento</div>
+        <div class="step-text">Te acompañamos en tu proceso de recuperación y evaluamos los resultados.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div class="container">
+    <div class="cta-banner-inner reveal">
+      <h2>¿Lista para tu <em>transformación</em>?</h2>
+      <p>Agenda tu consulta hoy · Santa Ana Town Center, Local 14 y 15</p>
+      <div class="cta-actions">
+        <a href="https://api.whatsapp.com/send/?phone=%2B50662987582" class="btn-gold" target="_blank">✦ &nbsp;WhatsApp · +506 6298-7582</a>
+        <a href="https://www.instagram.com/dra.jenireegutierrez/" class="btn-outline" target="_blank">Ver resultados en Instagram</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEED / APRENDE -->
+<section class="feed" id="aprende">
+  <div class="container">
+    <div class="feed-header reveal">
+      <div>
+        <div class="section-eyebrow">Conocimiento</div>
+        <h2 class="section-title">Aprende sobre <em>medicina estética</em></h2>
+        <div class="divider-gold"><span></span><i></i><span></span></div>
+        <p class="section-lead">Tu espacio para entender los tratamientos, tendencias y ciencia detrás de la medicina estética moderna.</p>
+      </div>
+      <div class="feed-filters">
+        <button class="filter-btn active">Todo</button>
+        <button class="filter-btn">Rellenos</button>
+        <button class="filter-btn">Láser</button>
+        <button class="filter-btn">Piel</button>
+        <button class="filter-btn">Tendencias</button>
+      </div>
+    </div>
+
+    <div class="feed-grid reveal" style="transition-delay:0.2s;">
+
+      <a class="feed-card" href="#">
+        <div class="feed-img">
+          <div class="feed-img-inner">✦</div>
+          <span class="feed-tag">Bioestimulación</span>
+        </div>
+        <div class="feed-body">
+          <div class="feed-date">Abril 2025</div>
+          <div class="feed-title">¿Qué son los bioestimuladores y cómo funcionan en tu piel?</div>
+          <div class="feed-excerpt">Descubre cómo estos tratamientos activan tus propias células para producir colágeno de forma natural y duradera.</div>
+          <div class="feed-read">Leer artículo</div>
+        </div>
+      </a>
+
+      <a class="feed-card" href="#">
+        <div class="feed-img">
+          <div class="feed-img-inner">◈</div>
+          <span class="feed-tag">Rellenos</span>
+        </div>
+        <div class="feed-body">
+          <div class="feed-date">Marzo 2025</div>
+          <div class="feed-title">Ácido Hialurónico: guía completa para principiantes</div>
+          <div class="feed-excerpt">Todo lo que necesitas saber antes de tu primera sesión de rellenos dérmicos: qué esperar, duración y cuidados.</div>
+          <div class="feed-read">Leer artículo</div>
+        </div>
+      </a>
+
+      <a class="feed-card" href="#">
+        <div class="feed-img">
+          <div class="feed-img-inner">☽</div>
+          <span class="feed-tag">Láser</span>
+        </div>
+        <div class="feed-body">
+          <div class="feed-date">Febrero 2025</div>
+          <div class="feed-title">Depilación láser: mitos y verdades que debes conocer</div>
+          <div class="feed-excerpt">Aclaramos los conceptos más comunes sobre la depilación láser y por qué es la solución definitiva para el vello no deseado.</div>
+          <div class="feed-read">Leer artículo</div>
+        </div>
+      </a>
+
+    </div>
+    <div style="text-align:center; margin-top:3rem;" class="reveal">
+      <a href="#" class="btn-gold" style="background:transparent; color:var(--gold); border:1px solid var(--gold-light); display:inline-flex; align-items:center; gap:.5rem;">Ver todos los artículos →</a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section" id="newsletter">
+  <div class="container">
+    <div class="newsletter-wrap reveal">
+      <div class="section-eyebrow" style="justify-content:center;">Newsletter Exclusivo</div>
+      <h2 class="section-title">Únete al mundo <em>Bombis</em></h2>
+      <div class="divider-gold" style="justify-content:center;"><span></span><i></i><span></span></div>
+      <p>Recibe tips de skincare, novedades en tratamientos, promociones exclusivas para suscriptoras y contenido educativo de la mano de la Dra. Jenireé. Sin spam, solo lo mejor.</p>
+      <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+        <input type="email" placeholder="Tu correo electrónico" required>
+        <button type="submit">Suscribirme</button>
+      </form>
+      <div class="newsletter-perks">
+        <div class="newsletter-perk">Promociones exclusivas</div>
+        <div class="newsletter-perk">Tips de skincare</div>
+        <div class="newsletter-perk">Novedades en tratamientos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM STRIP -->
+<div class="insta-strip">
+  <div class="container">
+    <div class="insta-inner reveal">
+      <p>Síguenos en Instagram · @dra.jenireegutierrez</p>
+      <div class="insta-grid">
+        <div class="insta-cell" onclick="window.open('https://www.instagram.com/dra.jenireegutierrez/')">✦</div>
+        <div class="insta-cell" onclick="window.open('https://www.instagram.com/dra.jenireegutierrez/')">◈</div>
+        <div class="insta-cell" onclick="window.open('https://www.instagram.com/dra.jenireegutierrez/')">◇</div>
+        <div class="insta-cell" onclick="window.open('https://www.instagram.com/dra.jenireegutierrez/')">⬡</div>
+        <div class="insta-cell" onclick="window.open('https://www.instagram.com/dra.jenireegutierrez/')">✧</div>
+        <div class="insta-cell" onclick="window.open('https://www.instagram.com/dra.jenireegutierrez/')">⁂</div>
+      </div>
+      <a href="https://www.instagram.com/dra.jenireegutierrez/" class="btn-outline" target="_blank" style="border-color:rgba(201,169,110,0.4); color:var(--gold);">Ver perfil completo</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contacto">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand reveal">
+        <div class="footer-logo-txt">Dra. <span>Jenireé</span> Gutiérrez</div>
+        <div class="footer-logo-sub">Medicina Estética · Costa Rica</div>
+        <p>Especialistas en resaltar la belleza natural que ya posees, con los más altos estándares de calidad y tecnología de vanguardia.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/dra.jenireegutierrez/" class="social-icon" target="_blank">ig</a>
+          <a href="https://www.facebook.com/drajenimedestetica" class="social-icon" target="_blank">fb</a>
+          <a href="https://www.tiktok.com/@dra.jenireegutierrez" class="social-icon" target="_blank">tk</a>
+          <a href="https://api.whatsapp.com/send/?phone=%2B50662987582" class="social-icon" target="_blank">wa</a>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:0.1s">
+        <div class="footer-col-title">Servicios</div>
+        <ul class="footer-links">
+          <li><a href="#">Bioestimuladores</a></li>
+          <li><a href="#">Rellenos HA</a></li>
+          <li><a href="#">Ultherapy</a></li>
+          <li><a href="#">Toxina Botulínica</a></li>
+          <li><a href="#">Tecnología Láser</a></li>
+          <li><a href="#">Estética Vaginal</a></li>
+          <li><a href="#">Facial & Spa</a></li>
+        </ul>
+      </div>
+      <div class="reveal" style="transition-delay:0.2s">
+        <div class="footer-col-title">Clínica</div>
+        <ul class="footer-links">
+          <li><a href="#sobre-la-dra">La Doctora</a></li>
+          <li><a href="#aprende">Aprende</a></li>
+          <li><a href="#newsletter">Newsletter</a></li>
+          <li><a href="https://api.whatsapp.com/send/?phone=%2B50662987582">Agendar cita</a></li>
+          <li><a href="#">Amazon Shop</a></li>
+        </ul>
+      </div>
+      <div class="reveal" style="transition-delay:0.3s">
+        <div class="footer-col-title">Contacto</div>
+        <ul class="footer-info">
+          <li><strong>Ubicación</strong>Santa Ana Town Center<br>Local 14 y 15, Santa Ana</li>
+          <li><strong>WhatsApp</strong>+506 6298-7582</li>
+          <li><strong>Email</strong>info@drajenireegutierrez.com</li>
+          <li><strong>Horario</strong>Lun–Vie: 9am–5pm<br>Sáb: 9am–12pm</li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <p>© 2025 JG Medical SRL · Todos los derechos reservados</p>
+      <p><a href="#">Términos y condiciones</a> · <a href="#">Privacidad</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- WhatsApp Float -->
+<a class="wa-float" href="https://api.whatsapp.com/send/?phone=%2B50662987582" target="_blank" aria-label="Contactar por WhatsApp">
+  <svg viewBox="0 0 24 24" xmlns="http://www.w3.org/2000/svg">
+    <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+  </svg>
+</a>
+
+<script>
+// NAV scroll behavior
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => {
+  nav.classList.toggle('scrolled', window.scrollY > 60);
+});
+
+// Mobile menu
+function toggleMenu() {
+  document.getElementById('mobileMenu').classList.toggle('open');
+}
+
+// Filter buttons
+document.querySelectorAll('.filter-btn').forEach(btn => {
+  btn.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(b => b.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+// Scroll reveal
+const revealEls = document.querySelectorAll('.reveal');
+const observer = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      entry.target.classList.add('visible');
+      observer.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.12 });
+revealEls.forEach(el => observer.observe(el));
+
+// Counter animation
+function animateCounter(el) {
+  const target = parseInt(el.dataset.count);
+  if (!target) return;
+  let current = 0;
+  const duration = 1800;
+  const step = target / (duration / 16);
+  const timer = setInterval(() => {
+    current += step;
+    if (current >= target) { current = target; clearInterval(timer); }
+    el.textContent = Math.floor(current).toLocaleString() + '+';
+  }, 16);
+}
+const statObserver = new IntersectionObserver((entries) => {
+  entries.forEach(entry => {
+    if (entry.isIntersecting) {
+      animateCounter(entry.target);
+      statObserver.unobserve(entry.target);
+    }
+  });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => statObserver.observe(el));
+
+// Particles
+(function() {
+  const container = document.getElementById('particles');
+  for (let i = 0; i < 40; i++) {
+    const s = document.createElement('span');
+    s.style.cssText = `
+      left:${Math.random()*100}%;
+      top:${Math.random()*100}%;
+      width:${Math.random()*2+1}px;
+      height:${Math.random()*2+1}px;
+      --d:${Math.random()*4+3}s;
+      --delay:${Math.random()*6}s;
+    `;
+    container.appendChild(s);
+  }
+})();
+
+// Newsletter
+function handleNewsletter(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  btn.textContent = '¡Bienvenida! ✦';
+  btn.style.background = '#3a7d44';
+  setTimeout(() => { btn.textContent = 'Suscribirme'; btn.style.background = ''; }, 3000);
+}
+
+// Smooth scroll for all anchors
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if (target) { e.preventDefault(); target.scrollIntoView({ behavior: 'smooth' }); }
+  });
+});
+</script>
+</body>
+</html>
