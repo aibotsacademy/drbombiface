@@ -45,7 +45,7 @@
 
   /* HERO */
   .hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
-  .hero-video-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #1a0e14 0%, #2d1520 35%, #1a1010 65%, #0d0a08 100%); z-index: 0; }
+  .hero-video-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #1a0e14 0%, #2d1520 35%, #1a1010 65%, #0d0a08 100%); z-index: 0; overflow: hidden; }
   .hero-video-bg::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 65% 55% at 78% 28%, rgba(201,169,110,0.13) 0%, transparent 60%), radial-gradient(ellipse 45% 65% at 18% 78%, rgba(242,196,206,0.09) 0%, transparent 55%); animation: atmo 9s ease-in-out infinite alternate; }
   .hero-video-bg::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 130% 85% at 50% 50%, transparent 38%, rgba(0,0,0,0.55) 100%); }
   @keyframes atmo { 0%{opacity:.55}100%{opacity:1} }
@@ -302,7 +302,21 @@
 
 <!-- HERO -->
 <section class="hero" id="inicio">
-  <div class="hero-video-bg"></div>
+
+<div class="hero-video-bg">
+  <video
+    autoplay
+    muted
+    loop
+    playsinline
+    poster="jg.png"
+    style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;z-index:0;opacity:0.45;"
+  >
+    <source src="jgclinic.mp4" type="video/mp4">
+  </video>
+</div>
+
+ 
   <div class="hero-particles" id="particles"></div>
   <div class="hero-content">
     <div class="hero-eyebrow" data-i18n="hero.eyebrow">Medicina Estética · Santa Ana, Costa Rica</div>
