@@ -1,0 +1,863 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Clínica Dra. Jenireé Gutiérrez | Medicina Estética · Costa Rica</title>
+<meta name="description" content="Especialistas en medicina estética en Costa Rica. Bioestimuladores, rellenos, ultherapy, láser, toxina botulínica y más. Santa Ana Town Center.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A96E; --gold-light: #E8D5B0; --gold-dark: #A07840;
+    --rose: #F2C4CE; --rose-light: #FAF0F2; --rose-mid: #E8A8B8; --rose-deep: #C97088;
+    --off-white: #FDF8F5; --text-dark: #2A1F1A; --text-mid: #5C4A42; --text-light: #9B8880;
+    --font-display: 'Cormorant Garamond', Georgia, serif; --font-body: 'Jost', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--text-dark); background: #fff; overflow-x: hidden; }
+
+  /* LANG TOGGLE */
+  .lang-toggle { display: flex; align-items: center; border: 1px solid rgba(201,169,110,0.5); overflow: hidden; }
+  .lang-btn { background: transparent; border: none; cursor: pointer; font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.35rem 0.7rem; color: rgba(255,255,255,0.45); font-weight: 300; transition: all 0.25s; }
+  nav.scrolled .lang-btn { color: var(--text-light); }
+  .lang-btn.active { background: var(--gold); color: #fff; }
+  .lang-sep { width: 1px; background: rgba(201,169,110,0.4); align-self: stretch; }
+
+  /* NAV */
+  nav { position: fixed; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1.2rem 3rem; gap: 1.5rem; background: rgba(255,255,255,0.06); backdrop-filter: blur(14px); -webkit-backdrop-filter: blur(14px); border-bottom: 1px solid rgba(201,169,110,0.18); transition: background 0.4s, padding 0.4s; }
+  nav.scrolled { background: rgba(253,248,245,0.97); padding: 0.75rem 3rem; box-shadow: 0 4px 28px rgba(201,169,110,0.07); }
+  .nav-logo { font-family: var(--font-display); font-size: 1.05rem; font-weight: 300; color: #fff; text-decoration: none; letter-spacing: 0.07em; transition: color 0.4s; white-space: nowrap; }
+  nav.scrolled .nav-logo { color: var(--text-dark); }
+  .nav-logo span { color: var(--gold); font-style: italic; }
+  .nav-links { display: flex; gap: 2.2rem; list-style: none; align-items: center; }
+  .nav-links a { font-size: 0.68rem; letter-spacing: 0.2em; text-transform: uppercase; color: rgba(255,255,255,0.75); text-decoration: none; font-weight: 300; transition: color 0.3s; }
+  nav.scrolled .nav-links a { color: var(--text-mid); }
+  .nav-links a:hover { color: var(--gold); }
+  .nav-right { display: flex; align-items: center; gap: 1rem; }
+  .nav-cta { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; border: 1px solid rgba(201,169,110,0.7); color: var(--gold); padding: 0.5rem 1.3rem; text-decoration: none; transition: all 0.3s; font-weight: 400; white-space: nowrap; }
+  .nav-cta:hover { background: var(--gold); color: #fff; }
+  .hamburger { display: none; cursor: pointer; flex-direction: column; gap: 5px; }
+  .hamburger span { display: block; width: 22px; height: 1.5px; background: #fff; transition: background 0.4s; }
+  nav.scrolled .hamburger span { background: var(--text-dark); }
+
+  /* HERO */
+  .hero { position: relative; height: 100vh; min-height: 600px; display: flex; align-items: center; justify-content: center; overflow: hidden; }
+  .hero-video-bg { position: absolute; inset: 0; background: linear-gradient(135deg, #1a0e14 0%, #2d1520 35%, #1a1010 65%, #0d0a08 100%); z-index: 0; }
+  .hero-video-bg::before { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 65% 55% at 78% 28%, rgba(201,169,110,0.13) 0%, transparent 60%), radial-gradient(ellipse 45% 65% at 18% 78%, rgba(242,196,206,0.09) 0%, transparent 55%); animation: atmo 9s ease-in-out infinite alternate; }
+  .hero-video-bg::after { content: ''; position: absolute; inset: 0; background: radial-gradient(ellipse 130% 85% at 50% 50%, transparent 38%, rgba(0,0,0,0.55) 100%); }
+  @keyframes atmo { 0%{opacity:.55}100%{opacity:1} }
+  .hero-particles { position: absolute; inset: 0; z-index: 1; overflow: hidden; }
+  .hero-particles span { position: absolute; border-radius: 50%; background: var(--gold-light); animation: sparkle var(--d,4s) var(--delay,0s) ease-in-out infinite alternate; opacity: 0; }
+  @keyframes sparkle { 0%{opacity:0;transform:scale(1)}50%{opacity:.85;transform:scale(2.8)}100%{opacity:0;transform:scale(1)} }
+  .hero-content { position: relative; z-index: 2; text-align: center; padding: 0 2rem; animation: heroin 1.4s cubic-bezier(0.22,1,0.36,1) forwards; opacity: 0; transform: translateY(30px); }
+  @keyframes heroin { to{opacity:1;transform:translateY(0)} }
+  .hero-eyebrow { font-size: 0.62rem; letter-spacing: 0.35em; text-transform: uppercase; color: var(--gold); font-weight: 400; margin-bottom: 1.4rem; display: flex; align-items: center; justify-content: center; gap: 1rem; }
+  .hero-eyebrow::before,.hero-eyebrow::after { content:''; display:block; width:38px; height:1px; background:var(--gold); opacity:.45; }
+  .hero-title { font-family: var(--font-display); font-size: clamp(2.8rem,7.5vw,6rem); font-weight: 300; line-height: 1.05; color: #fff; letter-spacing: 0.02em; margin-bottom: 0.3rem; }
+  .hero-title em { font-style: italic; color: var(--gold); display: block; font-size: 0.88em; }
+  .hero-sub { font-family: var(--font-display); font-size: clamp(0.95rem,2.2vw,1.3rem); color: rgba(255,255,255,0.45); font-weight: 300; letter-spacing: 0.12em; margin-bottom: 2.8rem; }
+  .hero-actions { display: flex; gap: 1.2rem; justify-content: center; flex-wrap: wrap; }
+  .btn-gold { display: inline-flex; align-items: center; gap: .5rem; background: linear-gradient(135deg, var(--gold) 0%, #A07840 100%); color: #fff; padding: .82rem 2.1rem; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; font-weight: 400; transition: all .35s; border: none; cursor: pointer; position: relative; overflow: hidden; font-family: var(--font-body); }
+  .btn-gold::after { content:''; position:absolute; inset:0; background:rgba(255,255,255,0.1); transform:translateX(-100%); transition:transform .3s; }
+  .btn-gold:hover::after { transform:translateX(0); }
+  .btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(201,169,110,0.38); }
+  .btn-outline { display: inline-flex; align-items: center; border: 1px solid rgba(255,255,255,0.32); color: #fff; padding: .82rem 2.1rem; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; font-weight: 300; transition: all .3s; font-family: var(--font-body); cursor: pointer; background: transparent; }
+  .btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+  .scroll-cue { position: absolute; bottom: 2.2rem; left: 50%; transform: translateX(-50%); z-index: 2; text-align: center; cursor: pointer; animation: bouncein 1.8s 1.5s ease-out forwards; opacity: 0; }
+  @keyframes bouncein { 0%{opacity:0;transform:translateX(-50%) translateY(8px)}100%{opacity:1;transform:translateX(-50%) translateY(0)} }
+  .scroll-cue p { font-size: .55rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(255,255,255,0.35); margin-bottom: .5rem; font-weight: 300; }
+  .scroll-arrow { width: 22px; height: 22px; margin: 0 auto; border-right: 1px solid var(--gold); border-bottom: 1px solid var(--gold); transform: rotate(45deg); animation: bounce 1.9s ease-in-out infinite; opacity: .65; }
+  @keyframes bounce { 0%,100%{transform:rotate(45deg) translateY(0)}50%{transform:rotate(45deg) translateY(6px)} }
+
+  /* SECTION COMMONS */
+  section { padding: 7rem 0; }
+  .container { max-width: 1200px; margin: 0 auto; padding: 0 2rem; }
+  .section-eyebrow { font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); font-weight: 400; margin-bottom: .9rem; display: flex; align-items: center; gap: .8rem; }
+  .section-eyebrow::before { content:''; display:block; width:28px; height:1px; background:var(--gold); opacity:.55; }
+  .section-title { font-family: var(--font-display); font-size: clamp(1.9rem,3.8vw,3.1rem); font-weight: 300; line-height: 1.15; letter-spacing: .01em; color: var(--text-dark); margin-bottom: 1.1rem; }
+  .section-title em { font-style: italic; color: var(--rose-deep); }
+  .section-lead { font-size: .93rem; line-height: 1.82; color: var(--text-light); max-width: 520px; font-weight: 300; }
+  .divider-gold { display: flex; align-items: center; gap: 1rem; margin: .7rem 0 1.8rem; }
+  .divider-gold span { display: block; height: 1px; background: var(--gold-light); flex: 1; }
+  .divider-gold i { width: 6px; height: 6px; border: 1px solid var(--gold); transform: rotate(45deg); flex-shrink: 0; }
+
+  /* SERVICES */
+  .services { background: var(--off-white); }
+  .services-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 0; margin-top: 3.5rem; border: 1.5px solid var(--gold-light); }
+  .service-card { background: #fff; padding: 2.5rem 2rem; transition: all .32s; cursor: pointer; display: block; border-right: 1.5px solid var(--gold-light); border-bottom: 1.5px solid var(--gold-light); position: relative; overflow: hidden; color: inherit; user-select: none; }
+  .service-card::before { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(90deg, var(--gold), var(--rose-mid)); transform:scaleX(0); transform-origin:left; transition:transform .32s; }
+  .service-card:hover::before { transform: scaleX(1); }
+  .service-card:hover { background: var(--rose-light); transform: translateY(-3px); }
+  .service-icon { font-size: 1.4rem; margin-bottom: 1.1rem; width: 48px; height: 48px; display: flex; align-items: center; justify-content: center; border: 1px solid var(--gold-light); background: linear-gradient(135deg, rgba(201,169,110,.06), rgba(242,196,206,.1)); }
+  .service-name { font-family: var(--font-display); font-size: 1.1rem; font-weight: 400; color: var(--text-dark); margin-bottom: .5rem; }
+  .service-desc { font-size: .8rem; color: var(--text-light); line-height: 1.7; font-weight: 300; }
+  .service-click-hint { display: inline-flex; align-items: center; gap: .4rem; margin-top: 1rem; font-size: .6rem; letter-spacing: .18em; text-transform: uppercase; color: var(--gold); font-weight: 400; transition: gap .25s; }
+  .service-card:hover .service-click-hint { gap: .7rem; }
+
+  /* SERVICE MODAL */
+  .modal-overlay { position: fixed; inset: 0; z-index: 2000; background: rgba(13,8,6,0.72); backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px); display: flex; align-items: center; justify-content: center; padding: 1.5rem; opacity: 0; pointer-events: none; transition: opacity .35s; }
+  .modal-overlay.open { opacity: 1; pointer-events: all; }
+  .modal-card { background: #fff; max-width: 540px; width: 100%; position: relative; transform: translateY(22px) scale(0.97); transition: transform .38s cubic-bezier(0.22,1,0.36,1); overflow: hidden; }
+  .modal-overlay.open .modal-card { transform: translateY(0) scale(1); }
+  .modal-header { background: linear-gradient(135deg, #1a0e14 0%, #2d1520 100%); padding: 2.5rem 2.5rem 2rem; position: relative; }
+  .modal-header::after { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 80% 60% at 80% 30%, rgba(201,169,110,0.12) 0%, transparent 65%); pointer-events:none; }
+  .modal-icon { font-size: 2rem; color: var(--gold); display: block; margin-bottom: 1rem; position: relative; z-index: 1; }
+  .modal-title { font-family: var(--font-display); font-size: 1.8rem; font-weight: 300; color: #fff; letter-spacing: .02em; line-height: 1.2; position: relative; z-index: 1; }
+  .modal-close { position: absolute; top: 1.2rem; right: 1.3rem; background: none; border: none; cursor: pointer; color: rgba(255,255,255,0.4); font-size: 1.2rem; font-family: var(--font-body); transition: color .25s; z-index: 2; line-height: 1; padding: .2rem .4rem; }
+  .modal-close:hover { color: var(--gold); }
+  .modal-body { padding: 2rem 2.5rem 2.5rem; }
+  .modal-tag { display: inline-block; font-size: .58rem; letter-spacing: .2em; text-transform: uppercase; background: var(--rose-light); color: var(--rose-deep); padding: .28rem .75rem; margin-bottom: 1.2rem; font-weight: 400; }
+  .modal-text { font-size: .88rem; line-height: 1.82; color: var(--text-mid); font-weight: 300; margin-bottom: 1.5rem; }
+  .modal-bullets { list-style: none; display: flex; flex-direction: column; gap: .65rem; margin-bottom: 2rem; }
+  .modal-bullets li { display: flex; align-items: flex-start; gap: .7rem; font-size: .82rem; color: var(--text-mid); font-weight: 300; line-height: 1.55; }
+  .modal-bullets li::before { content:'✦'; color: var(--gold); font-size: .5rem; margin-top: .35rem; flex-shrink: 0; }
+  .modal-actions { display: flex; gap: .8rem; flex-wrap: wrap; }
+  .btn-modal-primary { display: inline-flex; align-items: center; gap: .5rem; background: linear-gradient(135deg, var(--gold), #A07840); color: #fff; padding: .75rem 1.7rem; font-size: .65rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; font-weight: 400; border: none; cursor: pointer; font-family: var(--font-body); transition: all .3s; }
+  .btn-modal-primary:hover { box-shadow: 0 6px 22px rgba(201,169,110,0.4); transform: translateY(-1px); }
+  .btn-modal-secondary { display: inline-flex; align-items: center; border: 1px solid var(--gold-light); color: var(--text-mid); padding: .75rem 1.4rem; font-size: .65rem; letter-spacing: .18em; text-transform: uppercase; text-decoration: none; font-weight: 300; transition: all .3s; font-family: var(--font-body); cursor: pointer; background: transparent; }
+  .btn-modal-secondary:hover { border-color: var(--gold); color: var(--gold); }
+
+  /* ABOUT */
+  .about { background: #fff; }
+  .about-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 5rem; align-items: center; }
+  .about-image-wrap { position: relative; }
+  .about-image-frame { width: 100%; padding-top: 122%; background: linear-gradient(160deg, var(--rose-light) 0%, var(--gold-light) 100%); position: relative; overflow: hidden; }
+  .about-frame-placeholder { position: absolute; inset: 0; display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1rem; }
+  .about-frame-placeholder p { font-family: var(--font-display); font-size: 1.15rem; color: var(--text-light); letter-spacing: .05em; font-style: italic; }
+  .about-badge { position: absolute; bottom: -1.4rem; right: -1.4rem; z-index: 2; background: var(--text-dark); color: var(--gold); width: 112px; height: 112px; display: flex; flex-direction: column; align-items: center; justify-content: center; text-align: center; border: 1px solid rgba(201,169,110,0.3); }
+  .about-badge strong { font-family: var(--font-display); font-size: 2rem; font-weight: 300; line-height: 1; display: block; color: var(--gold); }
+  .about-badge span { font-size: .55rem; letter-spacing: .14em; text-transform: uppercase; color: rgba(255,255,255,.45); font-weight: 300; }
+  .about-deco { position: absolute; top: -1rem; left: -1rem; width: 110px; height: 110px; border-top: 1.5px solid var(--gold-light); border-left: 1.5px solid var(--gold-light); z-index: 0; }
+  .credentials { margin-top: 2.2rem; display: flex; flex-direction: column; gap: .9rem; }
+  .credential-item { display: flex; align-items: flex-start; gap: .9rem; padding-bottom: .9rem; border-bottom: 1px solid var(--rose-light); }
+  .credential-dot { width: 6px; height: 6px; border: 1px solid var(--gold); transform: rotate(45deg); margin-top: .45rem; flex-shrink: 0; }
+  .credential-text { font-size: .82rem; color: var(--text-mid); line-height: 1.6; font-weight: 300; }
+  .credential-text strong { color: var(--text-dark); font-weight: 400; display: block; margin-bottom: .08rem; }
+
+  /* STATS */
+  .stats-strip { background: var(--text-dark); }
+  .stats-inner { display: grid; grid-template-columns: repeat(4, 1fr); }
+  .stat-item { padding: 3.2rem 2rem; text-align: center; border-right: 1px solid rgba(201,169,110,0.13); }
+  .stat-item:last-child { border-right: none; }
+  .stat-num { font-family: var(--font-display); font-size: clamp(2.3rem,3.8vw,3.6rem); font-weight: 300; color: var(--gold); line-height: 1; display: block; }
+  .stat-label { font-size: .62rem; letter-spacing: .2em; text-transform: uppercase; color: rgba(255,255,255,.35); margin-top: .55rem; font-weight: 300; }
+
+  /* PROCESO */
+  .proceso { background: var(--off-white); }
+  .steps-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 0; margin-top: 4rem; position: relative; }
+  .steps-grid::before { content:''; position:absolute; top:2.4rem; left:12%; right:12%; height:1px; background:linear-gradient(90deg, transparent, var(--gold-light), transparent); }
+  .step-item { text-align: center; padding: 0 1.3rem; }
+  .step-num { width: 48px; height: 48px; margin: 0 auto 1.4rem; border: 1px solid var(--gold-light); display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 1rem; color: var(--gold); background: #fff; position: relative; z-index: 1; }
+  .step-title { font-family: var(--font-display); font-size: 1rem; font-weight: 400; color: var(--text-dark); margin-bottom: .45rem; }
+  .step-text { font-size: .78rem; color: var(--text-light); line-height: 1.7; font-weight: 300; }
+
+  /* CTA BANNER */
+  .cta-banner { background: linear-gradient(135deg, #1a0e14, #2a1820, #1a0e14); position: relative; overflow: hidden; padding: 5.5rem 0; }
+  .cta-banner::before { content:''; position:absolute; inset:0; background:radial-gradient(ellipse 55% 75% at 88% 50%, rgba(201,169,110,.09) 0%, transparent 60%), radial-gradient(ellipse 40% 55% at 12% 50%, rgba(242,196,206,.06) 0%, transparent 50%); }
+  .cta-banner-inner { position: relative; z-index: 1; text-align: center; }
+  .cta-banner h2 { font-family: var(--font-display); font-size: clamp(1.8rem,3.8vw,3rem); font-weight: 300; color: #fff; margin-bottom: .45rem; letter-spacing: .02em; }
+  .cta-banner h2 em { font-style: italic; color: var(--gold); }
+  .cta-banner p { color: rgba(255,255,255,.38); font-size: .88rem; margin-bottom: 2.3rem; font-weight: 300; }
+  .cta-actions { display: flex; gap: 1rem; justify-content: center; flex-wrap: wrap; }
+
+  /* FEED */
+  .feed { background: #fff; }
+  .feed-header { display: flex; align-items: flex-end; justify-content: space-between; margin-bottom: 3rem; flex-wrap: wrap; gap: 1.5rem; }
+  .feed-filters { display: flex; gap: .7rem; flex-wrap: wrap; }
+  .filter-btn { font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; padding: .42rem 1rem; border: 1px solid var(--gold-light); background: transparent; color: var(--text-light); cursor: pointer; transition: all .25s; font-family: var(--font-body); font-weight: 300; }
+  .filter-btn.active,.filter-btn:hover { background: var(--gold); border-color: var(--gold); color: #fff; }
+  .feed-grid { display: grid; grid-template-columns: repeat(auto-fit, minmax(295px,1fr)); gap: 2rem; }
+  .feed-card { display: block; text-decoration: none; transition: transform .3s; }
+  .feed-card:hover { transform: translateY(-4px); }
+  .feed-img { width: 100%; aspect-ratio: 4/3; overflow: hidden; background: linear-gradient(135deg, var(--rose-light), var(--gold-light)); position: relative; }
+  .feed-img-inner { position: absolute; inset: 0; display: flex; align-items: center; justify-content: center; font-family: var(--font-display); font-size: 2.4rem; color: rgba(201,169,110,.38); }
+  .feed-tag { position: absolute; top: 1rem; left: 1rem; font-size: .56rem; letter-spacing: .2em; text-transform: uppercase; background: var(--text-dark); color: var(--gold); padding: .28rem .75rem; font-weight: 400; }
+  .feed-body { padding: 1.4rem 0; }
+  .feed-date { font-size: .62rem; letter-spacing: .15em; color: var(--text-light); text-transform: uppercase; font-weight: 300; }
+  .feed-title { font-family: var(--font-display); font-size: 1.15rem; font-weight: 400; color: var(--text-dark); line-height: 1.35; margin: .45rem 0 .7rem; }
+  .feed-excerpt { font-size: .8rem; color: var(--text-light); line-height: 1.7; font-weight: 300; }
+  .feed-read { display: inline-flex; align-items: center; gap: .4rem; margin-top: .9rem; font-size: .6rem; letter-spacing: .2em; text-transform: uppercase; color: var(--gold); font-weight: 400; }
+  .feed-read::after { content:'→'; }
+
+  /* NEWSLETTER */
+  .newsletter-section { background: linear-gradient(160deg, var(--rose-light) 0%, rgba(255,255,255,0) 60%), var(--off-white); padding: 6rem 0; }
+  .newsletter-wrap { max-width: 680px; margin: 0 auto; text-align: center; }
+  .newsletter-wrap p { font-size: .88rem; color: var(--text-light); margin-bottom: 2.3rem; font-weight: 300; line-height: 1.75; }
+  .newsletter-form { display: flex; max-width: 470px; margin: 0 auto; border: 1px solid var(--gold-light); }
+  .newsletter-form input[type="email"] { flex: 1; padding: .88rem 1.1rem; font-family: var(--font-body); font-size: .83rem; font-weight: 300; border: none; outline: none; background: #fff; color: var(--text-dark); }
+  .newsletter-form input::placeholder { color: var(--text-light); }
+  .newsletter-form button { padding: .88rem 1.4rem; background: var(--gold); color: #fff; border: none; cursor: pointer; font-size: .62rem; letter-spacing: .18em; text-transform: uppercase; font-family: var(--font-body); font-weight: 400; transition: background .3s; white-space: nowrap; }
+  .newsletter-form button:hover { background: var(--gold-dark); }
+  .newsletter-perks { display: flex; justify-content: center; gap: 2rem; margin-top: 1.6rem; flex-wrap: wrap; }
+  .newsletter-perk { display: flex; align-items: center; gap: .45rem; font-size: .7rem; color: var(--text-light); font-weight: 300; }
+  .newsletter-perk::before { content:'✦'; color:var(--gold); font-size:.52rem; }
+
+  /* INSTAGRAM */
+  .insta-strip { background: var(--text-dark); padding: 4.5rem 0; }
+  .insta-inner { text-align: center; }
+  .insta-inner > p { font-size: .62rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); margin-bottom: 2.3rem; }
+  .insta-grid { display: grid; grid-template-columns: repeat(6,1fr); gap: 3px; margin-bottom: 2.3rem; }
+  .insta-cell { aspect-ratio: 1; background: linear-gradient(135deg,#2a1820,#1a1410); display: flex; align-items: center; justify-content: center; font-size: 1.4rem; opacity: .55; cursor: pointer; transition: opacity .3s; position: relative; overflow: hidden; }
+  .insta-cell:hover { opacity: 1; }
+  .insta-cell::after { content:'Ver'; position:absolute; inset:0; background:rgba(201,169,110,0.28); display:flex; align-items:center; justify-content:center; font-size:.6rem; letter-spacing:.2em; text-transform:uppercase; color:#fff; opacity:0; transition:opacity .3s; font-family:var(--font-body); }
+  .insta-cell:hover::after { opacity:1; }
+
+  /* FOOTER */
+  footer { background: #0d0a08; padding: 5rem 0 2rem; border-top: 1px solid rgba(201,169,110,0.1); }
+  .footer-grid { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 3rem; margin-bottom: 3.5rem; }
+  .footer-brand p { font-family: var(--font-display); font-size: .88rem; color: rgba(255,255,255,.3); line-height: 1.8; margin-top: 1.1rem; font-weight: 300; max-width: 255px; }
+  .footer-logo-txt { font-family: var(--font-display); font-size: 1.05rem; font-weight: 300; color: #fff; letter-spacing: .05em; }
+  .footer-logo-txt span { color: var(--gold); font-style: italic; }
+  .footer-logo-sub { font-size: .58rem; letter-spacing: .25em; text-transform: uppercase; color: rgba(255,255,255,.22); margin-top: .18rem; }
+  .footer-social { display: flex; gap: .7rem; margin-top: 1.4rem; }
+  .social-icon { width: 34px; height: 34px; border: 1px solid rgba(201,169,110,.22); display: flex; align-items: center; justify-content: center; color: rgba(255,255,255,.35); text-decoration: none; font-size: .7rem; transition: all .3s; }
+  .social-icon:hover { border-color: var(--gold); color: var(--gold); }
+  .footer-col-title { font-size: .58rem; letter-spacing: .25em; text-transform: uppercase; color: var(--gold); margin-bottom: 1.4rem; font-weight: 400; }
+  .footer-links { list-style: none; display: flex; flex-direction: column; gap: .65rem; }
+  .footer-links a { font-size: .8rem; color: rgba(255,255,255,.28); text-decoration: none; font-weight: 300; transition: color .3s; }
+  .footer-links a:hover { color: var(--gold); }
+  .footer-info { list-style: none; display: flex; flex-direction: column; gap: .75rem; }
+  .footer-info li { font-size: .78rem; color: rgba(255,255,255,.28); font-weight: 300; line-height: 1.5; }
+  .footer-info li strong { color: rgba(255,255,255,.45); font-weight: 400; display: block; font-size: .6rem; text-transform: uppercase; letter-spacing: .1em; margin-bottom: .08rem; }
+  .footer-bar { border-top: 1px solid rgba(255,255,255,.04); padding-top: 1.8rem; display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; }
+  .footer-bar p { font-size: .7rem; color: rgba(255,255,255,.14); font-weight: 300; }
+  .footer-bar a { color: rgba(201,169,110,.45); text-decoration: none; }
+
+  /* MOBILE MENU */
+  .mobile-menu { position: fixed; inset: 0; z-index: 1500; background: rgba(10,6,5,0.97); display: flex; flex-direction: column; align-items: center; justify-content: center; gap: 1.8rem; opacity: 0; pointer-events: none; transition: opacity .4s; }
+  .mobile-menu.open { opacity: 1; pointer-events: all; }
+  .mobile-menu a { font-family: var(--font-display); font-size: 1.8rem; color: rgba(255,255,255,.65); text-decoration: none; font-weight: 300; letter-spacing: .05em; transition: color .2s; }
+  .mobile-menu a:hover { color: var(--gold); }
+  .mobile-close { position: absolute; top: 1.4rem; right: 1.8rem; font-size: 1.3rem; color: rgba(255,255,255,.35); cursor: pointer; background: none; border: none; font-family: var(--font-body); }
+
+  /* WA FLOAT */
+  .wa-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 900; width: 52px; height: 52px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 18px rgba(37,211,102,.33); transition: transform .3s, box-shadow .3s; animation: wapop .5s 2s ease-out backwards; }
+  @keyframes wapop { from{transform:scale(0)}to{transform:scale(1)} }
+  .wa-float:hover { transform: scale(1.1); box-shadow: 0 8px 28px rgba(37,211,102,.48); }
+  .wa-float svg { width: 25px; height: 25px; fill: #fff; }
+
+  /* REVEAL */
+  .reveal { opacity: 0; transform: translateY(22px); transition: opacity .7s ease, transform .7s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* RESPONSIVE */
+  @media(max-width:1024px) { .services-grid { grid-template-columns: repeat(2,1fr); } }
+  @media(max-width:900px) {
+    nav { padding: 1rem 1.5rem; } nav.scrolled { padding: .7rem 1.5rem; }
+    .nav-links { display: none; } .hamburger { display: flex; }
+    .about-grid { grid-template-columns: 1fr; gap: 3rem; }
+    .stats-inner { grid-template-columns: repeat(2,1fr); }
+    .stat-item { border-bottom: 1px solid rgba(201,169,110,.12); }
+    .steps-grid { grid-template-columns: repeat(2,1fr); gap: 2rem; } .steps-grid::before { display:none; }
+    .footer-grid { grid-template-columns: 1fr 1fr; gap: 2rem; }
+    .insta-grid { grid-template-columns: repeat(3,1fr); }
+  }
+  @media(max-width:640px) {
+    section { padding: 4rem 0; }
+    .hero-actions { flex-direction: column; align-items: center; }
+    .services-grid { grid-template-columns: 1fr; }
+    .steps-grid { grid-template-columns: 1fr; }
+    .footer-grid { grid-template-columns: 1fr; }
+    .nav-cta { display: none; }
+    .modal-header { padding: 2rem 1.8rem 1.6rem; }
+    .modal-body { padding: 1.6rem 1.8rem 2rem; }
+  }
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<nav id="mainNav">
+  <a href="#inicio" class="nav-logo">Dra. <span>Jenireé</span> Gutiérrez</a>
+  <ul class="nav-links">
+    <li><a href="#servicios" data-i18n="nav.services">Servicios</a></li>
+    <li><a href="#sobre-la-dra" data-i18n="nav.doctor">La Dra.</a></li>
+    <li><a href="#proceso" data-i18n="nav.process">Proceso</a></li>
+    <li><a href="#aprende" data-i18n="nav.learn">Aprende</a></li>
+    <li><a href="#contacto" data-i18n="nav.contact">Contacto</a></li>
+  </ul>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <div class="lang-sep"></div>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="https://api.whatsapp.com/send/?phone=%2B50662987582" class="nav-cta" target="_blank" data-i18n="nav.cta">Agendar Cita</a>
+    <div class="hamburger" onclick="toggleMenu()"><span></span><span></span><span></span></div>
+  </div>
+</nav>
+
+<!-- MOBILE MENU -->
+<div class="mobile-menu" id="mobileMenu">
+  <button class="mobile-close" onclick="toggleMenu()">✕</button>
+  <a href="#servicios" onclick="toggleMenu()" data-i18n="nav.services">Servicios</a>
+  <a href="#sobre-la-dra" onclick="toggleMenu()" data-i18n="nav.doctor">La Dra.</a>
+  <a href="#proceso" onclick="toggleMenu()" data-i18n="nav.process">Proceso</a>
+  <a href="#aprende" onclick="toggleMenu()" data-i18n="nav.learn">Aprende</a>
+  <a href="https://api.whatsapp.com/send/?phone=%2B50662987582" target="_blank" onclick="toggleMenu()" data-i18n="nav.cta">Agendar Cita</a>
+</div>
+
+<!-- HERO -->
+<section class="hero" id="inicio">
+  <div class="hero-video-bg"></div>
+  <div class="hero-particles" id="particles"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow" data-i18n="hero.eyebrow">Medicina Estética · Santa Ana, Costa Rica</div>
+    <h1 class="hero-title" data-i18n-html="hero.title">Bienvenida a la<br><em>Clínica Dra. Jenireé</em></h1>
+    <p class="hero-sub" data-i18n="hero.sub">Donde la ciencia y la belleza se encuentran</p>
+    <div class="hero-actions">
+      <a href="https://api.whatsapp.com/send/?phone=%2B50662987582" class="btn-gold" target="_blank" data-i18n="hero.cta1">✦  Agendar mi cita</a>
+      <a href="#servicios" class="btn-outline" data-i18n="hero.cta2">Ver servicios</a>
+    </div>
+  </div>
+  <div class="scroll-cue" onclick="document.querySelector('#servicios').scrollIntoView({behavior:'smooth'})">
+    <p data-i18n="hero.scroll">Descubrir</p>
+    <div class="scroll-arrow"></div>
+  </div>
+</section>
+
+<!-- SERVICES -->
+<section class="services" id="servicios">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow" data-i18n="services.eyebrow">Tratamientos</div>
+      <h2 class="section-title" data-i18n-html="services.title">Nuestros <em>servicios</em></h2>
+      <div class="divider-gold"><span></span><i></i><span></span></div>
+      <p class="section-lead" data-i18n="services.lead">Cada tratamiento es diseñado a medida para resaltar tu belleza natural, con tecnología de vanguardia y productos de primera línea.</p>
+    </div>
+    <div class="services-grid reveal" style="transition-delay:.15s">
+      <div class="service-card" onclick="openModal('biostimulators')">
+        <div class="service-icon">✦</div>
+        <div class="service-name" data-i18n="svc.bio.name">Bioestimuladores</div>
+        <div class="service-desc" data-i18n="svc.bio.desc">Estimula la producción natural de colágeno y elastina para una piel más firme y luminosa.</div>
+        <div class="service-click-hint" data-i18n="svc.hint">Más información →</div>
+      </div>
+      <div class="service-card" onclick="openModal('peptides')">
+        <div class="service-icon">◈</div>
+        <div class="service-name" data-i18n="svc.pep.name">Péptidos</div>
+        <div class="service-desc" data-i18n="svc.pep.desc">Tratamientos con péptidos bioactivos que regeneran la piel desde adentro, reduciendo los signos del envejecimiento.</div>
+        <div class="service-click-hint" data-i18n="svc.hint">Más información →</div>
+      </div>
+      <div class="service-card" onclick="openModal('fillers')">
+        <div class="service-icon">◇</div>
+        <div class="service-name" data-i18n="svc.fill.name">Rellenos de Ácido Hialurónico</div>
+        <div class="service-desc" data-i18n="svc.fill.desc">Labios, pómulos, ojeras, mentón y más. Resultados naturales e inmediatos que respetan tus rasgos.</div>
+        <div class="service-click-hint" data-i18n="svc.hint">Más información →</div>
+      </div>
+      <div class="service-card" onclick="openModal('ultherapy')">
+        <div class="service-icon">⬡</div>
+        <div class="service-name" data-i18n="svc.ulth.name">Ultherapy</div>
+        <div class="service-desc" data-i18n="svc.ulth.desc">Ultrasonido microfocalizado que levanta y tensa el tejido sin cirugía. El lifting no invasivo más avanzado.</div>
+        <div class="service-click-hint" data-i18n="svc.hint">Más información →</div>
+      </div>
+      <div class="service-card" onclick="openModal('laser')">
+        <div class="service-icon">✧</div>
+        <div class="service-name" data-i18n="svc.las.name">Tecnología Láser</div>
+        <div class="service-desc" data-i18n="svc.las.desc">Fotona, Starwalker, CO₂, IPL y más. Manchas, rejuvenecimiento, poros y textura tratados con precisión.</div>
+        <div class="service-click-hint" data-i18n="svc.hint">Más información →</div>
+      </div>
+      <div class="service-card" onclick="openModal('botox')">
+        <div class="service-icon">◉</div>
+        <div class="service-name" data-i18n="svc.bot.name">Toxina Botulínica</div>
+        <div class="service-desc" data-i18n="svc.bot.desc">Tratamiento experto de arrugas: frente, entrecejo, patas de gallo, preservando tu expresividad natural.</div>
+        <div class="service-click-hint" data-i18n="svc.hint">Más información →</div>
+      </div>
+      <div class="service-card" onclick="openModal('vaginal')">
+        <div class="service-icon">♡</div>
+        <div class="service-name" data-i18n="svc.vag.name">Estética Vaginal</div>
+        <div class="service-desc" data-i18n="svc.vag.desc">Tratamientos íntimos con tecnología de última generación para bienestar y calidad de vida femenina.</div>
+        <div class="service-click-hint" data-i18n="svc.hint">Más información →</div>
+      </div>
+      <div class="service-card" onclick="openModal('laser_hair')">
+        <div class="service-icon">☽</div>
+        <div class="service-name" data-i18n="svc.dep.name">Depilación Láser</div>
+        <div class="service-desc" data-i18n="svc.dep.desc">Eliminación definitiva del vello no deseado. Segura y efectiva en todo tipo de piel.</div>
+        <div class="service-click-hint" data-i18n="svc.hint">Más información →</div>
+      </div>
+      <div class="service-card" onclick="openModal('facial')">
+        <div class="service-icon">⁂</div>
+        <div class="service-name" data-i18n="svc.fac.name">Facial & Spa</div>
+        <div class="service-desc" data-i18n="svc.fac.desc">Limpiezas profundas, peelings, mesoterapia y tratamientos relajantes que renuevan tu piel.</div>
+        <div class="service-click-hint" data-i18n="svc.hint">Más información →</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- SERVICE MODAL -->
+<div class="modal-overlay" id="serviceModal" onclick="closeModalOutside(event)">
+  <div class="modal-card">
+    <div class="modal-header">
+      <button class="modal-close" onclick="closeModal()">✕</button>
+      <span class="modal-icon" id="modalIcon"></span>
+      <div class="modal-title" id="modalTitle"></div>
+    </div>
+    <div class="modal-body">
+      <div class="modal-tag" id="modalTag"></div>
+      <p class="modal-text" id="modalText"></p>
+      <ul class="modal-bullets" id="modalBullets"></ul>
+      <div class="modal-actions">
+        <a href="https://api.whatsapp.com/send/?phone=%2B50662987582" class="btn-modal-primary" target="_blank" id="modalCtaBook">✦  Agendar cita</a>
+        <a href="#aprende" class="btn-modal-secondary" id="modalCtaLearn" onclick="closeModal()">Ver más →</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- STATS -->
+<div class="stats-strip">
+  <div class="container" style="padding:0">
+    <div class="stats-inner">
+      <div class="stat-item reveal"><span class="stat-num" data-count="2000">0</span><div class="stat-label" data-i18n="stat.patients">Pacientes Satisfechos</div></div>
+      <div class="stat-item reveal" style="transition-delay:.1s"><span class="stat-num" data-count="6500">0</span><div class="stat-label" data-i18n="stat.syringes">Jeringas Aplicadas</div></div>
+      <div class="stat-item reveal" style="transition-delay:.2s"><span class="stat-num" data-count="1000">0</span><div class="stat-label" data-i18n="stat.faces">Rostros Tratados</div></div>
+      <div class="stat-item reveal" style="transition-delay:.3s"><span class="stat-num">8+</span><div class="stat-label" data-i18n="stat.years">Años de Experiencia</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- ABOUT -->
+<section class="about" id="sobre-la-dra">
+  <div class="container">
+    <div class="about-grid">
+      <div class="about-image-wrap reveal">
+        <div class="about-deco"></div>
+        <div class="about-image-frame">
+          <div class="about-frame-placeholder"><p>Dra. Jenireé Gutiérrez</p></div>
+        </div>
+        <div class="about-badge"><strong>UBA</strong><span>Especialidad</span></div>
+      </div>
+      <div class="reveal" style="transition-delay:.2s">
+        <div class="section-eyebrow" data-i18n="about.eyebrow">La Doctora</div>
+        <h2 class="section-title" data-i18n-html="about.title">Una experta <em>internacional</em> a tu servicio</h2>
+        <div class="divider-gold"><span></span><i></i><span></span></div>
+        <p class="section-lead" data-i18n="about.lead">Médico Cirujana graduada de la UCIMED, especializada en Medicina Estética en la Universidad de Buenos Aires. Reconocida internacionalmente por su enfoque en resultados naturales y atención personalizada.</p>
+        <div class="credentials">
+          <div class="credential-item"><div class="credential-dot"></div><div class="credential-text"><strong data-i18n="about.cred1.title">Médico Cirujana — UCIMED, Costa Rica</strong><span data-i18n="about.cred1.text">Formación médica integral con énfasis en el paciente y su bienestar.</span></div></div>
+          <div class="credential-item"><div class="credential-dot"></div><div class="credential-text"><strong data-i18n="about.cred2.title">Especialista — Universidad de Buenos Aires</strong><span data-i18n="about.cred2.text">Posgrado en las técnicas más avanzadas de medicina estética y rejuvenecimiento.</span></div></div>
+          <div class="credential-item"><div class="credential-dot"></div><div class="credential-text"><strong data-i18n="about.cred3.title">Formación continua internacional</strong><span data-i18n="about.cred3.text">Entrenamiento constante con líderes mundiales en bioestimulación, láser y armonización facial.</span></div></div>
+        </div>
+        <div style="margin-top:2.3rem;display:flex;gap:1rem;flex-wrap:wrap;">
+          <a href="https://api.whatsapp.com/send/?phone=%2B50662987582" class="btn-gold" target="_blank" data-i18n="about.cta1">Agendar consulta</a>
+          <a href="https://www.instagram.com/dra.jenireegutierrez/" class="btn-outline" target="_blank" style="border-color:var(--gold-light);color:var(--text-mid);" data-i18n="about.cta2">Ver en Instagram</a>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- PROCESO -->
+<section class="proceso" id="proceso">
+  <div class="container">
+    <div class="reveal" style="text-align:center;max-width:580px;margin:0 auto">
+      <div class="section-eyebrow" style="justify-content:center" data-i18n="process.eyebrow">Tu experiencia</div>
+      <h2 class="section-title" data-i18n-html="process.title">El camino <em>Bombis</em></h2>
+      <div class="divider-gold" style="justify-content:center"><span></span><i></i><span></span></div>
+      <p class="section-lead" style="margin:0 auto" data-i18n="process.lead">Cuatro pasos para que vivas la transformación más natural y segura de tu vida.</p>
+    </div>
+    <div class="steps-grid reveal" style="transition-delay:.2s">
+      <div class="step-item"><div class="step-num">01</div><div class="step-title" data-i18n="step1.title">Consulta</div><div class="step-text" data-i18n="step1.text">Analizamos tus objetivos, historial y expectativas en un espacio de total confianza.</div></div>
+      <div class="step-item"><div class="step-num">02</div><div class="step-title" data-i18n="step2.title">Diagnóstico</div><div class="step-text" data-i18n="step2.text">Diseñamos un plan personalizado con los tratamientos más adecuados para ti.</div></div>
+      <div class="step-item"><div class="step-num">03</div><div class="step-title" data-i18n="step3.title">Tratamiento</div><div class="step-text" data-i18n="step3.text">Aplicamos los procedimientos con la máxima precisión, seguridad y confort.</div></div>
+      <div class="step-item"><div class="step-num">04</div><div class="step-title" data-i18n="step4.title">Seguimiento</div><div class="step-text" data-i18n="step4.text">Te acompañamos en tu proceso de recuperación y evaluamos los resultados.</div></div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BANNER -->
+<div class="cta-banner">
+  <div class="container">
+    <div class="cta-banner-inner reveal">
+      <h2 data-i18n-html="cta.title">¿Lista para tu <em>transformación</em>?</h2>
+      <p data-i18n="cta.sub">Agenda tu consulta hoy · Santa Ana Town Center, Local 14 y 15</p>
+      <div class="cta-actions">
+        <a href="https://api.whatsapp.com/send/?phone=%2B50662987582" class="btn-gold" target="_blank" data-i18n="cta.btn1">✦  WhatsApp · +506 6298-7582</a>
+        <a href="https://www.instagram.com/dra.jenireegutierrez/" class="btn-outline" target="_blank" data-i18n="cta.btn2">Ver resultados en Instagram</a>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- FEED -->
+<section class="feed" id="aprende">
+  <div class="container">
+    <div class="feed-header reveal">
+      <div>
+        <div class="section-eyebrow" data-i18n="feed.eyebrow">Conocimiento</div>
+        <h2 class="section-title" data-i18n-html="feed.title">Aprende sobre <em>medicina estética</em></h2>
+        <div class="divider-gold"><span></span><i></i><span></span></div>
+        <p class="section-lead" data-i18n="feed.lead">Tu espacio para entender los tratamientos, tendencias y ciencia detrás de la medicina estética moderna.</p>
+      </div>
+      <div class="feed-filters">
+        <button class="filter-btn active" data-i18n="feed.f.all">Todo</button>
+        <button class="filter-btn" data-i18n="feed.f.fillers">Rellenos</button>
+        <button class="filter-btn" data-i18n="feed.f.laser">Láser</button>
+        <button class="filter-btn" data-i18n="feed.f.skin">Piel</button>
+        <button class="filter-btn" data-i18n="feed.f.trends">Tendencias</button>
+      </div>
+    </div>
+    <div class="feed-grid reveal" style="transition-delay:.2s">
+      <a class="feed-card" href="#"><div class="feed-img"><div class="feed-img-inner">✦</div><span class="feed-tag" data-i18n="feed.tag1">Bioestimulación</span></div><div class="feed-body"><div class="feed-date" data-i18n="feed.date1">Abril 2025</div><div class="feed-title" data-i18n="feed.a1.title">¿Qué son los bioestimuladores y cómo funcionan en tu piel?</div><div class="feed-excerpt" data-i18n="feed.a1.text">Descubre cómo estos tratamientos activan tus propias células para producir colágeno de forma natural.</div><div class="feed-read" data-i18n="feed.read">Leer artículo</div></div></a>
+      <a class="feed-card" href="#"><div class="feed-img"><div class="feed-img-inner">◈</div><span class="feed-tag" data-i18n="feed.tag2">Rellenos</span></div><div class="feed-body"><div class="feed-date" data-i18n="feed.date2">Marzo 2025</div><div class="feed-title" data-i18n="feed.a2.title">Ácido Hialurónico: guía completa para principiantes</div><div class="feed-excerpt" data-i18n="feed.a2.text">Todo lo que necesitas saber antes de tu primera sesión: qué esperar, duración y cuidados.</div><div class="feed-read" data-i18n="feed.read">Leer artículo</div></div></a>
+      <a class="feed-card" href="#"><div class="feed-img"><div class="feed-img-inner">☽</div><span class="feed-tag" data-i18n="feed.tag3">Láser</span></div><div class="feed-body"><div class="feed-date" data-i18n="feed.date3">Febrero 2025</div><div class="feed-title" data-i18n="feed.a3.title">Depilación láser: mitos y verdades que debes conocer</div><div class="feed-excerpt" data-i18n="feed.a3.text">Aclaramos los conceptos más comunes y por qué es la solución definitiva para el vello no deseado.</div><div class="feed-read" data-i18n="feed.read">Leer artículo</div></div></a>
+    </div>
+    <div style="text-align:center;margin-top:2.8rem" class="reveal">
+      <a href="#" class="btn-outline" style="border-color:var(--gold-light);color:var(--gold);display:inline-flex;" data-i18n="feed.cta">Ver todos los artículos →</a>
+    </div>
+  </div>
+</section>
+
+<!-- NEWSLETTER -->
+<section class="newsletter-section" id="newsletter">
+  <div class="container">
+    <div class="newsletter-wrap reveal">
+      <div class="section-eyebrow" style="justify-content:center" data-i18n="nl.eyebrow">Newsletter Exclusivo</div>
+      <h2 class="section-title" data-i18n-html="nl.title">Únete al mundo <em>Bombis</em></h2>
+      <div class="divider-gold" style="justify-content:center"><span></span><i></i><span></span></div>
+      <p data-i18n="nl.text">Recibe tips de skincare, novedades en tratamientos, promociones exclusivas y contenido educativo. Sin spam, solo lo mejor.</p>
+      <form class="newsletter-form" onsubmit="handleNewsletter(event)">
+        <input type="email" data-i18n-placeholder="nl.placeholder" placeholder="Tu correo electrónico" required>
+        <button type="submit" data-i18n="nl.btn">Suscribirme</button>
+      </form>
+      <div class="newsletter-perks">
+        <div class="newsletter-perk" data-i18n="nl.p1">Promociones exclusivas</div>
+        <div class="newsletter-perk" data-i18n="nl.p2">Tips de skincare</div>
+        <div class="newsletter-perk" data-i18n="nl.p3">Novedades en tratamientos</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- INSTAGRAM -->
+<div class="insta-strip">
+  <div class="container">
+    <div class="insta-inner reveal">
+      <p data-i18n="insta.label">Síguenos en Instagram · @dra.jenireegutierrez</p>
+      <div class="insta-grid">
+        <div class="insta-cell" onclick="window.open('https://www.instagram.com/dra.jenireegutierrez/')">✦</div>
+        <div class="insta-cell" onclick="window.open('https://www.instagram.com/dra.jenireegutierrez/')">◈</div>
+        <div class="insta-cell" onclick="window.open('https://www.instagram.com/dra.jenireegutierrez/')">◇</div>
+        <div class="insta-cell" onclick="window.open('https://www.instagram.com/dra.jenireegutierrez/')">⬡</div>
+        <div class="insta-cell" onclick="window.open('https://www.instagram.com/dra.jenireegutierrez/')">✧</div>
+        <div class="insta-cell" onclick="window.open('https://www.instagram.com/dra.jenireegutierrez/')">⁂</div>
+      </div>
+      <a href="https://www.instagram.com/dra.jenireegutierrez/" class="btn-outline" target="_blank" style="border-color:rgba(201,169,110,.4);color:var(--gold)" data-i18n="insta.cta">Ver perfil completo</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer id="contacto">
+  <div class="container">
+    <div class="footer-grid">
+      <div class="footer-brand reveal">
+        <div class="footer-logo-txt">Dra. <span>Jenireé</span> Gutiérrez</div>
+        <div class="footer-logo-sub">Medicina Estética · Costa Rica</div>
+        <p data-i18n="footer.about">Especialistas en resaltar la belleza natural que ya posees, con los más altos estándares de calidad y tecnología de vanguardia.</p>
+        <div class="footer-social">
+          <a href="https://www.instagram.com/dra.jenireegutierrez/" class="social-icon" target="_blank">ig</a>
+          <a href="https://www.facebook.com/drajenimedestetica" class="social-icon" target="_blank">fb</a>
+          <a href="https://www.tiktok.com/@dra.jenireegutierrez" class="social-icon" target="_blank">tk</a>
+          <a href="https://api.whatsapp.com/send/?phone=%2B50662987582" class="social-icon" target="_blank">wa</a>
+        </div>
+      </div>
+      <div class="reveal" style="transition-delay:.1s">
+        <div class="footer-col-title" data-i18n="footer.col.services">Servicios</div>
+        <ul class="footer-links">
+          <li><a href="#servicios" data-i18n="svc.bio.name">Bioestimuladores</a></li>
+          <li><a href="#servicios" data-i18n="svc.fill.name">Rellenos HA</a></li>
+          <li><a href="#servicios" data-i18n="svc.ulth.name">Ultherapy</a></li>
+          <li><a href="#servicios" data-i18n="svc.bot.name">Toxina Botulínica</a></li>
+          <li><a href="#servicios" data-i18n="svc.las.name">Tecnología Láser</a></li>
+          <li><a href="#servicios" data-i18n="svc.vag.name">Estética Vaginal</a></li>
+          <li><a href="#servicios" data-i18n="svc.fac.name">Facial & Spa</a></li>
+        </ul>
+      </div>
+      <div class="reveal" style="transition-delay:.2s">
+        <div class="footer-col-title" data-i18n="footer.col.clinic">Clínica</div>
+        <ul class="footer-links">
+          <li><a href="#sobre-la-dra" data-i18n="nav.doctor">La Doctora</a></li>
+          <li><a href="#aprende" data-i18n="nav.learn">Aprende</a></li>
+          <li><a href="#newsletter">Newsletter</a></li>
+          <li><a href="https://api.whatsapp.com/send/?phone=%2B50662987582" data-i18n="nav.cta">Agendar cita</a></li>
+          <li><a href="https://www.amazon.com/shop/dra.jenireegutierrez">Amazon Shop</a></li>
+        </ul>
+      </div>
+      <div class="reveal" style="transition-delay:.3s">
+        <div class="footer-col-title" data-i18n="footer.col.contact">Contacto</div>
+        <ul class="footer-info">
+          <li><strong data-i18n="footer.location">Ubicación</strong>Santa Ana Town Center<br>Local 14 y 15</li>
+          <li><strong>WhatsApp</strong>+506 6298-7582</li>
+          <li><strong>Email</strong>info@drajenireegutierrez.com</li>
+          <li><strong data-i18n="footer.hours">Horario</strong><span data-i18n="footer.hours.text">Lun–Vie: 9am–5pm · Sáb: 9am–12pm</span></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bar">
+      <p>© 2025 JG Medical SRL · <span data-i18n="footer.rights">Todos los derechos reservados</span></p>
+      <p><a href="#" data-i18n="footer.terms">Términos y condiciones</a> · <a href="#" data-i18n="footer.privacy">Privacidad</a></p>
+    </div>
+  </div>
+</footer>
+
+<!-- WA FLOAT -->
+<a class="wa-float" href="https://api.whatsapp.com/send/?phone=%2B50662987582" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+/* ─── TRANSLATIONS ─── */
+const TR = {
+  es: {
+    'nav.services':'Servicios','nav.doctor':'La Dra.','nav.process':'Proceso','nav.learn':'Aprende','nav.contact':'Contacto','nav.cta':'Agendar Cita',
+    'hero.eyebrow':'Medicina Estética · Santa Ana, Costa Rica',
+    'hero.title':'Bienvenida a la<br><em>Clínica Dra. Jenireé</em>',
+    'hero.sub':'Donde la ciencia y la belleza se encuentran',
+    'hero.cta1':'✦  Agendar mi cita','hero.cta2':'Ver servicios','hero.scroll':'Descubrir',
+    'services.eyebrow':'Tratamientos','services.title':'Nuestros <em>servicios</em>',
+    'services.lead':'Cada tratamiento es diseñado a medida para resaltar tu belleza natural, con tecnología de vanguardia y productos de primera línea.',
+    'svc.hint':'Más información →',
+    'svc.bio.name':'Bioestimuladores','svc.bio.desc':'Estimula la producción natural de colágeno y elastina para una piel más firme y luminosa.',
+    'svc.pep.name':'Péptidos','svc.pep.desc':'Tratamientos con péptidos bioactivos que regeneran la piel desde adentro, reduciendo los signos del envejecimiento.',
+    'svc.fill.name':'Rellenos de Ácido Hialurónico','svc.fill.desc':'Labios, pómulos, ojeras, mentón y más. Resultados naturales e inmediatos que respetan tus rasgos.',
+    'svc.ulth.name':'Ultherapy','svc.ulth.desc':'Ultrasonido microfocalizado que levanta y tensa el tejido sin cirugía. El lifting no invasivo más avanzado.',
+    'svc.las.name':'Tecnología Láser','svc.las.desc':'Fotona, Starwalker, CO₂, IPL y más. Manchas, rejuvenecimiento y textura con precisión láser.',
+    'svc.bot.name':'Toxina Botulínica','svc.bot.desc':'Tratamiento experto de arrugas: frente, entrecejo, patas de gallo, preservando tu expresividad.',
+    'svc.vag.name':'Estética Vaginal','svc.vag.desc':'Tratamientos íntimos con tecnología de última generación para bienestar y calidad de vida femenina.',
+    'svc.dep.name':'Depilación Láser','svc.dep.desc':'Eliminación definitiva del vello no deseado. Segura y efectiva en todo tipo de piel.',
+    'svc.fac.name':'Facial & Spa','svc.fac.desc':'Limpiezas profundas, peelings, mesoterapia y tratamientos relajantes que renuevan tu piel.',
+    'stat.patients':'Pacientes Satisfechos','stat.syringes':'Jeringas Aplicadas','stat.faces':'Rostros Tratados','stat.years':'Años de Experiencia',
+    'about.eyebrow':'La Doctora','about.title':'Una experta <em>internacional</em> a tu servicio',
+    'about.lead':'Médico Cirujana graduada de la UCIMED, especializada en Medicina Estética en la Universidad de Buenos Aires. Reconocida internacionalmente por su enfoque en resultados naturales y atención personalizada.',
+    'about.cred1.title':'Médico Cirujana — UCIMED, Costa Rica','about.cred1.text':'Formación médica integral con énfasis en el paciente y su bienestar.',
+    'about.cred2.title':'Especialista — Universidad de Buenos Aires','about.cred2.text':'Posgrado en las técnicas más avanzadas de medicina estética y rejuvenecimiento.',
+    'about.cred3.title':'Formación continua internacional','about.cred3.text':'Entrenamiento constante con líderes mundiales en bioestimulación, láser y armonización facial.',
+    'about.cta1':'Agendar consulta','about.cta2':'Ver en Instagram',
+    'process.eyebrow':'Tu experiencia','process.title':'El camino <em>Bombis</em>','process.lead':'Cuatro pasos para que vivas la transformación más natural y segura de tu vida.',
+    'step1.title':'Consulta','step1.text':'Analizamos tus objetivos, historial y expectativas en un espacio de total confianza.',
+    'step2.title':'Diagnóstico','step2.text':'Diseñamos un plan personalizado con los tratamientos más adecuados para ti.',
+    'step3.title':'Tratamiento','step3.text':'Aplicamos los procedimientos con la máxima precisión, seguridad y confort.',
+    'step4.title':'Seguimiento','step4.text':'Te acompañamos en tu proceso de recuperación y evaluamos los resultados.',
+    'cta.title':'¿Lista para tu <em>transformación</em>?','cta.sub':'Agenda tu consulta hoy · Santa Ana Town Center, Local 14 y 15',
+    'cta.btn1':'✦  WhatsApp · +506 6298-7582','cta.btn2':'Ver resultados en Instagram',
+    'feed.eyebrow':'Conocimiento','feed.title':'Aprende sobre <em>medicina estética</em>',
+    'feed.lead':'Tu espacio para entender los tratamientos, tendencias y ciencia detrás de la medicina estética moderna.',
+    'feed.f.all':'Todo','feed.f.fillers':'Rellenos','feed.f.laser':'Láser','feed.f.skin':'Piel','feed.f.trends':'Tendencias',
+    'feed.tag1':'Bioestimulación','feed.tag2':'Rellenos','feed.tag3':'Láser',
+    'feed.date1':'Abril 2025','feed.date2':'Marzo 2025','feed.date3':'Febrero 2025',
+    'feed.a1.title':'¿Qué son los bioestimuladores y cómo funcionan en tu piel?','feed.a1.text':'Descubre cómo estos tratamientos activan tus propias células para producir colágeno de forma natural.',
+    'feed.a2.title':'Ácido Hialurónico: guía completa para principiantes','feed.a2.text':'Todo lo que necesitas saber antes de tu primera sesión: qué esperar, duración y cuidados.',
+    'feed.a3.title':'Depilación láser: mitos y verdades que debes conocer','feed.a3.text':'Aclaramos los conceptos más comunes y por qué es la solución definitiva para el vello no deseado.',
+    'feed.read':'Leer artículo','feed.cta':'Ver todos los artículos →',
+    'nl.eyebrow':'Newsletter Exclusivo','nl.title':'Únete al mundo <em>Bombis</em>',
+    'nl.text':'Recibe tips de skincare, novedades en tratamientos, promociones exclusivas y contenido educativo. Sin spam, solo lo mejor.',
+    'nl.placeholder':'Tu correo electrónico','nl.btn':'Suscribirme',
+    'nl.p1':'Promociones exclusivas','nl.p2':'Tips de skincare','nl.p3':'Novedades en tratamientos',
+    'insta.label':'Síguenos en Instagram · @dra.jenireegutierrez','insta.cta':'Ver perfil completo',
+    'footer.about':'Especialistas en resaltar la belleza natural que ya posees, con los más altos estándares de calidad y tecnología de vanguardia.',
+    'footer.col.services':'Servicios','footer.col.clinic':'Clínica','footer.col.contact':'Contacto',
+    'footer.location':'Ubicación','footer.hours':'Horario','footer.hours.text':'Lun–Vie: 9am–5pm · Sáb: 9am–12pm',
+    'footer.rights':'Todos los derechos reservados','footer.terms':'Términos y condiciones','footer.privacy':'Privacidad',
+  },
+  en: {
+    'nav.services':'Services','nav.doctor':'The Dr.','nav.process':'Process','nav.learn':'Learn','nav.contact':'Contact','nav.cta':'Book Appointment',
+    'hero.eyebrow':'Aesthetic Medicine · Santa Ana, Costa Rica',
+    'hero.title':'Welcome to<br><em>Dra. Jenireé\'s Clinic</em>',
+    'hero.sub':'Where science and beauty meet',
+    'hero.cta1':'✦  Book my appointment','hero.cta2':'View services','hero.scroll':'Discover',
+    'services.eyebrow':'Treatments','services.title':'Our <em>services</em>',
+    'services.lead':'Each treatment is tailored to enhance your natural beauty, using cutting-edge technology and premium products.',
+    'svc.hint':'Learn more →',
+    'svc.bio.name':'Biostimulators','svc.bio.desc':'Stimulates natural collagen and elastin production for firmer, more radiant skin with progressive results.',
+    'svc.pep.name':'Peptides','svc.pep.desc':'Bioactive peptide treatments that regenerate skin from within, reducing visible signs of aging with precision.',
+    'svc.fill.name':'Hyaluronic Acid Fillers','svc.fill.desc':'Lips, cheeks, under-eyes, chin and more. Natural, immediate results that respect your unique features.',
+    'svc.ulth.name':'Ultherapy','svc.ulth.desc':'Micro-focused ultrasound that lifts and tightens tissue without surgery. The most advanced non-invasive lifting.',
+    'svc.las.name':'Laser Technology','svc.las.desc':'Fotona, Starwalker, CO₂, IPL and more. Spots, rejuvenation and texture addressed with laser precision.',
+    'svc.bot.name':'Botulinum Toxin','svc.bot.desc':'Expert treatment of expression lines: forehead, frown lines, crow\'s feet — preserving your expressiveness.',
+    'svc.vag.name':'Vaginal Aesthetics','svc.vag.desc':'Intimate treatments with latest-generation technology for wellness and improved quality of life.',
+    'svc.dep.name':'Laser Hair Removal','svc.dep.desc':'Permanent removal of unwanted hair. Safe and effective on all skin types.',
+    'svc.fac.name':'Facial & Spa','svc.fac.desc':'Deep cleansing, peels, mesotherapy and relaxing treatments that renew your skin and mind.',
+    'stat.patients':'Happy Patients','stat.syringes':'Syringes Applied','stat.faces':'Faces Treated','stat.years':'Years of Experience',
+    'about.eyebrow':'The Doctor','about.title':'An <em>international expert</em> at your service',
+    'about.lead':'Surgeon graduated from UCIMED in Costa Rica, specialized in Aesthetic Medicine at the University of Buenos Aires. Internationally recognized for natural results and personalized care.',
+    'about.cred1.title':'Medical Surgeon — UCIMED, Costa Rica','about.cred1.text':'Comprehensive medical training with emphasis on patient care and wellbeing.',
+    'about.cred2.title':'Specialist — University of Buenos Aires','about.cred2.text':'Postgraduate degree in the most advanced aesthetic medicine and rejuvenation techniques.',
+    'about.cred3.title':'Continuous international training','about.cred3.text':'Constant training with world leaders in biostimulation, laser and facial harmonization.',
+    'about.cta1':'Book a consultation','about.cta2':'See on Instagram',
+    'process.eyebrow':'Your experience','process.title':'The <em>Bombis</em> journey','process.lead':'Four steps to experience the most natural and safe transformation of your life.',
+    'step1.title':'Consultation','step1.text':'We analyze your goals, history and expectations in a space of complete trust.',
+    'step2.title':'Diagnosis','step2.text':'We design a personalized plan with the most appropriate treatments for you.',
+    'step3.title':'Treatment','step3.text':'We apply procedures with maximum precision, safety and comfort.',
+    'step4.title':'Follow-up','step4.text':'We accompany you through your recovery and evaluate your results.',
+    'cta.title':'Ready for your <em>transformation</em>?','cta.sub':'Book your consultation today · Santa Ana Town Center, Local 14 & 15',
+    'cta.btn1':'✦  WhatsApp · +506 6298-7582','cta.btn2':'See results on Instagram',
+    'feed.eyebrow':'Knowledge','feed.title':'Learn about <em>aesthetic medicine</em>',
+    'feed.lead':'Your space to understand treatments, trends and the science behind modern aesthetic medicine.',
+    'feed.f.all':'All','feed.f.fillers':'Fillers','feed.f.laser':'Laser','feed.f.skin':'Skin','feed.f.trends':'Trends',
+    'feed.tag1':'Biostimulation','feed.tag2':'Fillers','feed.tag3':'Laser',
+    'feed.date1':'April 2025','feed.date2':'March 2025','feed.date3':'February 2025',
+    'feed.a1.title':'What are biostimulators and how do they work on your skin?','feed.a1.text':'Discover how these treatments activate your own cells to produce collagen naturally and durably.',
+    'feed.a2.title':'Hyaluronic Acid: complete beginner\'s guide','feed.a2.text':'Everything you need to know before your first filler session: what to expect, duration and aftercare.',
+    'feed.a3.title':'Laser hair removal: myths and truths you need to know','feed.a3.text':'We clear up the most common misconceptions and why it\'s the definitive solution for unwanted hair.',
+    'feed.read':'Read article','feed.cta':'See all articles →',
+    'nl.eyebrow':'Exclusive Newsletter','nl.title':'Join the <em>Bombis</em> world',
+    'nl.text':'Receive skincare tips, treatment news, exclusive promotions and educational content. No spam, only the best.',
+    'nl.placeholder':'Your email address','nl.btn':'Subscribe',
+    'nl.p1':'Exclusive promotions','nl.p2':'Skincare tips','nl.p3':'Treatment updates',
+    'insta.label':'Follow us on Instagram · @dra.jenireegutierrez','insta.cta':'View full profile',
+    'footer.about':'Specialists in enhancing the natural beauty you already have, with the highest quality standards and cutting-edge technology.',
+    'footer.col.services':'Services','footer.col.clinic':'Clinic','footer.col.contact':'Contact',
+    'footer.location':'Location','footer.hours':'Hours','footer.hours.text':'Mon–Fri: 9am–5pm · Sat: 9am–12pm',
+    'footer.rights':'All rights reserved','footer.terms':'Terms & Conditions','footer.privacy':'Privacy',
+  }
+};
+
+/* ─── SERVICE DATA ─── */
+const SVC = {
+  biostimulators: {
+    icon:'✦',
+    es:{ tag:'Bioestimulación', title:'Bioestimuladores', text:'Los bioestimuladores son tratamientos inyectables que activan los mecanismos naturales de la piel para producir colágeno, elastina y ácido hialurónico. Sus resultados son progresivos y pueden durar hasta dos años.', bullets:['Radiesse, Sculptra, Profhilo y más','Resultados naturales y progresivos','Estimula colágeno propio hasta 24 meses','Sin tiempo de recuperación significativo','Ideal para mejorar flacidez y calidad de piel'] },
+    en:{ tag:'Biostimulation', title:'Biostimulators', text:'Biostimulators are injectable treatments that activate the skin\'s natural mechanisms to produce collagen, elastin and hyaluronic acid. Results are progressive and can last up to two years.', bullets:['Radiesse, Sculptra, Profhilo and more','Natural, progressive results','Stimulates your own collagen for up to 24 months','No significant downtime','Ideal for improving skin laxity and quality'] }
+  },
+  peptides: {
+    icon:'◈',
+    es:{ tag:'Regeneración', title:'Péptidos Bioactivos', text:'Los péptidos son cadenas de aminoácidos que actúan como mensajeros celulares, estimulando la regeneración de la piel desde adentro. Son clave en los tratamientos anti-aging más avanzados.', bullets:['Péptidos de señalización y regeneración','Reducen arrugas finas y mejoran textura','Potencian otros tratamientos estéticos','Aplicación inyectable o tópica según caso','Resultados visibles desde las primeras semanas'] },
+    en:{ tag:'Regeneration', title:'Bioactive Peptides', text:'Peptides are chains of amino acids that act as cellular messengers, stimulating skin regeneration from within. They are key in the most advanced anti-aging treatments.', bullets:['Signaling and regeneration peptides','Reduce fine lines and improve texture','Enhance other aesthetic treatments','Injectable or topical application as needed','Visible results from the first few weeks'] }
+  },
+  fillers: {
+    icon:'◇',
+    es:{ tag:'Rellenos Dérmicos', title:'Rellenos de Ácido Hialurónico', text:'El ácido hialurónico restaura volumen, define contornos y suaviza arrugas con resultados inmediatos y naturales. En nuestra clínica utilizamos únicamente productos premium certificados.', bullets:['Labios, mentón, pómulos y ojeras','Marcaje mandibular y rinomodelación','Resultados inmediatos, duración 9–18 meses','Productos premium: Juvederm, Restylane, Belotero','Procedimiento rápido, sin tiempo de recuperación'] },
+    en:{ tag:'Dermal Fillers', title:'Hyaluronic Acid Fillers', text:'Hyaluronic acid restores volume, defines contours and smooths wrinkles with immediate, natural-looking results. We exclusively use certified premium products.', bullets:['Lips, chin, cheeks and under-eyes','Jawline definition and nose reshaping','Immediate results, lasting 9–18 months','Premium products: Juvederm, Restylane, Belotero','Quick procedure, no significant downtime'] }
+  },
+  ultherapy: {
+    icon:'⬡',
+    es:{ tag:'Ultrasonido Microfocalizado', title:'Ultherapy', text:'Ultherapy utiliza ultrasonido microfocalizado para llegar a las capas profundas de la piel y el músculo, estimulando la producción de colágeno. Es el único tratamiento aprobado por la FDA para lifting no invasivo.', bullets:['Aprobado por FDA para lifting no invasivo','Actúa en capas profundas: SMAS y dermis','Resultados progresivos en 3–6 meses','Tratamiento único o combinado','Sin cirugía, sin cicatrices, sin tiempo de recuperación'] },
+    en:{ tag:'Micro-Focused Ultrasound', title:'Ultherapy', text:'Ultherapy uses micro-focused ultrasound to reach the deep layers of skin and muscle, stimulating collagen production. It is the only FDA-approved treatment for non-invasive lifting.', bullets:['FDA-approved for non-invasive lifting','Works on deep layers: SMAS and dermis','Progressive results in 3–6 months','Single or combined treatment','No surgery, no scars, no downtime'] }
+  },
+  laser: {
+    icon:'✧',
+    es:{ tag:'Tecnología Avanzada', title:'Tecnología Láser', text:'Contamos con las tecnologías láser más avanzadas del mercado para tratar manchas, mejorar textura, estimular colágeno y mucho más. Cada tratamiento es personalizado según tu tipo de piel y objetivos.', bullets:['Fotona & Fotona StarWalker MaQX','Láser CO₂ fraccionado ablativo','IPL para manchas y rosácea','Eliminación de tatuajes y lesiones vasculares','Rejuvenecimiento dérmico y anti-aging'] },
+    en:{ tag:'Advanced Technology', title:'Laser Technology', text:'We have the most advanced laser technologies on the market to treat spots, improve texture, stimulate collagen and much more. Each treatment is personalized to your skin type and goals.', bullets:['Fotona & Fotona StarWalker MaQX','Fractional ablative CO₂ laser','IPL for pigmentation and rosacea','Tattoo and vascular lesion removal','Dermal rejuvenation and anti-aging'] }
+  },
+  botox: {
+    icon:'◉',
+    es:{ tag:'Toxina Botulínica', title:'Toxina Botulínica', text:'La toxina botulínica relaja los músculos responsables de las arrugas dinámicas, logrando un efecto rejuvenecedor inmediato y natural. Trabajamos con las marcas más reconocidas del mercado.', bullets:['Botox, Xeomin, Dysport, Nabota','Frente, entrecejo, patas de gallo','Efecto lifting y armonización facial','Resultados en 48–72h, duración 4–6 meses','Tratamiento preventivo desde los 25 años'] },
+    en:{ tag:'Botulinum Toxin', title:'Botulinum Toxin', text:'Botulinum toxin relaxes the muscles responsible for dynamic wrinkles, achieving an immediate and natural rejuvenating effect. We work with the most recognized brands on the market.', bullets:['Botox, Xeomin, Dysport, Nabota','Forehead, frown lines, crow\'s feet','Lifting effect and facial harmonization','Results in 48–72h, lasting 4–6 months','Preventive treatment from age 25'] }
+  },
+  vaginal: {
+    icon:'♡',
+    es:{ tag:'Bienestar Íntimo', title:'Estética Vaginal', text:'Nuestros tratamientos íntimos utilizan tecnología láser y radiofrecuencia para mejorar la calidad del tejido, el bienestar funcional y la confianza femenina. Tratamientos confidenciales y de alta seguridad.', bullets:['Láser ginecológico Fotona IntimaLase','Radiofrecuencia para laxitud y bienestar','Tratamiento de sequedad e incontinencia leve','Sin cirugía, mínimamente invasivo','Sesiones cortas con resultados duraderos'] },
+    en:{ tag:'Intimate Wellness', title:'Vaginal Aesthetics', text:'Our intimate treatments use laser and radiofrequency technology to improve tissue quality, functional wellness and feminine confidence. Confidential and highly safe treatments.', bullets:['Fotona IntimaLase gynecological laser','Radiofrequency for laxity and wellness','Treatment of dryness and mild incontinence','Non-surgical, minimally invasive','Short sessions with long-lasting results'] }
+  },
+  laser_hair: {
+    icon:'☽',
+    es:{ tag:'Depilación Definitiva', title:'Depilación Láser', text:'La depilación láser es la solución definitiva para eliminar el vello no deseado de forma permanente. Utilizamos tecnología de diodo de última generación, segura y efectiva en todos los tipos de piel.', bullets:['Láser de diodo de última generación','Efectivo en todos los fototipos de piel','Zonas: axilas, piernas, bikini, cara, espalda','Resultados permanentes en 6–8 sesiones','Tratamiento rápido y cómodo'] },
+    en:{ tag:'Permanent Hair Removal', title:'Laser Hair Removal', text:'Laser hair removal is the definitive solution for permanently eliminating unwanted hair. We use state-of-the-art diode laser technology, safe and effective on all skin types.', bullets:['State-of-the-art diode laser','Effective on all skin phototypes','Areas: underarms, legs, bikini, face, back','Permanent results in 6–8 sessions','Fast, comfortable treatment'] }
+  },
+  facial: {
+    icon:'⁂',
+    es:{ tag:'Facial & Spa', title:'Facial & Spa', text:'Nuestros tratamientos faciales combinan lo mejor de la medicina estética con el lujo del spa. Desde limpiezas profundas hasta mesoterapia y peelings, cada sesión es una experiencia de bienestar total.', bullets:['Limpiezas profundas y exfoliación','Peelings de ácido salicílico, glicólico y TCA','Mesoterapia facial y vitaminas inyectables','Plasma rico en plaquetas (PRP)','Tratamientos relajantes y antiestress'] },
+    en:{ tag:'Facial & Spa', title:'Facial & Spa', text:'Our facial treatments combine the best of aesthetic medicine with spa luxury. From deep cleansing to mesotherapy and peels, each session is a total wellness experience.', bullets:['Deep cleansing and exfoliation','Salicylic, glycolic and TCA peels','Facial mesotherapy and injectable vitamins','Platelet-rich plasma (PRP)','Relaxing and anti-stress treatments'] }
+  }
+};
+
+/* ─── LANGUAGE ─── */
+let lang = 'es';
+
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === l));
+  applyTR();
+}
+
+function t(k) { return (TR[lang] && TR[lang][k]) || TR.es[k] || k; }
+
+function applyTR() {
+  document.querySelectorAll('[data-i18n]').forEach(el => { const v = t(el.dataset.i18n); if(v) el.textContent = v; });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => { const v = t(el.dataset.i18nHtml); if(v) el.innerHTML = v; });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { const v = t(el.dataset.i18nPlaceholder); if(v) el.placeholder = v; });
+}
+
+/* ─── MODAL ─── */
+function openModal(key) {
+  const s = SVC[key]; if (!s) return;
+  const d = s[lang] || s.es;
+  document.getElementById('modalIcon').textContent = s.icon;
+  document.getElementById('modalTitle').textContent = d.title;
+  document.getElementById('modalTag').textContent = d.tag;
+  document.getElementById('modalText').textContent = d.text;
+  const ul = document.getElementById('modalBullets');
+  ul.innerHTML = '';
+  d.bullets.forEach(b => { const li = document.createElement('li'); li.textContent = b; ul.appendChild(li); });
+  document.getElementById('modalCtaBook').innerHTML = lang === 'en' ? '✦  Book appointment' : '✦  Agendar cita';
+  document.getElementById('modalCtaLearn').textContent = lang === 'en' ? 'Learn more →' : 'Ver más →';
+  document.getElementById('serviceModal').classList.add('open');
+  document.body.style.overflow = 'hidden';
+}
+
+function closeModal() {
+  document.getElementById('serviceModal').classList.remove('open');
+  document.body.style.overflow = '';
+}
+
+function closeModalOutside(e) { if (e.target.id === 'serviceModal') closeModal(); }
+document.addEventListener('keydown', e => { if (e.key === 'Escape') closeModal(); });
+
+/* ─── NAV ─── */
+const nav = document.getElementById('mainNav');
+window.addEventListener('scroll', () => nav.classList.toggle('scrolled', window.scrollY > 60));
+
+/* ─── MOBILE MENU ─── */
+function toggleMenu() { document.getElementById('mobileMenu').classList.toggle('open'); }
+
+/* ─── FILTER BUTTONS ─── */
+document.querySelectorAll('.filter-btn').forEach(b => {
+  b.addEventListener('click', function() {
+    document.querySelectorAll('.filter-btn').forEach(x => x.classList.remove('active'));
+    this.classList.add('active');
+  });
+});
+
+/* ─── REVEAL ─── */
+const revObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { e.target.classList.add('visible'); revObs.unobserve(e.target); } });
+}, { threshold: 0.1 });
+document.querySelectorAll('.reveal').forEach(el => revObs.observe(el));
+
+/* ─── COUNTERS ─── */
+function animateCounter(el) {
+  const target = parseInt(el.dataset.count); if(!target) return;
+  let cur = 0; const step = target / (1800 / 16);
+  const t = setInterval(() => { cur += step; if(cur >= target){cur=target;clearInterval(t);} el.textContent = Math.floor(cur).toLocaleString()+'+'; }, 16);
+}
+const cntObs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if(e.isIntersecting) { animateCounter(e.target); cntObs.unobserve(e.target); } });
+}, { threshold: 0.5 });
+document.querySelectorAll('[data-count]').forEach(el => cntObs.observe(el));
+
+/* ─── PARTICLES ─── */
+(function(){ const c = document.getElementById('particles');
+  for(let i=0;i<38;i++){const s=document.createElement('span');s.style.cssText=`left:${Math.random()*100}%;top:${Math.random()*100}%;width:${Math.random()*1.8+.8}px;height:${Math.random()*1.8+.8}px;--d:${Math.random()*4+3}s;--delay:${Math.random()*7}s;`;c.appendChild(s);} })();
+
+/* ─── NEWSLETTER ─── */
+function handleNewsletter(e) {
+  e.preventDefault();
+  const btn = e.target.querySelector('button');
+  btn.textContent = lang === 'en' ? 'Welcome! ✦' : '¡Bienvenida! ✦';
+  btn.style.background = '#3a7d44';
+  setTimeout(() => { btn.textContent = t('nl.btn'); btn.style.background = ''; }, 3200);
+}
+
+/* ─── SMOOTH SCROLL ─── */
+document.querySelectorAll('a[href^="#"]').forEach(a => {
+  a.addEventListener('click', function(e) {
+    const target = document.querySelector(this.getAttribute('href'));
+    if(target) { e.preventDefault(); target.scrollIntoView({behavior:'smooth'}); }
+  });
+});
+</script>
+</body>
+</html>
