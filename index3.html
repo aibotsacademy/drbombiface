@@ -266,355 +266,80 @@
     .modal-body { padding: 1.6rem 1.8rem 2rem; }
   }
 
-<style id="expStyles">
+*{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A96E;--gold-light:#E8D5B0;--gold-dark:#A07840;
+  --rose-light:#FAF0F2;--rose-mid:#E8A8B8;--rose-deep:#C97088;
+  --off-white:#FDF8F5;--text-dark:#2A1F1A;--text-mid:#5C4A42;--text-light:#9B8880;
+  --fd:'Cormorant Garamond',Georgia,serif;--fb:'Jost',sans-serif;
+  --lv0:#C9A96E;--lv1:#C97088;--lv2:#534AB7;
+}
+body{font-family:var(--fb);background:transparent;}
+.wrap{padding:2rem 0;}
+.top-header{text-align:center;margin-bottom:1.8rem;}
+.eyebrow{font-size:.58rem;letter-spacing:.28em;text-transform:uppercase;color:var(--gold);font-weight:400;display:flex;align-items:center;justify-content:center;gap:.7rem;margin-bottom:.7rem;}
+.eyebrow::before,.eyebrow::after{content:'';display:block;width:22px;height:1px;background:var(--gold);opacity:.5;}
+.main-title{font-family:var(--fd);font-size:clamp(1.4rem,3vw,2rem);font-weight:300;color:var(--text-dark);line-height:1.2;margin-bottom:.4rem;}
+.main-title em{font-style:italic;color:var(--rose-deep);}
+.main-sub{font-size:.8rem;color:var(--text-light);font-weight:300;}
+.slider-row{max-width:560px;margin:1.6rem auto 0;}
+.level-labels{display:flex;justify-content:space-between;margin-bottom:.4rem;}
+.lvl-lbl{font-size:.58rem;letter-spacing:.15em;text-transform:uppercase;font-weight:300;color:var(--text-light);cursor:pointer;transition:color .25s,font-weight .25s;padding:.2rem 0;}
+.lvl-lbl.active{font-weight:500;}
+.track-wrap{position:relative;height:2px;}
+.track-bg{position:absolute;inset:0;background:var(--gold-light);border-radius:2px;}
+.track-fill{position:absolute;top:0;left:0;height:100%;border-radius:2px;background:var(--lv0);width:0%;transition:width .3s,background .3s;}
+.track-dot{position:absolute;top:50%;width:18px;height:18px;border-radius:50%;background:#fff;border:2px solid var(--lv0);transform:translate(-50%,-50%);left:0%;transition:left .3s,border-color .3s;pointer-events:none;box-shadow:0 1px 6px rgba(201,169,110,.3);}
+.range-inp{position:absolute;top:-.7rem;left:0;width:100%;height:2rem;opacity:0;cursor:pointer;}
+.tagline{text-align:center;margin-top:1rem;font-family:var(--fd);font-size:.95rem;font-style:italic;color:var(--text-mid);font-weight:300;min-height:1.3rem;transition:opacity .25s;}
+.search-bar{display:flex;align-items:center;gap:.6rem;border:1px solid var(--gold-light);background:#fff;padding:.6rem .9rem;margin:1.4rem 0 .8rem;transition:border-color .25s;}
+.search-bar:focus-within{border-color:var(--gold);}
+.search-bar svg{width:14px;height:14px;flex-shrink:0;color:var(--text-light);}
+.search-bar input{border:none;outline:none;flex:1;font-family:var(--fb);font-size:.8rem;font-weight:300;color:var(--text-dark);background:transparent;}
+.search-bar input::placeholder{color:var(--text-light);}
+.search-clear{font-size:.68rem;color:var(--text-light);cursor:pointer;background:none;border:none;font-family:var(--fb);padding:.1rem .3rem;display:none;}
+.search-clear.show{display:block;}
+.results-info{font-size:.62rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-light);font-weight:300;margin-bottom:.7rem;}
+.results-info span{color:var(--gold);font-weight:400;}
+.cards-grid{display:grid;grid-template-columns:repeat(auto-fill,minmax(175px,1fr));gap:.6rem;}
+.proc-card{background:#fff;border:1px solid var(--gold-light);padding:.8rem .95rem;cursor:pointer;transition:transform .2s,box-shadow .2s,border-color .2s;position:relative;overflow:hidden;}
+.proc-card::after{content:'';position:absolute;bottom:0;left:0;right:0;height:2px;background:var(--gold);transform:scaleX(0);transform-origin:left;transition:transform .22s;}
+.proc-card:hover{transform:translateY(-2px);box-shadow:0 5px 16px rgba(201,169,110,.1);}
+.proc-card:hover::after{transform:scaleX(1);}
+.proc-card.hidden{display:none;}
+.card-top{display:flex;align-items:flex-start;justify-content:space-between;gap:.4rem;margin-bottom:.35rem;}
+.card-level-badge{font-size:.48rem;letter-spacing:.13em;text-transform:uppercase;padding:.16rem .5rem;font-weight:500;border-radius:2px;white-space:nowrap;}
+.card-name{font-family:var(--fd);font-size:.92rem;font-weight:400;color:var(--text-dark);line-height:1.2;margin-bottom:.25rem;}
+.card-teaser{font-size:.68rem;color:var(--text-light);font-weight:300;line-height:1.5;}
+.card-arrow{font-size:.58rem;letter-spacing:.13em;text-transform:uppercase;color:var(--gold);font-weight:400;margin-top:.45rem;}
+.no-results{text-align:center;padding:2.5rem 1rem;color:var(--text-light);font-family:var(--fd);font-size:1rem;font-style:italic;font-weight:300;}
+.cta-footer{text-align:center;margin-top:1.8rem;padding-top:1.4rem;border-top:1px solid var(--gold-light);}
+.cta-footer p{font-size:.73rem;color:var(--text-light);font-weight:300;margin-bottom:.85rem;}
+.btn-gold-main{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#C9A96E,#A07840);color:#fff;padding:.75rem 1.8rem;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:400;text-decoration:none;font-family:var(--fb);}
 
-/* ── Selector wrapper ── */
-.exp-selector {
-  margin-top: 4rem;
-}
-
-/* ── Intro header ── */
-.exp-intro {
-  text-align: center;
-  margin-bottom: 2.5rem;
-}
-.exp-intro-eyebrow {
-  font-size: .6rem;
-  letter-spacing: .28em;
-  text-transform: uppercase;
-  color: var(--gold);
-  font-weight: 400;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  gap: .8rem;
-  margin-bottom: .8rem;
-}
-.exp-intro-eyebrow::before,
-.exp-intro-eyebrow::after {
-  content: '';
-  display: block;
-  width: 28px;
-  height: 1px;
-  background: var(--gold);
-  opacity: .55;
-}
-.exp-intro-title {
-  font-family: var(--font-display);
-  font-size: clamp(1.5rem, 3vw, 2.1rem);
-  font-weight: 300;
-  color: var(--text-dark);
-  letter-spacing: .01em;
-  line-height: 1.2;
-}
-.exp-intro-title em {
-  font-style: italic;
-  color: var(--rose-deep);
-}
-.exp-intro-sub {
-  font-size: .82rem;
-  color: var(--text-light);
-  margin-top: .7rem;
-  font-weight: 300;
-  line-height: 1.7;
-}
-
-/* ── Slider ── */
-.exp-slider-wrap {
-  max-width: 640px;
-  margin: 0 auto 2.5rem;
-}
-.exp-level-labels {
-  display: flex;
-  justify-content: space-between;
-  margin-bottom: .5rem;
-}
-.exp-lbl {
-  font-size: .6rem;
-  letter-spacing: .18em;
-  text-transform: uppercase;
-  font-weight: 300;
-  color: var(--text-light);
-  transition: color .3s, font-weight .3s;
-  cursor: pointer;
-}
-.exp-lbl.active {
-  color: var(--gold);
-  font-weight: 500;
-}
-.exp-track-container {
-  position: relative;
-  height: 2px;
-  margin-bottom: .4rem;
-}
-.exp-track-bg {
-  position: absolute;
-  inset: 0;
-  background: var(--gold-light);
-  border-radius: 2px;
-}
-.exp-track-fill {
-  position: absolute;
-  top: 0;
-  left: 0;
-  height: 100%;
-  background: var(--gold);
-  border-radius: 2px;
-  width: 0%;
-  transition: width .35s, background .35s;
-}
-.exp-track-dot {
-  position: absolute;
-  top: 50%;
-  left: 0%;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  background: #fff;
-  border: 2px solid var(--gold);
-  transform: translate(-50%, -50%);
-  transition: left .35s, border-color .35s;
-  pointer-events: none;
-  box-shadow: 0 2px 10px rgba(201,169,110,.35);
-}
-.exp-range {
-  position: absolute;
-  top: -0.8rem;
-  left: 0;
-  width: 100%;
-  height: 2rem;
-  opacity: 0;
-  cursor: pointer;
-  margin: 0;
-  padding: 0;
-}
-.exp-tagline {
-  text-align: center;
-  margin-top: 1.2rem;
-  font-family: var(--font-display);
-  font-size: 1.05rem;
-  font-style: italic;
-  color: var(--text-mid);
-  font-weight: 300;
-  min-height: 1.5rem;
-  transition: opacity .3s;
-}
-
-/* ── Content fade ── */
-.exp-content-area,
-.exp-protocol-banner {
-  transition: opacity .35s;
-}
-
-/* ── Intro strip ── */
-.exp-level-intro {
-  padding: 1rem 1.25rem;
-  border-left: 2px solid var(--gold);
-  margin-bottom: 1.25rem;
-}
-.exp-level-intro p {
-  font-size: .82rem;
-  color: var(--text-mid);
-  font-weight: 300;
-  line-height: 1.82;
-}
-
-/* ── Service cards grid ── */
-.exp-cards-grid {
-  display: grid;
-  gap: 1rem;
-}
-.exp-cards-grid.cols-4 { grid-template-columns: repeat(2, 1fr); }
-.exp-cards-grid.cols-3 { grid-template-columns: repeat(3, 1fr); }
-
-.exp-card {
-  background: #fff;
-  border: 1px solid var(--gold-light);
-  padding: 1.5rem 1.25rem;
-  display: flex;
-  flex-direction: column;
-  gap: .55rem;
-  transition: transform .25s, box-shadow .25s;
-  position: relative;
-  overflow: hidden;
-}
-.exp-card::before {
-  content: '';
-  position: absolute;
-  bottom: 0; left: 0; right: 0;
-  height: 2px;
-  background: linear-gradient(90deg, var(--gold), var(--rose-mid));
-  transform: scaleX(0);
-  transform-origin: left;
-  transition: transform .3s;
-}
-.exp-card:hover { transform: translateY(-3px); box-shadow: 0 8px 28px rgba(201,169,110,.12); }
-.exp-card:hover::before { transform: scaleX(1); }
-
-.exp-card-icon {
-  font-size: 1.2rem;
-  color: var(--gold);
-  margin-bottom: .15rem;
-}
-.exp-card-tag {
-  display: inline-block;
-  font-size: .56rem;
-  letter-spacing: .16em;
-  text-transform: uppercase;
-  background: var(--rose-light);
-  color: var(--rose-deep);
-  padding: .22rem .65rem;
-  font-weight: 500;
-  margin-bottom: .3rem;
-}
-.exp-card-tag.tag-gold {
-  background: rgba(201,169,110,.12);
-  color: var(--gold-dark);
-}
-.exp-card-tag.tag-purple {
-  background: rgba(83,74,183,.09);
-  color: #3C3489;
-}
-.exp-card-name {
-  font-family: var(--font-display);
-  font-size: 1.08rem;
-  font-weight: 400;
-  color: var(--text-dark);
-  line-height: 1.2;
-}
-.exp-card-desc {
-  font-size: .78rem;
-  color: var(--text-light);
-  font-weight: 300;
-  line-height: 1.7;
-  flex: 1;
-}
-.exp-card-meta {
-  border-top: 1px solid var(--rose-light);
-  padding-top: .7rem;
-  margin-top: .2rem;
-  display: flex;
-  flex-direction: column;
-  gap: .28rem;
-}
-.exp-card-meta-row {
-  display: flex;
-  justify-content: space-between;
-  align-items: flex-start;
-  gap: .5rem;
-}
-.exp-card-meta-label {
-  font-size: .6rem;
-  color: var(--text-light);
-  font-weight: 300;
-  text-transform: uppercase;
-  letter-spacing: .1em;
-  white-space: nowrap;
-}
-.exp-card-meta-val {
-  font-size: .68rem;
-  color: var(--text-dark);
-  font-weight: 400;
-  text-align: right;
-}
-.exp-card-meta-val.accent { color: var(--gold); }
-
-/* ── Protocol banner ── */
-.exp-protocol {
-  background: linear-gradient(135deg, #1a0e14, #2d1520);
-  padding: 1.75rem 2rem;
-  margin-top: 1.5rem;
-  position: relative;
-  overflow: hidden;
-}
-.exp-protocol.purple {
-  background: linear-gradient(135deg, #1e1a38, #0f0c22);
-}
-.exp-protocol::after {
-  content: '';
-  position: absolute;
-  top: 0; right: 0;
-  width: 200px; height: 200px;
-  border-radius: 50%;
-  background: var(--gold);
-  opacity: .05;
-  transform: translate(50%, -50%);
-}
-.exp-protocol-badge {
-  display: inline-block;
-  font-size: .55rem;
-  letter-spacing: .2em;
-  text-transform: uppercase;
-  background: rgba(201,169,110,.18);
-  color: var(--gold);
-  padding: .25rem .75rem;
-  font-weight: 500;
-  margin-bottom: 1rem;
-}
-.exp-protocol-eyebrow {
-  font-size: .58rem;
-  letter-spacing: .22em;
-  text-transform: uppercase;
-  color: rgba(255,255,255,.35);
-  margin-bottom: .4rem;
-  font-weight: 300;
-}
-.exp-protocol-combo {
-  font-family: var(--font-display);
-  font-size: 1.4rem;
-  font-weight: 300;
-  color: #fff;
-  margin-bottom: .7rem;
-  letter-spacing: .01em;
-}
-.exp-protocol-desc {
-  font-size: .82rem;
-  color: rgba(255,255,255,.5);
-  font-weight: 300;
-  line-height: 1.8;
-  margin-bottom: 1rem;
-}
-.exp-protocol-footer {
-  display: flex;
-  align-items: center;
-  gap: .5rem;
-}
-.exp-protocol-footer span:first-child { color: var(--gold); }
-.exp-protocol-footer span:last-child {
-  font-size: .72rem;
-  color: rgba(255,255,255,.5);
-  font-weight: 300;
-}
-
-/* ── CTA bar ── */
-.exp-cta-bar {
-  text-align: center;
-  margin-top: 2.5rem;
-  padding-top: 2rem;
-  border-top: 1px solid var(--gold-light);
-  display: flex;
-  flex-direction: column;
-  align-items: center;
-  gap: 1rem;
-}
-.exp-cta-note {
-  font-size: .78rem;
-  color: var(--text-light);
-  font-weight: 300;
-}
-
-/* ── Responsive ── */
-@media (max-width: 768px) {
-  .exp-cards-grid.cols-4,
-  .exp-cards-grid.cols-3 {
-    grid-template-columns: 1fr;
-  }
-  .exp-protocol { padding: 1.5rem 1.25rem; }
-}
-@media (max-width: 480px) {
-  .exp-level-labels { gap: .3rem; }
-  .exp-lbl { font-size: .55rem; letter-spacing: .1em; }
-}
+/* MODAL OVERLAY — faux viewport */
+.modal-overlay{display:none;min-height:520px;background:rgba(13,8,6,0.68);align-items:center;justify-content:center;padding:1.5rem;margin-top:1rem;}
+.modal-overlay.open{display:flex;}
+.modal-box{background:#fff;max-width:520px;width:100%;max-height:80vh;overflow-y:auto;position:relative;}
+.modal-hd{background:linear-gradient(135deg,#1a0e14,#2d1520);padding:1.8rem 1.8rem 1.4rem;position:relative;}
+.modal-hd::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 80% 25%,rgba(201,169,110,.1) 0%,transparent 60%);}
+.modal-hd-level{font-size:.5rem;letter-spacing:.18em;text-transform:uppercase;padding:.2rem .65rem;font-weight:500;border-radius:2px;display:inline-block;margin-bottom:.7rem;position:relative;z-index:1;}
+.modal-hd-icon{font-size:1.6rem;display:block;margin-bottom:.5rem;position:relative;z-index:1;}
+.modal-hd-name{font-family:var(--fd);font-size:1.55rem;font-weight:300;color:#fff;line-height:1.15;position:relative;z-index:1;}
+.modal-close{position:absolute;top:1rem;right:1.1rem;background:none;border:none;cursor:pointer;color:rgba(255,255,255,.4);font-size:1.1rem;font-family:var(--fb);z-index:2;line-height:1;padding:.2rem .4rem;transition:color .2s;}
+.modal-close:hover{color:var(--gold);}
+.modal-bd{padding:1.3rem 1.6rem 1.6rem;}
+.modal-desc{font-size:.82rem;color:var(--text-mid);font-weight:300;line-height:1.8;margin-bottom:1rem;}
+.modal-meta{display:flex;gap:1rem;margin-bottom:1rem;padding:.75rem 1rem;background:var(--off-white);border:1px solid var(--gold-light);flex-wrap:wrap;}
+.meta-item{display:flex;flex-direction:column;gap:.18rem;}
+.meta-label{font-size:.52rem;letter-spacing:.15em;text-transform:uppercase;color:var(--text-light);font-weight:300;}
+.meta-val{font-size:.78rem;color:var(--text-dark);font-weight:400;}
+.meta-val.acc{color:var(--gold);}
+.modal-bullets{list-style:none;display:flex;flex-direction:column;gap:.4rem;margin-bottom:1.2rem;}
+.modal-bullets li{display:flex;align-items:flex-start;gap:.5rem;font-size:.77rem;color:var(--text-mid);font-weight:300;line-height:1.55;}
+.modal-bullets li::before{content:'✦';color:var(--gold);font-size:.42rem;margin-top:.35rem;flex-shrink:0;}
+.modal-cta{display:inline-flex;align-items:center;gap:.5rem;color:#fff;padding:.72rem 1.6rem;font-size:.62rem;letter-spacing:.18em;text-transform:uppercase;font-weight:400;text-decoration:none;font-family:var(--fb);transition:opacity .25s;}
+.modal-cta:hover{opacity:.88;}
 
 
 <style id="shopStyles">
@@ -742,55 +467,52 @@
     </p>
   </div>
 
-  <!-- ─── EXPERIENCE LEVEL SELECTOR ─── -->
-  <div class="exp-selector reveal" style="transition-delay:.1s">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
 
-    <!-- Intro del selector -->
-    <div class="exp-intro">
-      <div class="exp-intro-eyebrow" id="expEyebrow" data-i18n="exp.eyebrow">Tu punto de partida</div>
-      <div class="exp-intro-title" id="expTitle" data-i18n-html="exp.title">
-        ¿Cuál es tu <em>experiencia</em> con medicina estética?
-      </div>
-      <p class="exp-intro-sub" id="expSub" data-i18n="exp.sub">
-        Mueve el slider para descubrir los protocolos diseñados exactamente para ti.
-      </p>
+<div class="wrap">
+  <div class="top-header">
+    <div class="eyebrow">Tu experiencia en medicina estética</div>
+    <h2 class="main-title">¿Cuál es tu <em>nivel</em>?</h2>
+    <p class="main-sub">Selecciona tu nivel o busca cualquier procedimiento directamente</p>
+  </div>
+
+  <div class="slider-row">
+    <div class="level-labels">
+      <span class="lvl-lbl active" id="lbl0" style="color:var(--lv0)">Principiante</span>
+      <span class="lvl-lbl" id="lbl1">Intermedia</span>
+      <span class="lvl-lbl" id="lbl2">Avanzada</span>
     </div>
-
-    <!-- SLIDER -->
-    <div class="exp-slider-wrap">
-      <div class="exp-level-labels">
-        <span class="exp-lbl active" id="lbl0" data-i18n="exp.lv0">Principiante</span>
-        <span class="exp-lbl" id="lbl1" data-i18n="exp.lv1">Intermedia</span>
-        <span class="exp-lbl" id="lbl2" data-i18n="exp.lv2">Avanzada</span>
-      </div>
-      <div class="exp-track-container">
-        <div class="exp-track-bg"></div>
-        <div class="exp-track-fill" id="expTrackFill"></div>
-        <div class="exp-track-dot" id="expDot"></div>
-        <input type="range" class="exp-range" id="expSlider"
-               min="0" max="2" step="1" value="0"
-               aria-label="Nivel de experiencia en medicina estética">
-      </div>
-      <div class="exp-tagline" id="expTagline"></div>
+    <div class="track-wrap">
+      <div class="track-bg"></div>
+      <div class="track-fill" id="tFill"></div>
+      <div class="track-dot" id="tDot"></div>
+      <input type="range" class="range-inp" id="lvlSlider" min="0" max="2" step="1" value="0">
     </div>
+    <div class="tagline" id="tagline">Tu primer acercamiento a la medicina estética, con procedimientos seguros y de alto impacto.</div>
+  </div>
 
-    <!-- CARDS + PROTOCOL area -->
-    <div class="exp-content-area" id="expContentArea"></div>
-    <div class="exp-protocol-banner" id="expProtocolBanner" style="display:none;"></div>
+  <div class="search-bar">
+    <svg viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" aria-hidden="true"><circle cx="11" cy="11" r="8"/><path d="m21 21-4.35-4.35"/></svg>
+    <input type="text" id="searchInp" placeholder="Buscar procedimiento...">
+    <button class="search-clear" id="searchClear" aria-label="Limpiar">✕</button>
+  </div>
 
-    <!-- CTA footer -->
-    <div class="exp-cta-bar">
-      <p class="exp-cta-note" data-i18n="exp.cta.note">
-        Cada plan es único. La Dra. Jenireé diseñará el tuyo en una consulta personalizada.
-      </p>
-      <a href="agendar2.html" class="btn-gold" target="_blank" data-i18n="exp.cta.btn">
-        ✦ &nbsp;Descubrir mi protocolo ideal
-      </a>
+  <div class="results-info" id="resultsInfo"></div>
+  <div class="cards-grid" id="cardsGrid"></div>
+  <div class="no-results" id="noResults" style="display:none;">No se encontraron procedimientos.</div>
+
+  <!-- MODAL OVERLAY (faux viewport) -->
+  <div class="modal-overlay" id="modalOverlay">
+    <div class="modal-box" id="modalBox">
+      <!-- filled by JS -->
     </div>
+  </div>
 
-  </div><!-- /.exp-selector -->
-
-</div><!-- /.container -->
+  <div class="cta-footer">
+    <p>La Dra. Jenireé diseñará un protocolo personalizado para ti.</p>
+    <a href="agendar2.html" class="btn-gold-main">✦ &nbsp;Agendar consulta</a>
+  </div>
+</div>
 
 <!-- STATS -->
 <div class="stats-strip">
@@ -1281,282 +1003,135 @@ document.querySelectorAll('a[href^="#"]').forEach(a => {
 });
  
 /* ── Data ── */
-const EXP = {
-  es: [
-    {
-      tagline: 'Tu primera experiencia, con los tratamientos más seguros y de mayor impacto.',
-      intro: 'Empezar con los tratamientos correctos marca toda la diferencia. Estas opciones son ideales para quienes dan sus primeros pasos en medicina estética: resultados visibles, mínima intervención y máxima seguridad.',
-      tagClass: 'tag-gold',
-      cards: [
-        { icon: '◉', tag: 'El primer paso clásico', name: 'Toxina Botulínica', desc: 'Suaviza líneas de expresión de forma natural y preventiva. Rápido, sin tiempo de recuperación y con resultados en 3 días.', dur: '20–30 min', res: '3–6 meses', zona: 'Frente, entrecejo, patas de gallo' },
-        { icon: '◇', tag: 'Volumen y definición al instante', name: 'Rellenos de Ácido Hialurónico', desc: 'Restaura volumen en labios, ojeras o mentón. Resultados inmediatos que se ven naturales en manos expertas.', dur: '30–45 min', res: '9–18 meses', zona: 'Labios, ojeras, mentón' },
-        { icon: '✧', tag: 'La piel que siempre quisiste', name: 'Tecnología Láser', desc: 'Manchas, textura y poros tratados con precisión. Un ritual de rejuvenecimiento sin necesidad de inyectables.', dur: '45–60 min', res: 'Progresivo', zona: 'Manchas, textura, poros' },
-        { icon: '☽', tag: 'Libertad definitiva', name: 'Depilación Láser', desc: 'Di adiós al vello no deseado de forma permanente. Cómodo, eficiente y para todo tipo de piel.', dur: '15–60 min', res: '6–8 sesiones', zona: 'Axilas, piernas, bikini, cara' }
-      ],
-      protocol: null
-    },
-    {
-      tagline: 'Ya conoces los básicos. Es hora de trabajar más profundo y con mayor precisión.',
-      intro: 'Con experiencia previa, puedes incorporar tratamientos que actúan en capas más profundas con resultados que duran más y transforman la calidad de tu piel de adentro hacia afuera.',
-      tagClass: '',
-      cards: [
-        { icon: '✦', tag: 'La inversión en tu piel del futuro', name: 'Bioestimuladores', desc: 'Radiesse, Sculptra o Profhilo activan tu propio colágeno. Resultados progresivos, naturales y que duran hasta 2 años.', dur: '30–45 min', res: '12–24 meses', zona: 'Flacidez, cuello, calidad de piel' },
-        { icon: '◈', tag: 'Regeneración celular profunda', name: 'Péptidos Bioactivos', desc: 'Mensajeros celulares que reprograman la piel para un envejecimiento más lento. Potencian todos los demás tratamientos.', dur: '30 min', res: 'Progresivo', zona: 'Anti-aging, textura, luminosidad' },
-        { icon: '⬡', tag: 'El lifting sin bisturí', name: 'Ultherapy', desc: 'Ultrasonido microfocalizado que actúa en el SMAS, la capa que mueve el cirujano. Aprobado por la FDA para lifting no invasivo.', dur: '60–90 min', res: '3–6 meses post-tx', zona: 'Cuello, mandíbula, cejas, escote' }
-      ],
-      protocol: {
-        purple: false,
-        badge: 'Sinergia comprobada',
-        eyebrow: 'Protocolo recomendado · Nivel Intermedia',
-        combo: 'Bioestimuladores + Toxina Botulínica',
-        desc: 'La combinación más popular entre pacientes con base estética: los bioestimuladores mejoran la calidad de la piel mientras la toxina mantiene las líneas de expresión suavizadas. Resultados sinérgicos y duraderos.',
-        sessions: '2 sesiones al año'
-      }
-    },
-    {
-      tagline: 'Resultados de élite con protocolos combinados diseñados a medida.',
-      intro: 'Para quienes ya dominan su rutina estética y buscan resultados de alto rendimiento. Las combinaciones estratégicas maximizan cada tratamiento y elevan los resultados a otro nivel. Aquí la medicina estética se convierte en arte.',
-      tagClass: 'tag-purple',
-      cards: [
-        { icon: '⬡ ✦', tag: 'El protocolo anti-aging definitivo', name: 'Ultherapy + Bioestimuladores', desc: 'Ultherapy levanta desde capas profundas mientras los bioestimuladores regeneran la dermis. Acción estructural + celular en una sola estrategia.', dur: '2 sesiones', res: 'Hasta 2 años', zona: 'Lifting completo de rostro y cuello' },
-        { icon: '✧ ✦', tag: 'Rejuvenecimiento de doble acción', name: 'Láser + Bioestimuladores', desc: 'El láser elimina imperfecciones superficiales y potencia la absorción de los bioestimuladores que regeneran desde adentro. Sinergia total.', dur: '2–3 sesiones', res: '12–18 meses', zona: 'Manchas, textura y flacidez' },
-        { icon: '◇ ◈', tag: 'Volumen inteligente', name: 'Rellenos + Péptidos', desc: 'Los péptidos preparan la piel y prolongan la duración de los rellenos. Volumen más natural con menor cantidad de producto.', dur: '1–2 sesiones', res: '12–18 meses', zona: 'Armonización facial completa' },
-        { icon: '♡ ◇', tag: 'Bienestar íntimo integral', name: 'Estética Vaginal + Rellenos HA', desc: 'Protocolo femenino completo: rejuvenecimiento íntimo con láser Fotona combinado con ácido hialurónico para la zona íntima externa.', dur: '3–4 sesiones', res: 'Hasta 18 meses', zona: 'Bienestar funcional y estético íntimo' }
-      ],
-      protocol: {
-        purple: true,
-        badge: 'Protocolo exclusivo',
-        eyebrow: 'Protocolo Signature · Clínica Dra. Jenireé',
-        combo: 'Ultherapy + Bioestimuladores + Toxina + Láser',
-        desc: 'El protocolo más completo de la clínica. Un plan anual diseñado por la Dra. Jenireé que combina lifting profundo, regeneración celular, relajación muscular y rejuvenecimiento superficial. Para quienes buscan los mejores resultados posibles.',
-        sessions: 'Plan anual personalizado'
-      }
-    }
-  ],
-  en: [
-    {
-      tagline: 'Your first experience, with the safest and highest-impact treatments.',
-      intro: 'Starting with the right treatments makes all the difference. These options are ideal for those taking their first steps in aesthetic medicine: visible results, minimal intervention, maximum safety.',
-      tagClass: 'tag-gold',
-      cards: [
-        { icon: '◉', tag: 'The classic first step', name: 'Botulinum Toxin', desc: 'Softens expression lines naturally and preventively. Quick, no downtime, results in 3 days.', dur: '20–30 min', res: '3–6 months', zona: 'Forehead, frown lines, crow\'s feet' },
-        { icon: '◇', tag: 'Volume and definition, instantly', name: 'Hyaluronic Acid Fillers', desc: 'Restores volume in lips, under-eyes or chin. Immediate results that look natural in expert hands.', dur: '30–45 min', res: '9–18 months', zona: 'Lips, under-eyes, chin' },
-        { icon: '✧', tag: 'The skin you always wanted', name: 'Laser Technology', desc: 'Spots, texture and pores treated with precision. A rejuvenation ritual with no injectables needed.', dur: '45–60 min', res: 'Progressive', zona: 'Pigmentation, texture, pores' },
-        { icon: '☽', tag: 'Permanent freedom', name: 'Laser Hair Removal', desc: 'Say goodbye to unwanted hair permanently. Comfortable, efficient, and safe for all skin types.', dur: '15–60 min', res: '6–8 sessions', zona: 'Underarms, legs, bikini, face' }
-      ],
-      protocol: null
-    },
-    {
-      tagline: 'You know the basics. Now it\'s time to work deeper and with greater precision.',
-      intro: 'With prior aesthetic experience, you can incorporate treatments that act on deeper layers, delivering longer-lasting results that transform skin quality from the inside out.',
-      tagClass: '',
-      cards: [
-        { icon: '✦', tag: 'The investment in your future skin', name: 'Biostimulators', desc: 'Radiesse, Sculptra or Profhilo activate your own collagen. Progressive, natural results lasting up to 2 years.', dur: '30–45 min', res: '12–24 months', zona: 'Laxity, neck, skin quality' },
-        { icon: '◈', tag: 'Deep cellular regeneration', name: 'Bioactive Peptides', desc: 'Cellular messengers that reprogram the skin to age more slowly. They amplify all other treatments.', dur: '30 min', res: 'Progressive', zona: 'Anti-aging, texture, radiance' },
-        { icon: '⬡', tag: 'The lift without a scalpel', name: 'Ultherapy', desc: 'Micro-focused ultrasound acting on the SMAS — the same layer surgeons move. FDA-approved for non-invasive lifting.', dur: '60–90 min', res: '3–6 months post-tx', zona: 'Neck, jaw, brows, décolletage' }
-      ],
-      protocol: {
-        purple: false,
-        badge: 'Proven synergy',
-        eyebrow: 'Recommended protocol · Intermediate level',
-        combo: 'Biostimulators + Botulinum Toxin',
-        desc: 'The most popular combination among patients with an aesthetic base: biostimulators improve skin quality while the toxin keeps expression lines smooth. Synergistic, long-lasting results.',
-        sessions: '2 sessions per year'
-      }
-    },
-    {
-      tagline: 'Elite results with bespoke combined protocols.',
-      intro: 'For those who have mastered their aesthetic routine and seek high-performance protocols. Strategic combinations maximize each treatment and elevate results to another level. Here, aesthetic medicine becomes art.',
-      tagClass: 'tag-purple',
-      cards: [
-        { icon: '⬡ ✦', tag: 'The ultimate anti-aging protocol', name: 'Ultherapy + Biostimulators', desc: 'Ultherapy lifts from deep layers while biostimulators regenerate the dermis. Structural + cellular action in a single strategy.', dur: '2 sessions', res: 'Up to 2 years', zona: 'Full face and neck lift' },
-        { icon: '✧ ✦', tag: 'Double-action rejuvenation', name: 'Laser + Biostimulators', desc: 'The laser eliminates surface imperfections while boosting biostimulator absorption for inside-out regeneration. Total synergy.', dur: '2–3 sessions', res: '12–18 months', zona: 'Pigmentation, texture & laxity' },
-        { icon: '◇ ◈', tag: 'Intelligent volume', name: 'Fillers + Peptides', desc: 'Peptides prep the skin and extend filler longevity. More natural volume with less product.', dur: '1–2 sessions', res: '12–18 months', zona: 'Full facial harmonization' },
-        { icon: '♡ ◇', tag: 'Holistic intimate wellness', name: 'Vaginal Aesthetics + HA Fillers', desc: 'Complete feminine protocol: intimate rejuvenation with Fotona laser combined with hyaluronic acid for the external intimate area.', dur: '3–4 sessions', res: 'Up to 18 months', zona: 'Functional & aesthetic intimate wellness' }
-      ],
-      protocol: {
-        purple: true,
-        badge: 'Exclusive protocol',
-        eyebrow: 'Signature Protocol · Dr. Jenireé\'s Clinic',
-        combo: 'Ultherapy + Biostimulators + Toxin + Laser',
-        desc: 'The clinic\'s most comprehensive protocol. An annual plan designed by Dr. Jenireé combining deep lifting, cellular regeneration, muscle relaxation and surface rejuvenation. For those seeking the best possible results.',
-        sessions: 'Personalized annual plan'
-      }
-    }
-  ]
-};
+const PROCS=[
+  {id:1,level:0,icon:'◇',name:'Rellenos de ácido hialurónico',teaser:'Volumen y definición natural al instante.',desc:'El ácido hialurónico restaura volumen, define contornos y suaviza arrugas con resultados inmediatos. Usamos marcas premium certificadas: Juvederm, Restylane y Belotero.',bullets:['Labios, pómulos, ojeras, mentón y mandíbula','Rinomodelación no quirúrgica','Resultados inmediatos, duración 9–18 meses','Sin tiempo de recuperación','Reversible con hialuronidasa'],dur:'30–45 min',res:'9–18 meses',zona:'Rostro completo'},
+  {id:2,level:0,icon:'◉',name:'Toxina botulínica',teaser:'Suaviza líneas de expresión y previene nuevas.',desc:'Relaja los músculos responsables de arrugas dinámicas. Ideal como preventivo desde los 25 años. Trabajamos con Botox, Xeomin, Dysport y Nabota.',bullets:['Frente, entrecejo y patas de gallo','Baby botox para resultados naturales','Efecto lifting y armonización facial','Resultados en 48–72h, duran 4–6 meses','Tratamiento preventivo desde los 25'],dur:'20–30 min',res:'4–6 meses',zona:'Frente, ojos, cuello'},
+  {id:3,level:0,icon:'✧',name:'Tecnología láser Fotona',teaser:'Manchas, textura y rejuvenecimiento con precisión.',desc:'Fotona y StarWalker son los sistemas láser más versátiles del mercado, desde manchas superficiales hasta rejuvenecimiento profundo sin recuperaciones extensas.',bullets:['Fotona Smooth Eye y Lip Lase','StarWalker para manchas y tatuajes','Láser CO₂ fraccionado para cicatrices','IPL para rosácea y cúpulas vasculares','Sin daño al tejido circundante'],dur:'45–75 min',res:'Progresivo',zona:'Rostro y cuello'},
+  {id:4,level:0,icon:'☽',name:'Depilación láser',teaser:'Eliminación definitiva del vello no deseado.',desc:'Tecnología de diodo de última generación, eficaz en todos los fototipos de piel. Resultados permanentes en pocas sesiones con mínima molestia.',bullets:['Efectivo en todo tipo de piel','Axilas, piernas, bikini, cara, espalda','Permanente en 6–8 sesiones','Sesiones rápidas de 15–60 min','Apto para piel bronceada'],dur:'15–60 min',res:'Permanente',zona:'Cuerpo completo'},
+  {id:5,level:0,icon:'⁂',name:'Faciales médicos y limpieza profunda',teaser:'Piel limpia, luminosa y renovada.',desc:'Combinamos tecnología médica con protocolos de spa. Incluye análisis de piel, extracción profesional, hidratación y tratamiento específico para tu tipo de piel.',bullets:['Análisis de piel con tecnología de imagen','Limpieza profunda y extracción profesional','Hidratación y activación celular','Apto para piel sensible y acneica','Sesión mensual recomendada'],dur:'60–90 min',res:'Inmediato',zona:'Rostro'},
+  {id:6,level:0,icon:'◈',name:'Sueroterapia y péptidos',teaser:'Nutrición IV y regeneración celular profunda.',desc:'Cócteles de vitaminas, minerales y péptidos bioactivos administrados vía IV para recuperación, energía, inmunidad y belleza desde adentro.',bullets:['Suero vitamínico personalizado','Péptidos de regeneración y anti-aging','Mejora energía, inmunidad y piel','Sesión de 45–60 min en reposo total','Protocolos anti-fatiga y post-viaje'],dur:'45–60 min',res:'Inmediato',zona:'Sistémico'},
+  {id:7,level:0,icon:'◎',name:'Masajes reductivos y relajantes',teaser:'Modelado corporal y bienestar profundo.',desc:'Técnicas manuales y con aparatología para drenaje linfático, reducción de medidas y relajación muscular profunda. Complemento ideal para todos los protocolos estéticos.',bullets:['Drenaje linfático manual y mecánico','Masaje reductivo y modelador','Masaje relajante terapéutico','Complementa tratamientos corporales','Sesiones individuales o en paquete'],dur:'60–90 min',res:'Progresivo',zona:'Cuerpo'},
+  {id:8,level:1,icon:'✦',name:'Bioestimuladores de colágeno',teaser:'Tu propio colágeno trabajando 2 años.',desc:'Radiesse, Sculptra y Profhilo activan los mecanismos naturales de la piel para producir colágeno, elastina y ácido hialurónico. Resultados progresivos y duraderos.',bullets:['Profhilo: hidratación profunda desde adentro','Radiesse: relleno + estimulación dérmica','Sculptra: reconstrucción gradual del volumen','Sin aspecto inflado o artificial','1–2 sesiones anuales suficientes'],dur:'30–45 min',res:'12–24 meses',zona:'Rostro, cuello y escote'},
+  {id:9,level:1,icon:'◬',name:'Peeling químico médico',teaser:'Renovación celular con ácidos de grado médico.',desc:'Peelings superficiales, medios y profundos con ácido glicólico, salicílico y TCA para mejorar textura, manchas, cicatrices y signos del envejecimiento.',bullets:['Peeling superficial sin recuperación','Peeling medio (TCA): 5–7 días','Mejora manchas, poros y textura','Serie de 3–6 sesiones recomendada','Requiere preparación previa de la piel'],dur:'30–60 min',res:'Progresivo',zona:'Rostro'},
+  {id:10,level:1,icon:'◫',name:'Microdermabrasión y Dermapen',teaser:'Exfoliación profunda y microcanales de renovación.',desc:'La microdermabrasión elimina células muertas mientras el Dermapen crea microcanales que estimulan colágeno y optimizan la absorción de activos.',bullets:['Mejora cicatrices superficiales y poros','Dermapen con factores de crecimiento o PRP','Tono de piel más uniforme y luminoso','Sin recuperación significativa','Serie de 4–6 sesiones recomendada'],dur:'45–60 min',res:'Progresivo',zona:'Rostro y cuello'},
+  {id:11,level:1,icon:'◯',name:'Carboxiterapia y mesoterapia virtual',teaser:'CO₂ medicinal y activos sin agujas.',desc:'La carboxiterapia introduce CO₂ para mejorar circulación y regenerar tejidos. La mesoterapia virtual usa electroporación para llevar activos profundamente sin inyecciones.',bullets:['Carboxiterapia para ojeras y celulitis','Mesoterapia virtual para hidratación profunda','Sin dolor ni recuperación','Protocolo corporal y facial','Complemento perfecto de tratamientos invasivos'],dur:'30–60 min',res:'Progresivo',zona:'Rostro y cuerpo'},
+  {id:12,level:1,icon:'☿',name:'Terapias de restauración capilar',teaser:'Densidad y salud del cabello desde la raíz.',desc:'Combinamos PRP capilar, mesoterapia del cuero cabelludo y bioestimuladores para tratar la alopecia androgenética y mejorar la calidad general del cabello.',bullets:['PRP capilar con microagujas','Mesoterapia de vitaminas y minoxidil','Bioestimuladores capilares','Para hombres y mujeres','Protocolo de 4–6 sesiones iniciales'],dur:'45–60 min',res:'3–6 meses',zona:'Cuero cabelludo'},
+  {id:13,level:1,icon:'◐',name:'Control metabólico y pérdida de peso',teaser:'Protocolo médico integral para transformación.',desc:'Evaluación metabólica completa y diseño de protocolo personalizado que puede incluir sueroterapia, carboxiterapia, mesoterapia reductiva y seguimiento nutricional.',bullets:['Evaluación metabólica y hormonal','Mesoterapia reductiva y drenante','Carboxiterapia corporal anticelulítica','Sueroterapia de apoyo metabólico','Seguimiento mensual de resultados'],dur:'Variable',res:'Progresivo',zona:'Corporal'},
+  {id:14,level:2,icon:'⬡',name:'Ultherapy',teaser:'Lifting no invasivo aprobado por FDA.',desc:'Ultrasonido microfocalizado que actúa en el SMAS — la misma capa que maneja el cirujano. Único tratamiento no invasivo con aprobación FDA para lifting facial.',bullets:['Actúa en dermis profunda y SMAS','Lifting de cejas, mejillas, cuello y mandíbula','Resultados progresivos en 3–6 meses','Un tratamiento dura 1–2 años','Sin cirugía, sin cicatrices, sin recuperación'],dur:'60–90 min',res:'12–24 meses',zona:'Rostro, cuello y escote'},
+  {id:15,level:2,icon:'◊',name:'Endolift facial y corporal',teaser:'Láser subcutáneo para lifting estructural real.',desc:'El Endolift introduce una fibra óptica bajo la piel que emite láser desde adentro, fundiendo grasa y contrayendo tejidos. Alternativa mínimamente invasiva a la cirugía.',bullets:['Resultado comparable a cirugía en 1 sesión','Papada, brazos, abdomen y muslos','Lifting facial inmediato y progresivo','Anestesia local, recuperación 2–5 días','Estimulación de colágeno progresiva'],dur:'60–120 min',res:'12–24 meses',zona:'Rostro y cuerpo'},
+  {id:16,level:2,icon:'⌘',name:'Hilos tensores',teaser:'Reposicionamiento facial sin cirugía.',desc:'Hilos de PDO, PLLA o PCL que se insertan bajo la piel para levantar tejidos caídos y estimular colágeno. Resultado inmediato con mejoría progresiva en meses.',bullets:['Hilos lisos, espiculados y con conos','Lifting de mejillas, cuello y mandíbula','Resultado inmediato + progresivo','Efecto antiaging por estimulación de colágeno','Duración 12–18 meses'],dur:'45–90 min',res:'12–18 meses',zona:'Rostro y cuello'},
+  {id:17,level:2,icon:'⍟',name:'Enzimas recombinantes',teaser:'Disolución selectiva de grasa localizada.',desc:'Las enzimas recombinantes permiten disolver bolsas de grasa localizada (papada, lipomas pequeños) de forma no quirúrgica con resultados permanentes.',bullets:['Papada y grasa submentoniana','Pequeñas acumulaciones de grasa','Resultado permanente en 2–4 sesiones','Inflamación leve de 5–7 días','Alternativa definitiva a cirugía local'],dur:'20–40 min',res:'Permanente',zona:'Zonas localizadas'},
+  {id:18,level:2,icon:'⎔',name:'Terapia hormonal bioidéntica (Pellets)',teaser:'Equilibrio hormonal con hormonas idénticas a las tuyas.',desc:'Pellets de hormonas bioidénticas implantados subdérmicamente que liberan dosis fisiológicas constantes durante 3–6 meses. Mejoran energía, libido, piel y composición corporal.',bullets:['Personalizado según perfil hormonal propio','Implante subcutáneo de liberación sostenida','Mejora energía, sueño y estado de ánimo','Beneficios en piel, cabello y metabolismo','Evaluación hormonal completa previa'],dur:'15–20 min',res:'3–6 meses',zona:'Sistémico'},
+  {id:19,level:2,icon:'✺',name:'Fototerapia LED y rejuvenecimiento celular',teaser:'Luz roja y NIR para regeneración profunda.',desc:'La fototerapia LED de alta potencia estimula la mitocondria celular, aumenta la síntesis de colágeno, reduce inflamación y acelera cicatrización. Potencia cualquier tratamiento previo.',bullets:['Luz roja 630–660nm para colágeno','Infrarrojo cercano (NIR) de penetración profunda','Anti-inflamatorio y cicatrizante natural','Potencia los resultados de otros tratamientos','Sin dolor, sin efectos secundarios'],dur:'20–30 min',res:'Acumulativo',zona:'Rostro y cuerpo'},
+];
 
-/* i18n keys para el selector */
-const EXP_TR = {
-  es: {
-    'exp.eyebrow': 'Tu punto de partida',
-    'exp.title': '¿Cuál es tu <em>experiencia</em> con medicina estética?',
-    'exp.sub': 'Mueve el slider para descubrir los protocolos diseñados exactamente para ti.',
-    'exp.lv0': 'Principiante', 'exp.lv1': 'Intermedia', 'exp.lv2': 'Avanzada',
-    'exp.cta.note': 'Cada plan es único. La Dra. Jenireé diseñará el tuyo en una consulta personalizada.',
-    'exp.cta.btn': '✦ &nbsp;Descubrir mi protocolo ideal',
-    'exp.meta.dur': 'Duración', 'exp.meta.res': 'Resultados', 'exp.meta.zona': 'Zonas'
-  },
-  en: {
-    'exp.eyebrow': 'Your starting point',
-    'exp.title': 'What\'s your <em>experience</em> with aesthetic medicine?',
-    'exp.sub': 'Move the slider to discover protocols designed exactly for you.',
-    'exp.lv0': 'Beginner', 'exp.lv1': 'Intermediate', 'exp.lv2': 'Advanced',
-    'exp.cta.note': 'Every plan is unique. Dr. Jenireé will design yours in a personalized consultation.',
-    'exp.cta.btn': '✦ &nbsp;Discover my ideal protocol',
-    'exp.meta.dur': 'Duration', 'exp.meta.res': 'Results', 'exp.meta.zona': 'Areas'
-  }
-};
+const TAGS={0:['rgba(201,169,110,.12)','#A07840'],1:['rgba(242,196,206,.2)','#C97088'],2:['rgba(83,74,183,.1)','#3C3489']};
+const LABELS={0:'Principiante',1:'Intermedia',2:'Avanzada'};
+const TAGLINES={0:'Tu primer acercamiento, con procedimientos seguros y de alto impacto.',1:'Con base estética, es hora de ir más profundo y duradero.',2:'Protocolos de élite para los mejores resultados disponibles.'};
+const ACCENTS=['#C9A96E','#C97088','#534AB7'];
+let curLevel=0,searchVal='';
 
-const PCT = [0, 50, 100];
-const ACCENT_COLORS = ['var(--gold)', 'var(--rose-deep)', '#534AB7'];
-let expLevel = 0;
-
-function expT(k) {
-  const l = (typeof lang !== 'undefined') ? lang : 'es';
-  return (EXP_TR[l] && EXP_TR[l][k]) || EXP_TR.es[k] || k;
-}
-
-function expData() {
-  const l = (typeof lang !== 'undefined') ? lang : 'es';
-  return EXP[l] || EXP.es;
-}
-
-function renderExp(lvl) {
-  expLevel = lvl;
-  const d = expData()[lvl];
-  const accent = ACCENT_COLORS[lvl];
-
-  /* track */
-  const fill = document.getElementById('expTrackFill');
-  const dot  = document.getElementById('expDot');
-  if (fill) { fill.style.width = PCT[lvl] + '%'; fill.style.background = accent; }
-  if (dot)  { dot.style.left = PCT[lvl] + '%'; dot.style.borderColor = accent; }
-
-  /* labels */
-  ['lbl0','lbl1','lbl2'].forEach((id, i) => {
-    const el = document.getElementById(id);
-    if (!el) return;
-    el.classList.toggle('active', i === lvl);
-    el.style.color = i === lvl ? accent : 'var(--text-light)';
+function setLevel(l){
+  curLevel=l;
+  const pct=[0,50,100][l];
+  document.getElementById('tFill').style.cssText=`width:${pct}%;background:${ACCENTS[l]}`;
+  document.getElementById('tDot').style.cssText=`left:${pct}%;border-color:${ACCENTS[l]}`;
+  ['lbl0','lbl1','lbl2'].forEach((id,i)=>{
+    const el=document.getElementById(id);
+    el.classList.toggle('active',i===l);
+    el.style.color=i===l?ACCENTS[l]:'var(--text-light)';
+    el.style.fontWeight=i===l?'500':'300';
   });
-
-  /* tagline fade */
-  const tg = document.getElementById('expTagline');
-  if (tg) { tg.style.opacity = '0'; setTimeout(() => { tg.textContent = d.tagline; tg.style.opacity = '1'; }, 150); }
-
-  /* cards */
-  const area = document.getElementById('expContentArea');
-  if (area) {
-    area.style.opacity = '0';
-    setTimeout(() => {
-      area.innerHTML = buildExpCards(d, lvl, accent);
-      area.style.opacity = '1';
-    }, 150);
-  }
-
-  /* protocol */
-  const banner = document.getElementById('expProtocolBanner');
-  if (banner) {
-    if (d.protocol) {
-      banner.style.display = 'block';
-      banner.style.opacity = '0';
-      setTimeout(() => {
-        banner.innerHTML = buildExpProtocol(d.protocol);
-        banner.style.opacity = '1';
-      }, 200);
-    } else {
-      banner.style.display = 'none';
-    }
-  }
+  const tg=document.getElementById('tagline');
+  tg.style.opacity='0';
+  setTimeout(()=>{tg.textContent=TAGLINES[l];tg.style.opacity='1';},150);
+  closeModal();
+  renderCards();
 }
 
-function buildExpCards(d, lvl, accent) {
-  const bgMap = ['rgba(201,169,110,.07)', 'rgba(242,196,206,.12)', 'rgba(83,74,183,.07)'];
-  const borderMap = [accent, accent, accent];
-
-  let html = `<div class="exp-level-intro" style="background:${bgMap[lvl]}; border-left-color:${borderMap[lvl]};">
-    <p>${d.intro}</p>
-  </div>`;
-
-  const colClass = d.cards.length === 4 ? 'cols-4' : 'cols-3';
-  html += `<div class="exp-cards-grid ${colClass}">`;
-
-  d.cards.forEach(c => {
-    html += `
-    <div class="exp-card">
-      <div class="exp-card-icon">${c.icon}</div>
-      <span class="exp-card-tag ${d.tagClass}">${c.tag}</span>
-      <div class="exp-card-name">${c.name}</div>
-      <div class="exp-card-desc">${c.desc}</div>
-      <div class="exp-card-meta">
-        <div class="exp-card-meta-row">
-          <span class="exp-card-meta-label">${expT('exp.meta.dur')}</span>
-          <span class="exp-card-meta-val">${c.dur}</span>
-        </div>
-        <div class="exp-card-meta-row">
-          <span class="exp-card-meta-label">${expT('exp.meta.res')}</span>
-          <span class="exp-card-meta-val accent">${c.res}</span>
-        </div>
-        <div class="exp-card-meta-row">
-          <span class="exp-card-meta-label">${expT('exp.meta.zona')}</span>
-          <span class="exp-card-meta-val" style="text-align:right;max-width:58%;font-weight:300;">${c.zona}</span>
-        </div>
+function renderCards(){
+  const grid=document.getElementById('cardsGrid');
+  const noRes=document.getElementById('noResults');
+  const info=document.getElementById('resultsInfo');
+  const q=searchVal.toLowerCase().trim();
+  let shown=0;
+  grid.innerHTML=PROCS.map(p=>{
+    const ms=!q||p.name.toLowerCase().includes(q)||p.teaser.toLowerCase().includes(q)||p.desc.toLowerCase().includes(q);
+    const ml=q?true:(p.level===curLevel);
+    const vis=ms&&ml;
+    if(vis)shown++;
+    const [tbg,tcol]=TAGS[p.level];
+    const ac=ACCENTS[p.level];
+    return `<div class="proc-card${vis?'':' hidden'}" onclick="openModal(${p.id})">
+      <div class="card-top">
+        <span style="font-size:1rem;color:${ac}">${p.icon}</span>
+        <span class="card-level-badge" style="background:${tbg};color:${tcol}">${LABELS[p.level]}</span>
       </div>
+      <div class="card-name">${p.name}</div>
+      <div class="card-teaser">${p.teaser}</div>
+      <div class="card-arrow">Ver detalle →</div>
     </div>`;
-  });
-
-  html += '</div>';
-  return html;
+  }).join('');
+  noRes.style.display=shown===0?'block':'none';
+  info.innerHTML=q
+    ?`<span>${shown}</span> resultado${shown!==1?'s':''} para "<span>${searchVal}</span>"`
+    :`<span>${shown}</span> procedimiento${shown!==1?'s':''} · nivel <span>${LABELS[curLevel]}</span>`;
 }
 
-function buildExpProtocol(p) {
-  return `
-  <div class="exp-protocol${p.purple ? ' purple' : ''}">
-    <div class="exp-protocol-badge">${p.badge}</div>
-    <div class="exp-protocol-eyebrow">${p.eyebrow}</div>
-    <div class="exp-protocol-combo">${p.combo}</div>
-    <div class="exp-protocol-desc">${p.desc}</div>
-    <div class="exp-protocol-footer">
-      <span>✦</span>
-      <span>${p.sessions}</span>
+function openModal(id){
+  const p=PROCS.find(x=>x.id===id);
+  const [tbg,tcol]=TAGS[p.level];
+  const ac=ACCENTS[p.level];
+  document.getElementById('modalBox').innerHTML=`
+    <div class="modal-hd">
+      <button class="modal-close" onclick="closeModal()" aria-label="Cerrar">✕</button>
+      <span class="modal-hd-level" style="background:${tbg};color:${tcol}">${LABELS[p.level]}</span>
+      <span class="modal-hd-icon">${p.icon}</span>
+      <div class="modal-hd-name">${p.name}</div>
     </div>
-  </div>`;
+    <div class="modal-bd">
+      <p class="modal-desc">${p.desc}</p>
+      <div class="modal-meta">
+        <div class="meta-item"><span class="meta-label">Duración</span><span class="meta-val">${p.dur}</span></div>
+        <div class="meta-item"><span class="meta-label">Resultados</span><span class="meta-val acc" style="color:${ac}">${p.res}</span></div>
+        <div class="meta-item"><span class="meta-label">Zonas</span><span class="meta-val">${p.zona}</span></div>
+      </div>
+      <ul class="modal-bullets">${p.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
+      <a href="agendar2.html" class="modal-cta" style="background:linear-gradient(135deg,${ac},${ac}bb)">✦ &nbsp;Agendar cita · ${p.name}</a>
+    </div>`;
+  document.getElementById('modalOverlay').classList.add('open');
+  document.getElementById('modalOverlay').scrollIntoView({behavior:'smooth',block:'nearest'});
 }
 
-/* ── Init slider ── */
-function initExpSlider() {
-  const slider = document.getElementById('expSlider');
-  if (!slider) return;
-  slider.addEventListener('input', function() { renderExp(parseInt(this.value)); });
-  /* label clicks */
-  ['lbl0','lbl1','lbl2'].forEach((id, i) => {
-    const el = document.getElementById(id);
-    if (el) el.addEventListener('click', () => { slider.value = i; renderExp(i); });
-  });
-  renderExp(0);
+function closeModal(){
+  document.getElementById('modalOverlay').classList.remove('open');
 }
 
-/* ── Hook into existing setLang ── */
-const _origSetLang = (typeof setLang === 'function') ? setLang : null;
-window.setLang = function(l) {
-  if (_origSetLang) _origSetLang(l);
-  /* re-apply exp i18n keys */
-  const keys = EXP_TR[l] || EXP_TR.es;
-  ['exp.eyebrow','exp.title','exp.sub','exp.lv0','exp.lv1','exp.lv2','exp.cta.note','exp.cta.btn'].forEach(k => {
-    const els = document.querySelectorAll(`[data-i18n="${k}"]`);
-    els.forEach(el => { el.textContent = keys[k] || el.textContent; });
-    const elsH = document.querySelectorAll(`[data-i18n-html="${k}"]`);
-    elsH.forEach(el => { el.innerHTML = keys[k] || el.innerHTML; });
-  });
-  renderExp(expLevel);
-};
+document.getElementById('modalOverlay').addEventListener('click',function(e){
+  if(e.target===this)closeModal();
+});
 
-if (document.readyState === 'loading') {
-  document.addEventListener('DOMContentLoaded', initExpSlider);
-} else {
-  initExpSlider();
-}
+document.getElementById('lvlSlider').addEventListener('input',function(){setLevel(parseInt(this.value));});
+['lbl0','lbl1','lbl2'].forEach((id,i)=>{
+  document.getElementById(id).addEventListener('click',()=>{document.getElementById('lvlSlider').value=i;setLevel(i);});
+});
+
+const inp=document.getElementById('searchInp');
+const clr=document.getElementById('searchClear');
+inp.addEventListener('input',function(){
+  searchVal=this.value;
+  clr.classList.toggle('show',searchVal.length>0);
+  closeModal();
+  renderCards();
+});
+clr.addEventListener('click',()=>{
+  inp.value='';searchVal='';
+  clr.classList.remove('show');
+  closeModal();
+  renderCards();
+});
+
+setLevel(0);
 
  const SHOP_PRODUCTS = [
   { id:'tx-brow',   type:'service', badge:'badge-top',    badgeLabel:'#1 más pedido',  icon:'◉', cat:'Tratamiento',  name:'Toxina Botulínica',              nameEn:'Botulinum Toxin',              desc:'Sesión completa frente + entrecejo + patas de gallo. Resultados en 72h.',                     descEn:'Full session forehead + frown + crow\'s feet. Results in 72h.',                    price:180, unit:'sesión',   unitEn:'session' },
