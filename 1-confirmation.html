@@ -1,0 +1,280 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Pedido Confirmado · Clínica Dra. Jenireé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --gold:#C9A96E;--gold-light:#E8D5B0;--gold-dark:#A07840;
+  --rose-light:#FAF0F2;--rose-deep:#C97088;
+  --off-white:#FDF8F5;--text-dark:#2A1F1A;--text-mid:#5C4A42;--text-light:#9B8880;
+  --font-display:'Cormorant Garamond',Georgia,serif;--font-body:'Jost',sans-serif;
+}
+body{font-family:var(--font-body);color:var(--text-dark);background:var(--off-white);min-height:100vh;}
+
+/* NAV */
+nav{background:rgba(253,248,245,.97);padding:.9rem 3rem;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid var(--gold-light);}
+.nav-logo{font-family:var(--font-display);font-size:1rem;font-weight:300;color:var(--text-dark);text-decoration:none;letter-spacing:.05em;}
+.nav-logo span{color:var(--gold);font-style:italic;}
+@media(max-width:600px){nav{padding:.9rem 1.2rem;}}
+
+/* STEPS */
+.steps-bar{background:#fff;border-bottom:1px solid var(--gold-light);padding:.9rem 3rem;}
+.steps{display:flex;align-items:center;gap:0;max-width:480px;margin:0 auto;}
+.step{display:flex;align-items:center;gap:.5rem;flex:1;}
+.step-num{width:22px;height:22px;border-radius:50%;border:1px solid var(--gold-light);display:flex;align-items:center;justify-content:center;font-size:.6rem;color:var(--text-light);font-weight:300;flex-shrink:0;}
+.step.done .step-num{background:var(--text-dark);border-color:var(--text-dark);color:var(--gold);}
+.step-label{font-size:.6rem;letter-spacing:.12em;text-transform:uppercase;color:var(--text-light);font-weight:300;}
+.step.done .step-label{color:var(--text-dark);font-weight:400;}
+.step-line{flex:1;height:1px;background:var(--gold);margin:0 .5rem;}
+
+/* HERO */
+.conf-hero{background:linear-gradient(135deg,#1a0e14,#2d1520);padding:5rem 2rem;text-align:center;position:relative;overflow:hidden;}
+.conf-hero::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 55% 65% at 80% 30%,rgba(201,169,110,.1) 0%,transparent 60%);}
+.conf-icon{font-size:2.8rem;color:var(--gold);margin-bottom:1.4rem;position:relative;z-index:1;animation:popIn .6s cubic-bezier(.22,1,.36,1) forwards;}
+@keyframes popIn{from{transform:scale(.4);opacity:0}to{transform:scale(1);opacity:1}}
+.conf-eyebrow{font-size:.6rem;letter-spacing:.3em;text-transform:uppercase;color:var(--gold);font-weight:400;margin-bottom:.8rem;position:relative;z-index:1;}
+.conf-title{font-family:var(--font-display);font-size:clamp(2rem,5vw,3.2rem);font-weight:300;color:#fff;line-height:1.1;position:relative;z-index:1;margin-bottom:.5rem;}
+.conf-title em{font-style:italic;color:var(--gold);}
+.conf-subtitle{font-family:var(--font-display);font-size:1.05rem;color:rgba(255,255,255,.45);font-weight:300;letter-spacing:.08em;position:relative;z-index:1;}
+
+/* CONTENT */
+.conf-wrap{max-width:820px;margin:0 auto;padding:3.5rem 2rem;display:flex;flex-direction:column;gap:2rem;}
+@media(max-width:600px){.conf-wrap{padding:2rem 1.2rem;}}
+
+/* ORDER CARD */
+.conf-card{background:#fff;border:1px solid var(--gold-light);}
+.conf-card-header{padding:1.1rem 1.4rem;border-bottom:1px solid var(--gold-light);display:flex;align-items:center;justify-content:space-between;}
+.conf-card-title{font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;color:var(--text-mid);font-weight:400;}
+.conf-order-num{font-size:.65rem;letter-spacing:.15em;color:var(--gold);font-weight:400;}
+.conf-card-body{padding:1.4rem;}
+
+/* Order items */
+.conf-item{display:flex;align-items:center;gap:1rem;padding:.8rem 0;border-bottom:1px solid var(--rose-light);}
+.conf-item:last-child{border-bottom:none;}
+.conf-item-icon{width:42px;height:42px;background:linear-gradient(135deg,var(--rose-light),var(--gold-light));display:flex;align-items:center;justify-content:center;font-size:1.1rem;color:rgba(201,169,110,.55);flex-shrink:0;}
+.conf-item-name{flex:1;font-size:.85rem;color:var(--text-dark);font-weight:300;line-height:1.35;}
+.conf-item-qty{font-size:.72rem;color:var(--text-light);font-weight:300;}
+.conf-item-price{font-family:var(--font-display);font-size:1.05rem;font-weight:300;color:var(--text-dark);}
+
+.conf-totals{padding-top:1rem;border-top:1px solid var(--gold-light);margin-top:.5rem;}
+.conf-total-row{display:flex;justify-content:space-between;font-size:.8rem;color:var(--text-mid);font-weight:300;padding:.35rem 0;}
+.conf-total-row.main{padding-top:.8rem;border-top:1.5px solid var(--gold-light);margin-top:.3rem;}
+.conf-total-row.main span:first-child{font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;}
+.conf-total-row.main span:last-child{font-family:var(--font-display);font-size:1.4rem;font-weight:300;}
+
+/* NEXT STEPS */
+.next-steps{display:grid;grid-template-columns:repeat(3,1fr);gap:1.2rem;}
+@media(max-width:620px){.next-steps{grid-template-columns:1fr;}}
+.next-step{background:#fff;border:1px solid var(--gold-light);padding:1.4rem;text-align:center;}
+.next-step-icon{font-size:1.4rem;color:var(--gold);margin-bottom:.7rem;}
+.next-step-num{font-size:.55rem;letter-spacing:.2em;text-transform:uppercase;color:var(--gold);font-weight:400;margin-bottom:.4rem;}
+.next-step-title{font-family:var(--font-display);font-size:1rem;font-weight:400;color:var(--text-dark);margin-bottom:.4rem;}
+.next-step-text{font-size:.75rem;color:var(--text-light);font-weight:300;line-height:1.65;}
+
+/* PAY INSTRUCTIONS */
+.pay-instructions{background:linear-gradient(135deg,#1a0e14,#2d1520);padding:1.75rem;position:relative;overflow:hidden;}
+.pay-instructions::after{content:'';position:absolute;top:0;right:0;width:150px;height:150px;border-radius:50%;background:var(--gold);opacity:.05;transform:translate(40%,-40%);}
+.pay-instructions-title{font-size:.6rem;letter-spacing:.22em;text-transform:uppercase;color:rgba(255,255,255,.4);margin-bottom:.5rem;font-weight:300;}
+.pay-instructions h3{font-family:var(--font-display);font-size:1.25rem;font-weight:300;color:#fff;margin-bottom:.8rem;}
+.pay-instructions p{font-size:.8rem;color:rgba(255,255,255,.5);font-weight:300;line-height:1.75;margin-bottom:.5rem;}
+.pay-instructions strong{color:var(--gold);font-weight:400;}
+.copy-field{display:flex;align-items:center;justify-content:space-between;background:rgba(255,255,255,.06);border:1px solid rgba(201,169,110,.2);padding:.55rem .9rem;margin:.6rem 0;}
+.copy-field span{font-size:.82rem;font-weight:400;color:#fff;}
+.copy-btn{font-size:.55rem;letter-spacing:.15em;text-transform:uppercase;background:none;border:none;cursor:pointer;color:var(--gold);font-family:var(--font-body);font-weight:400;padding:.2rem .4rem;}
+.copy-btn:hover{color:var(--gold-light);}
+
+/* CTA */
+.conf-cta{display:grid;grid-template-columns:1fr 1fr;gap:1rem;}
+@media(max-width:520px){.conf-cta{grid-template-columns:1fr;}}
+.btn-gold{display:flex;align-items:center;justify-content:center;gap:.5rem;background:linear-gradient(135deg,var(--gold),var(--gold-dark));color:#fff;padding:.88rem 1.5rem;font-size:.65rem;letter-spacing:.2em;text-transform:uppercase;font-weight:400;border:none;cursor:pointer;font-family:var(--font-body);text-decoration:none;transition:all .3s;}
+.btn-gold:hover{box-shadow:0 8px 28px rgba(201,169,110,.38);transform:translateY(-1px);}
+.btn-outline{display:flex;align-items:center;justify-content:center;border:1px solid var(--gold-light);color:var(--text-mid);padding:.88rem 1.5rem;font-size:.65rem;letter-spacing:.18em;text-transform:uppercase;text-decoration:none;font-weight:300;transition:all .3s;font-family:var(--font-body);}
+.btn-outline:hover{border-color:var(--gold);color:var(--gold);}
+
+/* Divider */
+.divider-gold{display:flex;align-items:center;gap:.8rem;margin:.2rem 0;}
+.divider-gold span{display:block;height:1px;background:var(--gold-light);flex:1;}
+.divider-gold i{width:5px;height:5px;border:1px solid var(--gold);transform:rotate(45deg);flex-shrink:0;}
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Dra. <span>Jenireé</span> Gutiérrez</a>
+</nav>
+
+<div class="steps-bar">
+  <div class="steps">
+    <div class="step done"><div class="step-num">✓</div><div class="step-label">Carrito</div></div>
+    <div class="step-line"></div>
+    <div class="step done"><div class="step-num">✓</div><div class="step-label">Pago</div></div>
+    <div class="step-line"></div>
+    <div class="step done"><div class="step-num">✓</div><div class="step-label">Confirmación</div></div>
+  </div>
+</div>
+
+<!-- HERO -->
+<div class="conf-hero">
+  <div class="conf-icon">✦</div>
+  <div class="conf-eyebrow">Pedido recibido</div>
+  <h1 class="conf-title">¡Tu pedido ha sido<br><em>confirmado</em>!</h1>
+  <p class="conf-subtitle">Gracias por confiar en la Clínica Dra. Jenireé</p>
+</div>
+
+<div class="conf-wrap">
+
+  <!-- ORDER SUMMARY -->
+  <div class="conf-card" id="orderCard">
+    <div class="conf-card-header">
+      <div class="conf-card-title">Resumen del pedido</div>
+      <div class="conf-order-num" id="orderNum">ORD-######</div>
+    </div>
+    <div class="conf-card-body" id="orderBody">
+      <!-- rendered by JS -->
+    </div>
+  </div>
+
+  <!-- PAYMENT INSTRUCTIONS -->
+  <div class="pay-instructions" id="payInstructions">
+    <!-- rendered by JS depending on payMethod -->
+  </div>
+
+  <!-- NEXT STEPS -->
+  <div>
+    <div style="font-size:.62rem;letter-spacing:.22em;text-transform:uppercase;color:var(--gold);margin-bottom:1.2rem;display:flex;align-items:center;gap:.7rem;">
+      <span style="display:block;width:22px;height:1px;background:var(--gold);opacity:.55;"></span>
+      ¿Qué sigue?
+    </div>
+    <div class="next-steps">
+      <div class="next-step">
+        <div class="next-step-icon">📲</div>
+        <div class="next-step-num">Paso 01</div>
+        <div class="next-step-title">Comprobante</div>
+        <div class="next-step-text">Envíanos el comprobante de pago por WhatsApp al +506 6298-7582.</div>
+      </div>
+      <div class="next-step">
+        <div class="next-step-icon">✓</div>
+        <div class="next-step-num">Paso 02</div>
+        <div class="next-step-title">Confirmación</div>
+        <div class="next-step-text">Recibirás confirmación por WhatsApp en un máximo de 2 horas hábiles.</div>
+      </div>
+      <div class="next-step">
+        <div class="next-step-icon">◉</div>
+        <div class="next-step-num">Paso 03</div>
+        <div class="next-step-title">Tu cita</div>
+        <div class="next-step-text">Para tratamientos, coordinaremos tu fecha y hora ideal en la clínica.</div>
+      </div>
+    </div>
+  </div>
+
+  <!-- CTA -->
+  <div class="conf-cta">
+    <a href="https://api.whatsapp.com/send/?phone=%2B50662987582" target="_blank" class="btn-gold">✦ &nbsp;Enviar comprobante por WA</a>
+    <a href="index.html" class="btn-outline">← Volver al inicio</a>
+  </div>
+
+</div><!-- /.conf-wrap -->
+
+<script>
+function cartGet()    { try { return JSON.parse(sessionStorage.getItem('jg_cart')||'[]'); } catch(e){ return []; } }
+function getOrder()   { try { return JSON.parse(sessionStorage.getItem('jg_last_order')||'null'); } catch(e){ return null; } }
+function getDiscount(){ try { return JSON.parse(sessionStorage.getItem('jg_promo')||'null'); } catch(e){ return null; } }
+
+function generateOrderNum() {
+  return 'ORD-' + Date.now().toString().slice(-6);
+}
+
+function renderConfirmation() {
+  const order = getOrder();
+  const orderNum = sessionStorage.getItem('jg_order_num') || generateOrderNum();
+  sessionStorage.setItem('jg_order_num', orderNum);
+
+  document.getElementById('orderNum').textContent = orderNum;
+
+  /* Build items from order or cart */
+  const items = order?.items || cartGet();
+  const subtotal = items.reduce((s,i) => s + i.price * i.qty, 0);
+  const promo = getDiscount();
+  const discount = promo ? (subtotal * promo.pct / 100) : 0;
+  const total = subtotal - discount;
+
+  const body = document.getElementById('orderBody');
+  body.innerHTML = `
+    ${items.map(i => `
+    <div class="conf-item">
+      <div class="conf-item-icon">${i.icon||'◇'}</div>
+      <div style="flex:1;">
+        <div class="conf-item-name">${i.name}</div>
+        <div class="conf-item-qty">x${i.qty} · ${i.unit||''}</div>
+      </div>
+      <div class="conf-item-price">$${(i.price*i.qty).toFixed(2)}</div>
+    </div>`).join('')}
+    <div class="conf-totals">
+      <div class="conf-total-row"><span>Subtotal</span><span>$${subtotal.toFixed(2)}</span></div>
+      ${promo ? `<div class="conf-total-row" style="color:var(--rose-deep)"><span>Descuento (${promo.code})</span><span>−$${discount.toFixed(2)}</span></div>` : ''}
+      <div class="conf-total-row"><span>Envío</span><span style="color:var(--gold)">Gratis</span></div>
+      <div class="conf-total-row main">
+        <span>Total pagado</span>
+        <span>$${total.toFixed(2)}</span>
+      </div>
+    </div>
+    ${order?.nombre ? `<div style="margin-top:1rem;padding-top:1rem;border-top:1px solid var(--rose-light);font-size:.8rem;color:var(--text-mid);font-weight:300;line-height:1.7;">
+      <strong style="font-weight:400;color:var(--text-dark);">${order.nombre}</strong><br>
+      ${order.email} · ${order.phone}
+    </div>` : ''}`;
+
+  /* Payment instructions */
+  const payMethod = order?.payMethod || 'sinpe';
+  const instrEl = document.getElementById('payInstructions');
+
+  const instrMap = {
+    sinpe: `
+      <div class="pay-instructions-title">Instrucciones de pago</div>
+      <h3>SINPE Móvil</h3>
+      <p>Realiza tu pago al número:</p>
+      <div class="copy-field">
+        <span id="sinpeConf">+506 6298-7582</span>
+        <button class="copy-btn" onclick="copyConf('sinpeConf')">Copiar</button>
+      </div>
+      <p>Nombre: <strong>JG Medical SRL</strong></p>
+      <p>Monto: <strong>$${total.toFixed(2)} USD</strong> (o su equivalente en colones al tipo de cambio del día)</p>
+      <p style="margin-top:.8rem;font-size:.75rem;">Luego de realizar el SINPE, envíanos el screenshot del comprobante por WhatsApp al +506 6298-7582 junto con tu nombre y número de pedido <strong>${orderNum}</strong>.</p>`,
+    transfer: `
+      <div class="pay-instructions-title">Instrucciones de pago</div>
+      <h3>Transferencia Bancaria</h3>
+      <p>Banco: <strong>BAC Credomatic</strong></p>
+      <p>Beneficiario: <strong>JG Medical SRL</strong></p>
+      <div class="copy-field">
+        <span>Cuenta USD: <strong id="cuentaConf">000-000000-0</strong></span>
+        <button class="copy-btn" onclick="copyConf('cuentaConf')">Copiar</button>
+      </div>
+      <p>Monto: <strong>$${total.toFixed(2)}</strong></p>
+      <p style="margin-top:.8rem;font-size:.75rem;">Envía el comprobante a <strong>info@drajenireegutierrez.com</strong> con el asunto <strong>${orderNum}</strong>. Tu pedido se confirmará en 1 día hábil.</p>`,
+    card: `
+      <div class="pay-instructions-title">Pago procesado</div>
+      <h3>Tarjeta de crédito / débito</h3>
+      <p>Tu pago de <strong>$${total.toFixed(2)}</strong> está siendo procesado de forma segura.</p>
+      <p style="margin-top:.6rem;font-size:.75rem;">Recibirás un correo de confirmación en <strong>${order?.email||'tu correo'}</strong>. Si tienes alguna duda, contáctanos por WhatsApp.</p>`
+  };
+
+  instrEl.innerHTML = instrMap[payMethod] || instrMap.sinpe;
+}
+
+function copyConf(id) {
+  const el = document.getElementById(id);
+  if (!el) return;
+  navigator.clipboard.writeText(el.textContent.trim()).then(() => {
+    const btn = el.closest('.copy-field')?.querySelector('.copy-btn');
+    if (btn) { btn.textContent = '✓ Copiado'; setTimeout(()=>btn.textContent='Copiar',1800); }
+  });
+}
+
+renderConfirmation();
+</script>
+</body>
+</html>
