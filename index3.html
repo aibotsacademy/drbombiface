@@ -615,6 +615,49 @@
   .exp-level-labels { gap: .3rem; }
   .exp-lbl { font-size: .55rem; letter-spacing: .1em; }
 }
+
+
+<style id="shopStyles">
+/* SHOP SECTION */
+.shop { background: var(--off-white); }
+.shop-grid { display: grid; grid-template-columns: repeat(3,1fr); gap: 1.5rem; margin-top: 3.5rem; }
+.shop-card { background: #fff; border: 1px solid var(--gold-light); display: flex; flex-direction: column; position: relative; overflow: hidden; transition: transform .28s, box-shadow .28s; }
+.shop-card:hover { transform: translateY(-4px); box-shadow: 0 12px 36px rgba(201,169,110,.13); }
+.shop-card::after { content:''; position:absolute; bottom:0; left:0; right:0; height:2px; background:linear-gradient(90deg,var(--gold),var(--rose-mid)); transform:scaleX(0); transform-origin:left; transition:transform .3s; }
+.shop-card:hover::after { transform:scaleX(1); }
+.shop-badge { position:absolute; top:1rem; left:1rem; font-size:.55rem; letter-spacing:.18em; text-transform:uppercase; padding:.25rem .7rem; font-weight:500; z-index:1; }
+.shop-badge.badge-top { background:var(--text-dark); color:var(--gold); }
+.shop-badge.badge-new { background:var(--rose-deep); color:#fff; }
+.shop-badge.badge-bundle { background:var(--gold); color:#fff; }
+.shop-img { width:100%; aspect-ratio:4/3; background:linear-gradient(135deg,var(--rose-light),var(--gold-light)); display:flex; align-items:center; justify-content:center; font-family:var(--font-display); font-size:2.5rem; color:rgba(201,169,110,.4); flex-shrink:0; }
+.shop-body { padding:1.4rem 1.25rem 1.2rem; display:flex; flex-direction:column; flex:1; gap:.4rem; }
+.shop-category { font-size:.58rem; letter-spacing:.2em; text-transform:uppercase; color:var(--gold); font-weight:400; }
+.shop-name { font-family:var(--font-display); font-size:1.1rem; font-weight:400; color:var(--text-dark); line-height:1.25; }
+.shop-desc { font-size:.78rem; color:var(--text-light); font-weight:300; line-height:1.65; flex:1; }
+.shop-footer { display:flex; align-items:center; justify-content:space-between; padding:1rem 1.25rem 1.25rem; border-top:1px solid var(--rose-light); gap:.5rem; }
+.shop-price { font-family:var(--font-display); font-size:1.35rem; font-weight:300; color:var(--text-dark); }
+.shop-price small { font-family:var(--font-body); font-size:.68rem; color:var(--text-light); font-weight:300; display:block; line-height:1; }
+.shop-add { background:linear-gradient(135deg,var(--gold),var(--gold-dark)); color:#fff; border:none; cursor:pointer; font-family:var(--font-body); font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; font-weight:400; padding:.6rem 1.1rem; transition:all .25s; white-space:nowrap; }
+.shop-add:hover { box-shadow:0 6px 20px rgba(201,169,110,.38); transform:translateY(-1px); }
+.shop-add:active { transform:scale(.97); }
+
+/* CART BUBBLE */
+.cart-bubble { position:fixed; bottom:2rem; left:2rem; z-index:900; background:var(--text-dark); color:#fff; padding:.8rem 1.4rem; display:none; align-items:center; gap:1rem; box-shadow:0 8px 32px rgba(0,0,0,.22); animation:slideUp .4s cubic-bezier(.22,1,.36,1); cursor:pointer; border-left:3px solid var(--gold); }
+@keyframes slideUp { from{transform:translateY(20px);opacity:0}to{transform:translateY(0);opacity:1} }
+.cart-bubble.visible { display:flex; }
+.cart-bubble-icon { font-size:1.1rem; }
+.cart-bubble-text { font-size:.7rem; font-weight:300; line-height:1.4; }
+.cart-bubble-text strong { display:block; font-size:.78rem; font-weight:500; color:var(--gold); }
+.cart-bubble-cta { font-size:.6rem; letter-spacing:.18em; text-transform:uppercase; color:var(--gold); font-weight:400; white-space:nowrap; text-decoration:none; border:1px solid rgba(201,169,110,.4); padding:.35rem .75rem; transition:all .25s; }
+.cart-bubble-cta:hover { background:var(--gold); color:#fff; }
+
+/* TOAST */
+.shop-toast { position:fixed; top:5.5rem; right:1.5rem; z-index:1800; background:#fff; border:1px solid var(--gold-light); border-left:3px solid var(--gold); padding:.9rem 1.2rem; font-size:.78rem; color:var(--text-dark); font-weight:300; box-shadow:0 8px 28px rgba(201,169,110,.15); opacity:0; transform:translateY(-8px); transition:all .3s; pointer-events:none; max-width:280px; }
+.shop-toast.show { opacity:1; transform:translateY(0); }
+.shop-toast strong { color:var(--gold); font-weight:500; }
+
+@media(max-width:900px){ .shop-grid { grid-template-columns:repeat(2,1fr); } }
+@media(max-width:560px){ .shop-grid { grid-template-columns:1fr; } }
  
 </style>
 </head>
@@ -890,6 +933,39 @@
     </div>
   </div>
 </div>
+
+
+ <section class="shop" id="tienda">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow" data-i18n="shop.eyebrow">Tienda</div>
+      <h2 class="section-title" data-i18n-html="shop.title">Los más <em>comprados</em></h2>
+      <div class="divider-gold"><span></span><i></i><span></span></div>
+      <p class="section-lead" data-i18n="shop.lead">Productos y tratamientos seleccionados por la Dra. Jenireé. Agenda tu sesión o recibe tu skincare favorito directamente en casa.</p>
+    </div>
+
+    <div class="shop-grid reveal" style="transition-delay:.15s" id="shopGrid">
+      <!-- Cards generadas por JS -->
+    </div>
+
+    <div style="text-align:center;margin-top:2.5rem" class="reveal">
+      <a href="cart.html" class="btn-outline" style="border-color:var(--gold-light);color:var(--gold);display:inline-flex;" data-i18n="shop.all">Ver todos los productos →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Cart bubble -->
+<div class="cart-bubble" id="cartBubble" onclick="window.location.href='cart.html'">
+  <div class="cart-bubble-icon">🛒</div>
+  <div class="cart-bubble-text">
+    <strong id="cartBubbleCount">0 productos</strong>
+    <span id="cartBubbleTotal">$0.00</span>
+  </div>
+  <a href="cart.html" class="cart-bubble-cta" data-i18n="cart.view">Ver carrito →</a>
+</div>
+
+<!-- Toast -->
+<div class="shop-toast" id="shopToast"></div>
 
 <!-- FOOTER -->
 <footer id="contacto">
@@ -1477,6 +1553,113 @@ if (document.readyState === 'loading') {
   document.addEventListener('DOMContentLoaded', initExpSlider);
 } else {
   initExpSlider();
+}
+
+ const SHOP_PRODUCTS = [
+  { id:'tx-brow',   type:'service', badge:'badge-top',    badgeLabel:'#1 más pedido',  icon:'◉', cat:'Tratamiento',  name:'Toxina Botulínica',              nameEn:'Botulinum Toxin',              desc:'Sesión completa frente + entrecejo + patas de gallo. Resultados en 72h.',                     descEn:'Full session forehead + frown + crow\'s feet. Results in 72h.',                    price:180, unit:'sesión',   unitEn:'session' },
+  { id:'fill-lips', type:'service', badge:'badge-top',    badgeLabel:'Favorito',        icon:'◇', cat:'Tratamiento',  name:'Relleno de Labios',              nameEn:'Lip Filler',                   desc:'1 jeringa de ácido hialurónico premium. Volumen y definición natural al instante.',           descEn:'1 premium hyaluronic acid syringe. Natural volume and definition instantly.',      price:220, unit:'sesión',   unitEn:'session' },
+  { id:'bio-pro',   type:'service', badge:'badge-bundle', badgeLabel:'Más completo',    icon:'✦', cat:'Protocolo',    name:'Bioestimulador Profhilo',         nameEn:'Profhilo Biostimulator',       desc:'2 jeringas de Profhilo. El protocolo de hidratación más avanzado del mercado.',              descEn:'2 Profhilo syringes. The most advanced hydration protocol on the market.',        price:450, unit:'protocolo',unitEn:'protocol' },
+  { id:'laser-pkg', type:'service', badge:'badge-top',    badgeLabel:'Pack ahorro',     icon:'✧', cat:'Tratamiento',  name:'Pack Láser x3 Sesiones',         nameEn:'Laser Pack x3 Sessions',       desc:'3 sesiones de rejuvenecimiento láser. Manchas, textura y luminosidad.',                      descEn:'3 laser rejuvenation sessions. Spots, texture and radiance.',                     price:380, unit:'pack',     unitEn:'pack' },
+  { id:'serum-c',   type:'product', badge:'badge-new',    badgeLabel:'Nuevo',           icon:'◈', cat:'Skincare',     name:'Sérum Vitamina C 20%',           nameEn:'Vitamin C Serum 20%',          desc:'Fórmula profesional con vitamina C estabilizada. Ilumina y protege la piel diariamente.',    descEn:'Professional formula with stabilized vitamin C. Brightens and protects daily.',  price:65,  unit:'60ml',     unitEn:'60ml' },
+  { id:'bundle-ult',type:'service', badge:'badge-bundle', badgeLabel:'Signature',       icon:'⬡', cat:'Protocolo',    name:'Ultherapy + Bioestimulador',     nameEn:'Ultherapy + Biostimulator',    desc:'El protocolo anti-aging definitivo de la clínica. Lifting + regeneración en una estrategia.', descEn:'The clinic\'s ultimate anti-aging protocol. Lifting + regeneration in one plan.', price:890, unit:'protocolo',unitEn:'protocol' },
+];
+
+/* ─── CART (sessionStorage) ─── */
+function cartGet()        { try { return JSON.parse(sessionStorage.getItem('jg_cart') || '[]'); } catch(e){ return []; } }
+function cartSave(items)  { sessionStorage.setItem('jg_cart', JSON.stringify(items)); }
+function cartAdd(product) {
+  const items = cartGet();
+  const existing = items.find(i => i.id === product.id);
+  if (existing) { existing.qty++; } else { items.push({ ...product, qty: 1 }); }
+  cartSave(items);
+  updateCartBubble();
+  showToast(product);
+}
+function cartTotal()      { return cartGet().reduce((s,i) => s + i.price * i.qty, 0); }
+function cartCount()      { return cartGet().reduce((s,i) => s + i.qty, 0); }
+
+function updateCartBubble() {
+  const count = cartCount();
+  const bubble = document.getElementById('cartBubble');
+  const countEl = document.getElementById('cartBubbleCount');
+  const totalEl = document.getElementById('cartBubbleTotal');
+  if (!bubble) return;
+  if (count > 0) {
+    bubble.classList.add('visible');
+    const lbl = (typeof lang !== 'undefined' && lang === 'en') ? (count === 1 ? '1 item' : count+' items') : (count === 1 ? '1 producto' : count+' productos');
+    countEl.textContent = lbl;
+    totalEl.textContent = '$' + cartTotal().toFixed(2);
+  } else {
+    bubble.classList.remove('visible');
+  }
+}
+
+function showToast(p) {
+  const toast = document.getElementById('shopToast');
+  if (!toast) return;
+  const name = (typeof lang !== 'undefined' && lang === 'en') ? p.nameEn : p.name;
+  toast.innerHTML = `<strong>${name}</strong> agregado al carrito ✦`;
+  toast.classList.add('show');
+  setTimeout(() => toast.classList.remove('show'), 2800);
+}
+
+/* ─── RENDER SHOP CARDS ─── */
+function renderShopGrid() {
+  const grid = document.getElementById('shopGrid');
+  if (!grid) return;
+  const isEn = (typeof lang !== 'undefined' && lang === 'en');
+  grid.innerHTML = SHOP_PRODUCTS.map(p => {
+    const name    = isEn ? p.nameEn  : p.name;
+    const desc    = isEn ? p.descEn  : p.desc;
+    const unit    = isEn ? p.unitEn  : p.unit;
+    const addLbl  = isEn ? 'Add to cart' : 'Agregar';
+    const badgeLbl = p.badge === 'badge-top' ? (isEn ? 'Best seller' : p.badgeLabel) : (p.badge === 'badge-new' ? (isEn ? 'New' : 'Nuevo') : (isEn ? 'Bundle' : p.badgeLabel));
+    return `
+    <div class="shop-card">
+      <span class="shop-badge ${p.badge}">${badgeLbl}</span>
+      <div class="shop-img">${p.icon}</div>
+      <div class="shop-body">
+        <div class="shop-category">${isEn ? (p.type === 'service' ? 'Treatment' : 'Skincare') : p.cat}</div>
+        <div class="shop-name">${name}</div>
+        <div class="shop-desc">${desc}</div>
+      </div>
+      <div class="shop-footer">
+        <div class="shop-price">
+          $${p.price.toFixed(2)}
+          <small>${unit}</small>
+        </div>
+        <button class="shop-add" onclick="cartAdd(SHOP_PRODUCTS.find(x=>x.id==='${p.id}'))">${addLbl}</button>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+/* ─── Hook into setLang ─── */
+const _shopOrigSetLang = (typeof setLang === 'function') ? setLang : null;
+if (_shopOrigSetLang) {
+  setLang = function(l) {
+    _shopOrigSetLang(l);
+    renderShopGrid();
+    updateCartBubble();
+  };
+}
+
+/* ─── Init ─── */
+renderShopGrid();
+updateCartBubble();
+
+/* ─── i18n keys adicionales (agregar al objeto TR existente) ─── */
+if (typeof TR !== 'undefined') {
+  TR.es['shop.eyebrow'] = 'Tienda';
+  TR.es['shop.title']   = 'Los más <em>comprados</em>';
+  TR.es['shop.lead']    = 'Productos y tratamientos seleccionados por la Dra. Jenireé. Agenda tu sesión o recibe tu skincare favorito directamente en casa.';
+  TR.es['shop.all']     = 'Ver todos los productos →';
+  TR.es['cart.view']    = 'Ver carrito →';
+  TR.en['shop.eyebrow'] = 'Shop';
+  TR.en['shop.title']   = 'Most <em>popular</em>';
+  TR.en['shop.lead']    = 'Products and treatments selected by Dr. Jenireé. Book your session or receive your favorite skincare directly at home.';
+  TR.en['shop.all']     = 'View all products →';
+  TR.en['cart.view']    = 'View cart →';
 }
 
 </script>
