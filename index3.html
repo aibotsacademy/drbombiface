@@ -834,6 +834,38 @@
   </div>
 </section>
 
+  <section class="shop" id="tienda">
+  <div class="container">
+    <div class="reveal">
+      <div class="section-eyebrow" data-i18n="shop.eyebrow">Tienda</div>
+      <h2 class="section-title" data-i18n-html="shop.title">Los más <em>comprados</em></h2>
+      <div class="divider-gold"><span></span><i></i><span></span></div>
+      <p class="section-lead" data-i18n="shop.lead">Productos y tratamientos seleccionados por la Dra. Jenireé. Agenda tu sesión o recibe tu skincare favorito directamente en casa.</p>
+    </div>
+
+    <div class="shop-grid reveal" style="transition-delay:.15s" id="shopGrid">
+      <!-- Cards generadas por JS -->
+    </div>
+
+    <div style="text-align:center;margin-top:2.5rem" class="reveal">
+      <a href="cart.html" class="btn-outline" style="border-color:var(--gold-light);color:var(--gold);display:inline-flex;" data-i18n="shop.all">Ver todos los productos →</a>
+    </div>
+  </div>
+</section>
+
+<!-- Cart bubble -->
+<div class="cart-bubble" id="cartBubble" onclick="window.location.href='cart.html'">
+  <div class="cart-bubble-icon">🛒</div>
+  <div class="cart-bubble-text">
+    <strong id="cartBubbleCount">0 productos</strong>
+    <span id="cartBubbleTotal">$0.00</span>
+  </div>
+  <a href="cart.html" class="cart-bubble-cta" data-i18n="cart.view">Ver carrito →</a>
+</div>
+
+<!-- Toast -->
+<div class="shop-toast" id="shopToast"></div>
+
 <!-- PROCESO -->
 <section class="proceso" id="proceso">
   <div class="container">
@@ -935,37 +967,7 @@
 </div>
 
 
- <section class="shop" id="tienda">
-  <div class="container">
-    <div class="reveal">
-      <div class="section-eyebrow" data-i18n="shop.eyebrow">Tienda</div>
-      <h2 class="section-title" data-i18n-html="shop.title">Los más <em>comprados</em></h2>
-      <div class="divider-gold"><span></span><i></i><span></span></div>
-      <p class="section-lead" data-i18n="shop.lead">Productos y tratamientos seleccionados por la Dra. Jenireé. Agenda tu sesión o recibe tu skincare favorito directamente en casa.</p>
-    </div>
 
-    <div class="shop-grid reveal" style="transition-delay:.15s" id="shopGrid">
-      <!-- Cards generadas por JS -->
-    </div>
-
-    <div style="text-align:center;margin-top:2.5rem" class="reveal">
-      <a href="cart.html" class="btn-outline" style="border-color:var(--gold-light);color:var(--gold);display:inline-flex;" data-i18n="shop.all">Ver todos los productos →</a>
-    </div>
-  </div>
-</section>
-
-<!-- Cart bubble -->
-<div class="cart-bubble" id="cartBubble" onclick="window.location.href='cart.html'">
-  <div class="cart-bubble-icon">🛒</div>
-  <div class="cart-bubble-text">
-    <strong id="cartBubbleCount">0 productos</strong>
-    <span id="cartBubbleTotal">$0.00</span>
-  </div>
-  <a href="cart.html" class="cart-bubble-cta" data-i18n="cart.view">Ver carrito →</a>
-</div>
-
-<!-- Toast -->
-<div class="shop-toast" id="shopToast"></div>
 
 <!-- FOOTER -->
 <footer id="contacto">
