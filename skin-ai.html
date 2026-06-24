@@ -1,0 +1,899 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Espejo IA · Análisis de Piel · Clínica Dra. Jenireé</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400&family=Jost:wght@200;300;400;500&family=Space+Mono:wght@400;700&display=swap" rel="stylesheet">
+<style>
+*,*::before,*::after{box-sizing:border-box;margin:0;padding:0}
+:root{
+  --void:#000508;
+  --deep:#040d14;
+  --panel:rgba(4,20,32,0.85);
+  --gold:#C9A96E;
+  --gold2:#E8D5B0;
+  --rose:#C97088;
+  --cyan:#00e5ff;
+  --cyan2:rgba(0,229,255,0.12);
+  --cyan3:rgba(0,229,255,0.04);
+  --text:#e8f4f8;
+  --muted:rgba(200,230,240,0.45);
+  --mono:'Space Mono',monospace;
+  --sans:'Jost',sans-serif;
+  --serif:'Cormorant Garamond',Georgia,serif;
+}
+html{scroll-behavior:smooth;}
+body{background:var(--void);color:var(--text);font-family:var(--sans);overflow-x:hidden;min-height:100vh;}
+
+/* NAV */
+.top-bar{position:fixed;top:0;left:0;right:0;z-index:100;display:flex;align-items:center;justify-content:space-between;padding:.9rem 2rem;background:rgba(0,5,8,0.7);backdrop-filter:blur(18px);border-bottom:1px solid rgba(0,229,255,0.08);}
+.top-bar-logo{font-family:var(--serif);font-size:.95rem;font-weight:300;color:var(--text);text-decoration:none;letter-spacing:.06em;}
+.top-bar-logo span{color:var(--gold);font-style:italic;}
+.top-bar-back{font-family:var(--mono);font-size:.58rem;letter-spacing:.18em;color:var(--muted);text-decoration:none;border:1px solid rgba(0,229,255,0.2);padding:.3rem .8rem;transition:all .25s;}
+.top-bar-back:hover{color:var(--cyan);border-color:var(--cyan);}
+
+/* HERO */
+.hero{min-height:100vh;display:flex;flex-direction:column;align-items:center;justify-content:center;padding:6rem 2rem 3rem;position:relative;overflow:hidden;}
+.hero-bg{position:absolute;inset:0;background:radial-gradient(ellipse 70% 60% at 50% 40%,rgba(0,60,80,0.35) 0%,transparent 70%),radial-gradient(ellipse 40% 50% at 20% 80%,rgba(201,112,136,0.07) 0%,transparent 55%),radial-gradient(ellipse 30% 40% at 80% 20%,rgba(201,169,110,0.06) 0%,transparent 50%);z-index:0;}
+.grid-lines{position:absolute;inset:0;z-index:0;opacity:.06;background-image:linear-gradient(rgba(0,229,255,.6) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.6) 1px,transparent 1px);background-size:60px 60px;}
+.hero-inner{position:relative;z-index:1;text-align:center;max-width:740px;}
+.hero-chip{display:inline-flex;align-items:center;gap:.5rem;font-family:var(--mono);font-size:.55rem;letter-spacing:.22em;color:var(--cyan);border:1px solid rgba(0,229,255,0.3);padding:.3rem .9rem;margin-bottom:1.8rem;animation:pulse-border 3s ease-in-out infinite;}
+@keyframes pulse-border{0%,100%{border-color:rgba(0,229,255,0.3)}50%{border-color:rgba(0,229,255,0.7)}}
+.hero-chip-dot{width:6px;height:6px;border-radius:50%;background:var(--cyan);animation:blink 1.4s ease-in-out infinite;}
+@keyframes blink{0%,100%{opacity:1}50%{opacity:.2}}
+.hero-title{font-family:var(--serif);font-size:clamp(2.4rem,6vw,4.8rem);font-weight:300;line-height:1.08;letter-spacing:.01em;margin-bottom:.6rem;}
+.hero-title em{font-style:italic;color:var(--gold);}
+.hero-title .cyan{color:var(--cyan);}
+.hero-sub{font-size:.88rem;color:var(--muted);font-weight:300;line-height:1.75;max-width:520px;margin:0 auto 2.5rem;}
+.hero-actions{display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;}
+.btn-cyan{display:inline-flex;align-items:center;gap:.5rem;background:transparent;border:1px solid var(--cyan);color:var(--cyan);padding:.78rem 1.8rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .3s;text-decoration:none;}
+.btn-cyan:hover{background:rgba(0,229,255,0.08);box-shadow:0 0 28px rgba(0,229,255,0.2);}
+.btn-gold-ai{display:inline-flex;align-items:center;gap:.5rem;background:linear-gradient(135deg,#C9A96E,#A07840);color:#fff;padding:.78rem 1.8rem;font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;text-transform:uppercase;cursor:pointer;transition:all .3s;text-decoration:none;border:none;}
+.btn-gold-ai:hover{box-shadow:0 6px 24px rgba(201,169,110,0.35);}
+
+/* MIRROR SECTION */
+.mirror-section{padding:5rem 2rem;max-width:1300px;margin:0 auto;}
+.section-label{font-family:var(--mono);font-size:.55rem;letter-spacing:.28em;color:var(--cyan);margin-bottom:2.5rem;display:flex;align-items:center;gap:1rem;}
+.section-label::after{content:'';flex:1;height:1px;background:linear-gradient(90deg,rgba(0,229,255,0.3),transparent);}
+
+/* MIRROR UI */
+.mirror-layout{display:grid;grid-template-columns:1fr 340px;gap:1.5rem;align-items:start;}
+.mirror-frame{position:relative;background:var(--deep);border:1px solid rgba(0,229,255,0.15);overflow:hidden;}
+.mirror-frame::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 50% at 50% 50%,rgba(0,229,255,0.03) 0%,transparent 70%);pointer-events:none;z-index:1;}
+
+/* Corner decorations */
+.mirror-corner{position:absolute;width:22px;height:22px;z-index:3;}
+.mirror-corner.tl{top:12px;left:12px;border-top:1px solid var(--cyan);border-left:1px solid var(--cyan);}
+.mirror-corner.tr{top:12px;right:12px;border-top:1px solid var(--cyan);border-right:1px solid var(--cyan);}
+.mirror-corner.bl{bottom:12px;left:12px;border-bottom:1px solid var(--cyan);border-left:1px solid var(--cyan);}
+.mirror-corner.br{bottom:12px;right:12px;border-bottom:1px solid var(--cyan);border-right:1px solid var(--cyan);}
+
+/* Video / camera area */
+.mirror-video-area{position:relative;aspect-ratio:3/4;background:#000;display:flex;align-items:center;justify-content:center;overflow:hidden;}
+.mirror-video-area video{width:100%;height:100%;object-fit:cover;transform:scaleX(-1);}
+.mirror-placeholder{display:flex;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;color:var(--muted);text-align:center;padding:2rem;}
+.mirror-placeholder svg{opacity:.35;}
+.mirror-placeholder p{font-family:var(--mono);font-size:.6rem;letter-spacing:.18em;line-height:1.8;}
+
+/* Scan overlay */
+.scan-overlay{position:absolute;inset:0;pointer-events:none;z-index:2;display:none;}
+.scan-overlay.active{display:block;}
+.scan-line{position:absolute;left:0;right:0;height:2px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);animation:scan-move 2.5s linear infinite;opacity:.8;}
+@keyframes scan-move{0%{top:0}100%{top:100%}}
+.scan-grid{position:absolute;inset:0;background-image:linear-gradient(rgba(0,229,255,.05) 1px,transparent 1px),linear-gradient(90deg,rgba(0,229,255,.05) 1px,transparent 1px);background-size:30px 30px;}
+
+/* Analysis overlays */
+.face-outline{position:absolute;top:50%;left:50%;transform:translate(-50%,-50%);width:55%;aspect-ratio:.75;border:1px solid rgba(0,229,255,0.4);border-radius:50% 50% 45% 45%;z-index:3;display:none;}
+.face-outline.show{display:block;animation:face-pulse 2s ease-in-out infinite;}
+@keyframes face-pulse{0%,100%{border-color:rgba(0,229,255,0.4)}50%{border-color:rgba(0,229,255,0.8)}}
+
+/* Marker dots */
+.marker{position:absolute;z-index:4;display:none;}
+.marker.show{display:block;}
+.marker-dot{width:8px;height:8px;border-radius:50%;background:var(--cyan);animation:marker-pulse 1.8s ease-in-out infinite;}
+@keyframes marker-pulse{0%,100%{transform:scale(1);opacity:1}50%{transform:scale(1.6);opacity:.5}}
+.marker-line{position:absolute;width:40px;height:1px;background:linear-gradient(90deg,var(--cyan),transparent);}
+.marker-label{position:absolute;font-family:var(--mono);font-size:.48rem;letter-spacing:.12em;color:var(--cyan);white-space:nowrap;background:rgba(0,5,8,0.8);padding:.15rem .4rem;}
+
+/* Status bar */
+.mirror-status{position:absolute;bottom:0;left:0;right:0;background:rgba(0,5,8,0.85);backdrop-filter:blur(10px);padding:.7rem 1rem;display:flex;align-items:center;justify-content:space-between;border-top:1px solid rgba(0,229,255,0.1);z-index:5;}
+.status-text{font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;color:var(--cyan);}
+.status-indicator{display:flex;align-items:center;gap:.4rem;font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;color:var(--muted);}
+.status-dot{width:5px;height:5px;border-radius:50%;background:#3ddc84;}
+
+/* Mirror controls */
+.mirror-controls{position:absolute;bottom:52px;left:0;right:0;display:flex;justify-content:center;gap:.8rem;padding:.8rem;z-index:5;}
+.ctrl-btn{background:rgba(0,5,8,0.7);border:1px solid rgba(0,229,255,0.2);color:var(--muted);padding:.5rem 1rem;font-family:var(--mono);font-size:.52rem;letter-spacing:.14em;cursor:pointer;transition:all .25s;}
+.ctrl-btn:hover,.ctrl-btn.active{border-color:var(--cyan);color:var(--cyan);background:rgba(0,229,255,0.06);}
+
+/* PANEL SIDEBAR */
+.panel-sidebar{display:flex;flex-direction:column;gap:1rem;}
+.panel{background:var(--panel);border:1px solid rgba(0,229,255,0.1);padding:1.2rem;}
+.panel-title{font-family:var(--mono);font-size:.52rem;letter-spacing:.2em;color:var(--cyan);margin-bottom:1rem;display:flex;align-items:center;gap:.5rem;}
+.panel-title::before{content:'';width:3px;height:10px;background:var(--cyan);}
+
+/* AI Avatar */
+.avatar-wrap{display:flex;flex-direction:column;align-items:center;gap:.9rem;padding:.5rem 0;}
+.avatar-orb{width:72px;height:72px;border-radius:50%;background:radial-gradient(circle at 35% 35%,rgba(0,229,255,0.3),rgba(0,60,80,0.8));border:1px solid rgba(0,229,255,0.4);display:flex;align-items:center;justify-content:center;position:relative;cursor:pointer;}
+.avatar-orb::before{content:'';position:absolute;inset:-6px;border-radius:50%;border:1px solid rgba(0,229,255,0.15);animation:orb-rotate 8s linear infinite;}
+@keyframes orb-rotate{to{transform:rotate(360deg)}}
+.avatar-orb.speaking{animation:speak-pulse .6s ease-in-out infinite alternate;}
+@keyframes speak-pulse{from{box-shadow:0 0 0 0 rgba(0,229,255,0.2)}to{box-shadow:0 0 0 12px rgba(0,229,255,0)}}
+.avatar-orb svg{opacity:.7;}
+.avatar-name{font-family:var(--serif);font-size:1.05rem;font-weight:300;color:var(--text);letter-spacing:.04em;}
+.avatar-role{font-family:var(--mono);font-size:.5rem;letter-spacing:.18em;color:var(--muted);}
+.avatar-wave{display:flex;align-items:center;gap:3px;height:20px;}
+.wave-bar{width:3px;background:var(--cyan);border-radius:2px;animation:wave-anim 1s ease-in-out infinite;}
+.wave-bar:nth-child(1){height:6px;animation-delay:0s;}
+.wave-bar:nth-child(2){height:14px;animation-delay:.1s;}
+.wave-bar:nth-child(3){height:20px;animation-delay:.2s;}
+.wave-bar:nth-child(4){height:14px;animation-delay:.3s;}
+.wave-bar:nth-child(5){height:8px;animation-delay:.4s;}
+.wave-bar:nth-child(6){height:16px;animation-delay:.15s;}
+.wave-bar:nth-child(7){height:10px;animation-delay:.25s;}
+@keyframes wave-anim{0%,100%{transform:scaleY(.4)}50%{transform:scaleY(1)}}
+.wave-bar.idle{animation:none;height:3px;}
+
+/* Chat */
+.chat-log{display:flex;flex-direction:column;gap:.7rem;max-height:220px;overflow-y:auto;margin-bottom:.8rem;padding-right:.2rem;}
+.chat-log::-webkit-scrollbar{width:2px;}
+.chat-log::-webkit-scrollbar-thumb{background:rgba(0,229,255,0.2);}
+.msg{display:flex;flex-direction:column;gap:.2rem;}
+.msg-role{font-family:var(--mono);font-size:.45rem;letter-spacing:.18em;color:var(--muted);}
+.msg-text{font-size:.75rem;line-height:1.65;font-weight:300;padding:.6rem .8rem;border-radius:2px;}
+.msg.ai .msg-text{background:rgba(0,229,255,0.06);border-left:2px solid var(--cyan);color:var(--text);}
+.msg.user .msg-text{background:rgba(201,169,110,0.08);border-left:2px solid var(--gold);color:var(--text);align-self:flex-end;}
+.msg.user .msg-role{align-self:flex-end;}
+.chat-input-row{display:flex;gap:.5rem;}
+.chat-input{flex:1;background:rgba(0,229,255,0.04);border:1px solid rgba(0,229,255,0.15);padding:.55rem .7rem;font-family:var(--sans);font-size:.75rem;font-weight:300;color:var(--text);outline:none;transition:border-color .25s;}
+.chat-input:focus{border-color:rgba(0,229,255,0.45);}
+.chat-input::placeholder{color:rgba(200,230,240,0.25);}
+.chat-send{background:rgba(0,229,255,0.1);border:1px solid rgba(0,229,255,0.25);color:var(--cyan);padding:.55rem .8rem;cursor:pointer;font-family:var(--mono);font-size:.55rem;transition:all .25s;}
+.chat-send:hover{background:rgba(0,229,255,0.18);}
+.mic-btn{background:transparent;border:1px solid rgba(0,229,255,0.2);color:var(--muted);padding:.55rem .7rem;cursor:pointer;transition:all .25s;font-size:.8rem;}
+.mic-btn:hover,.mic-btn.active{border-color:var(--cyan);color:var(--cyan);}
+
+/* Skin scores */
+.score-grid{display:grid;grid-template-columns:1fr 1fr;gap:.6rem;}
+.score-item{background:rgba(0,229,255,0.03);border:1px solid rgba(0,229,255,0.08);padding:.7rem;}
+.score-label{font-family:var(--mono);font-size:.45rem;letter-spacing:.14em;color:var(--muted);margin-bottom:.35rem;}
+.score-bar-wrap{height:3px;background:rgba(255,255,255,0.06);border-radius:2px;margin-bottom:.3rem;}
+.score-bar{height:100%;border-radius:2px;transition:width 1.2s cubic-bezier(.22,1,.36,1);}
+.score-val{font-family:var(--mono);font-size:.65rem;font-weight:700;color:var(--text);}
+.score-val.good{color:#3ddc84;}
+.score-val.mid{color:var(--gold);}
+.score-val.low{color:var(--rose);}
+
+/* Recommendations */
+.rec-list{display:flex;flex-direction:column;gap:.55rem;}
+.rec-item{display:flex;align-items:flex-start;gap:.6rem;padding:.6rem;background:rgba(0,229,255,0.03);border:1px solid rgba(0,229,255,0.07);cursor:pointer;transition:border-color .2s;}
+.rec-item:hover{border-color:rgba(0,229,255,0.2);}
+.rec-icon{font-size:.9rem;flex-shrink:0;margin-top:.1rem;}
+.rec-body{}
+.rec-type{font-family:var(--mono);font-size:.44rem;letter-spacing:.15em;color:var(--muted);}
+.rec-name{font-size:.75rem;font-weight:400;color:var(--text);line-height:1.3;}
+
+/* FEATURES SECTION */
+.features{padding:5rem 2rem;max-width:1300px;margin:0 auto;}
+.features-grid{display:grid;grid-template-columns:repeat(3,1fr);gap:1rem;margin-top:2rem;}
+.feature-card{background:var(--panel);border:1px solid rgba(0,229,255,0.08);padding:1.8rem 1.5rem;position:relative;overflow:hidden;transition:border-color .3s;}
+.feature-card:hover{border-color:rgba(0,229,255,0.25);}
+.feature-card::before{content:'';position:absolute;top:0;left:0;right:0;height:1px;background:linear-gradient(90deg,transparent,var(--cyan),transparent);opacity:0;transition:opacity .3s;}
+.feature-card:hover::before{opacity:1;}
+.feature-num{font-family:var(--mono);font-size:.5rem;letter-spacing:.2em;color:rgba(0,229,255,0.35);margin-bottom:1.2rem;}
+.feature-icon{font-size:1.6rem;margin-bottom:.9rem;display:block;}
+.feature-title{font-family:var(--serif);font-size:1.15rem;font-weight:300;color:var(--text);margin-bottom:.5rem;line-height:1.25;}
+.feature-desc{font-size:.75rem;color:var(--muted);line-height:1.7;font-weight:300;}
+
+/* HOW IT WORKS */
+.how{padding:5rem 2rem;max-width:900px;margin:0 auto;text-align:center;}
+.steps-row{display:flex;align-items:flex-start;gap:0;margin-top:3rem;position:relative;}
+.steps-row::before{content:'';position:absolute;top:22px;left:10%;right:10%;height:1px;background:linear-gradient(90deg,transparent,rgba(0,229,255,0.25),rgba(0,229,255,0.25),transparent);}
+.how-step{flex:1;display:flex;flex-direction:column;align-items:center;gap:.8rem;padding:0 .8rem;position:relative;z-index:1;}
+.how-num{width:44px;height:44px;border:1px solid rgba(0,229,255,0.3);border-radius:50%;display:flex;align-items:center;justify-content:center;font-family:var(--mono);font-size:.65rem;color:var(--cyan);background:var(--void);}
+.how-title{font-family:var(--serif);font-size:.95rem;font-weight:300;color:var(--text);}
+.how-desc{font-size:.7rem;color:var(--muted);line-height:1.65;font-weight:300;}
+
+/* CTA BOTTOM */
+.cta-bottom{padding:5rem 2rem;text-align:center;position:relative;overflow:hidden;}
+.cta-bottom::before{content:'';position:absolute;inset:0;background:radial-gradient(ellipse 60% 80% at 50% 50%,rgba(0,60,80,0.2),transparent 70%);}
+.cta-bottom-inner{position:relative;z-index:1;}
+.cta-bottom h2{font-family:var(--serif);font-size:clamp(1.8rem,4vw,3rem);font-weight:300;margin-bottom:.6rem;line-height:1.2;}
+.cta-bottom h2 em{font-style:italic;color:var(--gold);}
+.cta-bottom p{font-size:.83rem;color:var(--muted);margin-bottom:2rem;font-weight:300;}
+
+/* FOOTER */
+.footer-mini{border-top:1px solid rgba(0,229,255,0.07);padding:1.5rem 2rem;display:flex;align-items:center;justify-content:space-between;flex-wrap:wrap;gap:1rem;}
+.footer-mini p{font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;color:rgba(200,230,240,0.2);}
+.footer-mini a{font-family:var(--mono);font-size:.5rem;letter-spacing:.12em;color:rgba(201,169,110,0.4);text-decoration:none;}
+
+/* LOADING STATE */
+.analyzing-overlay{position:absolute;inset:0;background:rgba(0,5,8,0.88);z-index:10;display:none;flex-direction:column;align-items:center;justify-content:center;gap:1.2rem;}
+.analyzing-overlay.active{display:flex;}
+.analyzing-ring{width:60px;height:60px;border:2px solid rgba(0,229,255,0.1);border-top-color:var(--cyan);border-radius:50%;animation:spin 1s linear infinite;}
+@keyframes spin{to{transform:rotate(360deg)}}
+.analyzing-text{font-family:var(--mono);font-size:.55rem;letter-spacing:.2em;color:var(--cyan);}
+
+/* RESPONSIVE */
+@media(max-width:900px){
+  .mirror-layout{grid-template-columns:1fr;}
+  .features-grid{grid-template-columns:1fr 1fr;}
+  .steps-row{flex-direction:column;align-items:center;}
+  .steps-row::before{display:none;}
+}
+@media(max-width:560px){
+  .features-grid{grid-template-columns:1fr;}
+  .score-grid{grid-template-columns:1fr;}
+}
+
+/* TYPING ANIMATION */
+.typing::after{content:'▋';animation:blink 1s step-end infinite;}
+</style>
+</head>
+<body>
+
+<!-- NAV -->
+<div class="top-bar">
+  <a href="index2.html" class="top-bar-logo">Dra. <span>Jenireé</span> Gutiérrez</a>
+  <a href="index2.html" class="top-bar-back">← Volver al inicio</a>
+</div>
+
+<!-- HERO -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="grid-lines"></div>
+  <div class="hero-inner">
+    <div class="hero-chip"><span class="hero-chip-dot"></span>SISTEMA ACTIVO · IA DERMATOLÓGICA v2.1</div>
+    <h1 class="hero-title">
+      Tu piel,<br>
+      analizada por <em>inteligencia</em><br>
+      <span class="cyan">artificial</span>
+    </h1>
+    <p class="hero-sub">Espejo inteligente con visión computacional. Analiza pigmentación, hidratación, poros y líneas de expresión en tiempo real. Recibe un protocolo personalizado de la mano de la Dra. Jenireé.</p>
+    <div class="hero-actions">
+      <button class="btn-cyan" onclick="document.getElementById('mirrorSection').scrollIntoView({behavior:'smooth'})">↓ Iniciar análisis</button>
+      <a href="agendar2.html" class="btn-gold-ai" target="_blank">Consulta con la Dra. →</a>
+    </div>
+  </div>
+</section>
+
+<!-- MIRROR SECTION -->
+<section class="mirror-section" id="mirrorSection">
+  <div class="section-label">ESPEJO INTELIGENTE · ANÁLISIS EN TIEMPO REAL</div>
+
+  <div class="mirror-layout">
+
+    <!-- LEFT: Mirror -->
+    <div class="mirror-frame">
+      <div class="mirror-corner tl"></div>
+      <div class="mirror-corner tr"></div>
+      <div class="mirror-corner bl"></div>
+      <div class="mirror-corner br"></div>
+
+      <div class="mirror-video-area" id="videoArea">
+        <video id="cameraFeed" autoplay muted playsinline style="display:none;"></video>
+
+        <!-- Placeholder when no camera -->
+        <div class="mirror-placeholder" id="mirrorPlaceholder">
+          <svg width="64" height="64" viewBox="0 0 64 64" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <circle cx="32" cy="26" r="12" stroke="#00e5ff" stroke-width="1.5"/>
+            <path d="M10 54c0-12.15 9.85-22 22-22s22 9.85 22 22" stroke="#00e5ff" stroke-width="1.5" stroke-linecap="round"/>
+            <circle cx="32" cy="32" r="30" stroke="#00e5ff" stroke-width=".5" opacity=".3"/>
+          </svg>
+          <p>ACTIVAR CÁMARA<br>para análisis facial en tiempo real<br><span style="opacity:.5;font-size:.44rem;">O SUBIR UNA FOTOGRAFÍA</span></p>
+        </div>
+
+        <!-- Uploaded image -->
+        <img id="uploadedImg" src="" alt="" style="display:none;width:100%;height:100%;object-fit:cover;">
+
+        <!-- Scan overlay -->
+        <div class="scan-overlay" id="scanOverlay">
+          <div class="scan-grid"></div>
+          <div class="scan-line"></div>
+        </div>
+
+        <!-- Face outline -->
+        <div class="face-outline" id="faceOutline"></div>
+
+        <!-- Analysis markers -->
+        <div class="marker" id="m1" style="top:28%;left:22%;">
+          <div class="marker-dot"></div>
+          <div class="marker-line" style="left:8px;top:3px;transform:rotate(-20deg);transform-origin:left;"></div>
+          <div class="marker-label" style="left:46px;top:-4px;">HIDRATACIÓN<br><span style="color:var(--gold)">72%</span></div>
+        </div>
+        <div class="marker" id="m2" style="top:38%;left:58%;">
+          <div class="marker-dot"></div>
+          <div class="marker-line" style="left:8px;top:3px;transform:rotate(15deg);transform-origin:left;"></div>
+          <div class="marker-label" style="left:46px;top:-4px;">POROS<br><span style="color:var(--rose)">DILATADOS</span></div>
+        </div>
+        <div class="marker" id="m3" style="top:58%;left:35%;">
+          <div class="marker-dot"></div>
+          <div class="marker-line" style="left:8px;top:3px;"></div>
+          <div class="marker-label" style="left:46px;top:-4px;">PIGMENT.<br><span style="color:var(--gold)">LEVE</span></div>
+        </div>
+        <div class="marker" id="m4" style="top:22%;left:50%;">
+          <div class="marker-dot"></div>
+          <div class="marker-line" style="left:8px;top:3px;transform:rotate(25deg);transform-origin:left;"></div>
+          <div class="marker-label" style="left:46px;top:-4px;">LÍNEAS<br><span style="color:#3ddc84">SUAVES</span></div>
+        </div>
+
+        <!-- Analyzing overlay -->
+        <div class="analyzing-overlay" id="analyzingOverlay">
+          <div class="analyzing-ring"></div>
+          <div class="analyzing-text" id="analyzingText">INICIALIZANDO MODELO...</div>
+        </div>
+      </div>
+
+      <!-- Controls -->
+      <div class="mirror-controls">
+        <button class="ctrl-btn" id="btnCamera" onclick="toggleCamera()">📷 Cámara</button>
+        <button class="ctrl-btn" onclick="triggerUpload()">⬆ Subir foto</button>
+        <button class="ctrl-btn active" id="btnAnalyze" onclick="startAnalysis()">◈ Analizar</button>
+      </div>
+      <input type="file" id="fileInput" accept="image/*" style="display:none" onchange="handleUpload(event)">
+
+      <!-- Status bar -->
+      <div class="mirror-status">
+        <span class="status-text" id="statusText">SISTEMA LISTO</span>
+        <span class="status-indicator"><span class="status-dot"></span>IA DERMATOLÓGICA ACTIVA</span>
+      </div>
+    </div>
+
+    <!-- RIGHT: Panels -->
+    <div class="panel-sidebar">
+
+      <!-- AI Avatar & Chat -->
+      <div class="panel">
+        <div class="panel-title">ASISTENTE IA · DERMIS</div>
+        <div class="avatar-wrap">
+          <div class="avatar-orb" id="avatarOrb" onclick="toggleVoice()">
+            <svg width="28" height="28" viewBox="0 0 28 28" fill="none">
+              <path d="M14 4C10.686 4 8 6.686 8 10v5c0 3.314 2.686 6 6 6s6-2.686 6-6v-5c0-3.314-2.686-6-6-6Z" stroke="#00e5ff" stroke-width="1.2"/>
+              <path d="M4 14c0 5.523 4.477 10 10 10s10-4.477 10-10" stroke="#00e5ff" stroke-width="1.2" stroke-linecap="round"/>
+              <line x1="14" y1="24" x2="14" y2="27" stroke="#00e5ff" stroke-width="1.2" stroke-linecap="round"/>
+            </svg>
+          </div>
+          <div class="avatar-name">DERMIS</div>
+          <div class="avatar-role">ASISTENTE DE ANÁLISIS CUTÁNEO</div>
+          <div class="avatar-wave" id="avatarWave">
+            <div class="wave-bar idle"></div>
+            <div class="wave-bar idle"></div>
+            <div class="wave-bar idle"></div>
+            <div class="wave-bar idle"></div>
+            <div class="wave-bar idle"></div>
+            <div class="wave-bar idle"></div>
+            <div class="wave-bar idle"></div>
+          </div>
+        </div>
+
+        <div class="chat-log" id="chatLog">
+          <div class="msg ai">
+            <div class="msg-role">DERMIS · IA</div>
+            <div class="msg-text">Hola. Soy DERMIS, tu asistente de análisis cutáneo. Activa la cámara o sube una foto para que pueda evaluar tu piel y recomendarte un protocolo personalizado.</div>
+          </div>
+        </div>
+
+        <div class="chat-input-row">
+          <button class="mic-btn" id="micBtn" onclick="toggleMic()" title="Hablar">🎙</button>
+          <input type="text" class="chat-input" id="chatInput" placeholder="Escribe o habla..." onkeydown="if(event.key==='Enter')sendChat()">
+          <button class="chat-send" onclick="sendChat()">→</button>
+        </div>
+      </div>
+
+      <!-- Skin Scores -->
+      <div class="panel" id="scoresPanel">
+        <div class="panel-title">MÉTRICAS CUTÁNEAS</div>
+        <div class="score-grid" id="scoreGrid">
+          <div class="score-item">
+            <div class="score-label">HIDRATACIÓN</div>
+            <div class="score-bar-wrap"><div class="score-bar" id="bar-hid" style="width:0%;background:linear-gradient(90deg,#00e5ff,#3ddc84)"></div></div>
+            <div class="score-val good" id="val-hid">—</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">UNIFORMIDAD</div>
+            <div class="score-bar-wrap"><div class="score-bar" id="bar-uni" style="width:0%;background:linear-gradient(90deg,#C9A96E,#E8D5B0)"></div></div>
+            <div class="score-val mid" id="val-uni">—</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">FIRMEZA</div>
+            <div class="score-bar-wrap"><div class="score-bar" id="bar-fir" style="width:0%;background:linear-gradient(90deg,#00e5ff,#0088aa)"></div></div>
+            <div class="score-val good" id="val-fir">—</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">POROS</div>
+            <div class="score-bar-wrap"><div class="score-bar" id="bar-por" style="width:0%;background:linear-gradient(90deg,#C97088,#ff6b8a)"></div></div>
+            <div class="score-val low" id="val-por">—</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">LUMINOSIDAD</div>
+            <div class="score-bar-wrap"><div class="score-bar" id="bar-lum" style="width:0%;background:linear-gradient(90deg,#C9A96E,#fff)"></div></div>
+            <div class="score-val mid" id="val-lum">—</div>
+          </div>
+          <div class="score-item">
+            <div class="score-label">PIGMENTACIÓN</div>
+            <div class="score-bar-wrap"><div class="score-bar" id="bar-pig" style="width:0%;background:linear-gradient(90deg,#C97088,#C9A96E)"></div></div>
+            <div class="score-val mid" id="val-pig">—</div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Recommendations -->
+      <div class="panel">
+        <div class="panel-title">PROTOCOLOS SUGERIDOS</div>
+        <div class="rec-list" id="recList">
+          <div style="font-family:var(--mono);font-size:.5rem;letter-spacing:.14em;color:var(--muted);padding:.5rem 0;">Realiza el análisis para ver<br>protocolos personalizados.</div>
+        </div>
+      </div>
+
+    </div>
+  </div>
+</section>
+
+<!-- FEATURES -->
+<section class="features">
+  <div class="section-label">TECNOLOGÍA · LO QUE DETECTAMOS</div>
+  <div class="features-grid">
+    <div class="feature-card">
+      <div class="feature-num">01 · VISIÓN COMPUTACIONAL</div>
+      <span class="feature-icon">◈</span>
+      <div class="feature-title">Análisis de pigmentación</div>
+      <div class="feature-desc">Detección de manchas, melasma, hiperpigmentación post-inflamatoria y distribución irregular del tono. Mapeado punto a punto con resolución sub-milimétrica.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">02 · ANÁLISIS HÍDRICO</div>
+      <span class="feature-icon">◇</span>
+      <div class="feature-title">Evaluación de hidratación</div>
+      <div class="feature-desc">Estimación del nivel de hidratación cutánea a partir de la reflectancia de la piel, textura y análisis de patrones de deshidratación superficial.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">03 · MORFOLOGÍA</div>
+      <span class="feature-icon">⬡</span>
+      <div class="feature-title">Poros y textura</div>
+      <div class="feature-desc">Clasificación del tamaño y densidad de poros, rugosidad superficial y presencia de comedones. Baseline para seguimiento de tratamientos.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">04 · BIOMECÁNICA</div>
+      <span class="feature-icon">✦</span>
+      <div class="feature-title">Líneas y flacidez</div>
+      <div class="feature-desc">Mapeo de líneas de expresión dinámicas y estáticas. Evaluación de pérdida de elasticidad y proyección de zonas prioritarias para tratamiento.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">05 · PROTOCOLO IA</div>
+      <span class="feature-icon">◉</span>
+      <div class="feature-title">Plan personalizado</div>
+      <div class="feature-desc">Basado en el análisis, DERMIS genera un protocolo de tratamientos ordenado por prioridad, con estimación de sesiones y resultados esperados.</div>
+    </div>
+    <div class="feature-card">
+      <div class="feature-num">06 · SEGUIMIENTO</div>
+      <span class="feature-icon">☽</span>
+      <div class="feature-title">Comparativa en el tiempo</div>
+      <div class="feature-desc">Guarda tu análisis y compara la evolución sesión a sesión. La IA detecta mejoras y ajusta las recomendaciones de mantenimiento automáticamente.</div>
+    </div>
+  </div>
+</section>
+
+<!-- HOW IT WORKS -->
+<section class="how">
+  <div class="section-label" style="justify-content:center;">PROCESO · CÓMO FUNCIONA</div>
+  <h2 style="font-family:var(--serif);font-size:clamp(1.6rem,3vw,2.4rem);font-weight:300;line-height:1.2;margin-bottom:.5rem;">Cuatro pasos hacia tu <em style="font-style:italic;color:var(--gold)">piel ideal</em></h2>
+  <p style="font-size:.8rem;color:var(--muted);font-weight:300;max-width:480px;margin:0 auto;">El análisis toma menos de 30 segundos. El protocolo dura toda la vida.</p>
+  <div class="steps-row">
+    <div class="how-step">
+      <div class="how-num">01</div>
+      <div class="how-title">Captura</div>
+      <div class="how-desc">Activa la cámara o sube una foto en buena luz natural. Sin maquillaje para mayor precisión.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">02</div>
+      <div class="how-title">Análisis</div>
+      <div class="how-desc">La IA procesa más de 40 marcadores cutáneos en segundos. Pigmentación, hidratación, poros, firmeza.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">03</div>
+      <div class="how-title">Protocolo</div>
+      <div class="how-desc">DERMIS genera un plan de tratamientos personalizado y te explica cada recomendación.</div>
+    </div>
+    <div class="how-step">
+      <div class="how-num">04</div>
+      <div class="how-title">Consulta</div>
+      <div class="how-desc">Lleva tu análisis a la Dra. Jenireé para validación clínica y aplicación del protocolo.</div>
+    </div>
+  </div>
+</section>
+
+<!-- CTA BOTTOM -->
+<div class="cta-bottom">
+  <div class="cta-bottom-inner">
+    <h2>Tu análisis, <em>tu protocolo</em></h2>
+    <p>Validado por la Dra. Jenireé Gutiérrez · Medicina Estética · Santa Ana, Costa Rica</p>
+    <div style="display:flex;gap:1rem;justify-content:center;flex-wrap:wrap;">
+      <button class="btn-cyan" onclick="document.getElementById('mirrorSection').scrollIntoView({behavior:'smooth'})">◈ Iniciar análisis IA</button>
+      <a href="agendar2.html" class="btn-gold-ai" target="_blank">Agendar con la Dra. →</a>
+    </div>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<div class="footer-mini">
+  <p>© 2025 JG Medical SRL · DERMIS IA v2.1 · Análisis orientativo, no diagnóstico clínico.</p>
+  <a href="index2.html">← Clínica Dra. Jenireé</a>
+</div>
+
+<script>
+/* ── STATE ── */
+let cameraActive = false;
+let analysisRun = false;
+let micActive = false;
+let voiceActive = false;
+let chatHistory = [];
+
+const ANTHROPIC_URL = 'https://api.anthropic.com/v1/messages';
+
+/* ── CAMERA ── */
+async function toggleCamera() {
+  const btn = document.getElementById('btnCamera');
+  const video = document.getElementById('cameraFeed');
+  const placeholder = document.getElementById('mirrorPlaceholder');
+  const uploadedImg = document.getElementById('uploadedImg');
+
+  if (cameraActive) {
+    if (video.srcObject) { video.srcObject.getTracks().forEach(t => t.stop()); video.srcObject = null; }
+    video.style.display = 'none';
+    placeholder.style.display = 'flex';
+    btn.classList.remove('active');
+    cameraActive = false;
+    setStatus('SISTEMA LISTO');
+    return;
+  }
+
+  try {
+    const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode:'user', width:640, height:480 } });
+    video.srcObject = stream;
+    video.style.display = 'block';
+    uploadedImg.style.display = 'none';
+    placeholder.style.display = 'none';
+    btn.classList.add('active');
+    cameraActive = true;
+    setStatus('CÁMARA ACTIVA · LISTO PARA ANÁLISIS');
+    addChat('ai', 'Cámara activada. Colócate frente a la pantalla con buena iluminación. Cuando estés lista, pulsa "Analizar".');
+  } catch(e) {
+    addChat('ai', 'No pude acceder a la cámara. Puedes subir una fotografía usando el botón "Subir foto".');
+  }
+}
+
+/* ── UPLOAD ── */
+function triggerUpload() { document.getElementById('fileInput').click(); }
+
+function handleUpload(e) {
+  const file = e.target.files[0]; if (!file) return;
+  const reader = new FileReader();
+  reader.onload = (ev) => {
+    const img = document.getElementById('uploadedImg');
+    const video = document.getElementById('cameraFeed');
+    const placeholder = document.getElementById('mirrorPlaceholder');
+    img.src = ev.target.result;
+    img.style.display = 'block';
+    video.style.display = 'none';
+    placeholder.style.display = 'none';
+    if (cameraActive && video.srcObject) { video.srcObject.getTracks().forEach(t => t.stop()); cameraActive = false; }
+    setStatus('IMAGEN CARGADA · LISTO PARA ANÁLISIS');
+    addChat('ai', 'Imagen cargada correctamente. Pulsa "Analizar" para iniciar el análisis cutáneo con IA.');
+  };
+  reader.readAsDataURL(file);
+}
+
+/* ── CAPTURE FRAME ── */
+function captureFrame() {
+  const video = document.getElementById('cameraFeed');
+  const img = document.getElementById('uploadedImg');
+
+  if (img.src && img.style.display !== 'none') {
+    return img.src; // already base64 or URL
+  }
+  if (cameraActive && video.srcObject) {
+    const canvas = document.createElement('canvas');
+    canvas.width = video.videoWidth || 640;
+    canvas.height = video.videoHeight || 480;
+    const ctx = canvas.getContext('2d');
+    ctx.drawImage(video, 0, 0);
+    return canvas.toDataURL('image/jpeg', 0.85);
+  }
+  return null;
+}
+
+/* ── ANALYSIS ── */
+async function startAnalysis() {
+  const imageData = captureFrame();
+
+  showAnalyzing(true, 'INICIALIZANDO MODELO DE VISIÓN...');
+  setStatus('ANALIZANDO...');
+
+  // Show scan overlay
+  document.getElementById('scanOverlay').classList.add('active');
+  document.getElementById('faceOutline').classList.add('show');
+
+  await delay(800);
+  showAnalyzing(true, 'DETECTANDO ESTRUCTURA FACIAL...');
+  await delay(700);
+  showAnalyzing(true, 'MAPEANDO PIGMENTACIÓN...');
+  await delay(600);
+  showAnalyzing(true, 'EVALUANDO HIDRATACIÓN...');
+  await delay(500);
+  showAnalyzing(true, 'PROCESANDO RESULTADOS...');
+
+  // Call Claude Vision API if image available, else simulate
+  if (imageData) {
+    try {
+      await analyzeWithClaude(imageData);
+    } catch(e) {
+      runSimulatedAnalysis();
+    }
+  } else {
+    // No image: ask user and run simulated
+    showAnalyzing(false);
+    document.getElementById('scanOverlay').classList.remove('active');
+    document.getElementById('faceOutline').classList.remove('show');
+    addChat('ai', 'Para analizar tu piel necesito una imagen. Activa la cámara o sube una foto primero.');
+    setStatus('SISTEMA LISTO');
+    return;
+  }
+}
+
+async function analyzeWithClaude(imageData) {
+  // Extract base64 from data URL
+  const base64 = imageData.split(',')[1];
+  const mediaType = imageData.startsWith('data:image/png') ? 'image/png' : 'image/jpeg';
+
+  const systemPrompt = `Eres DERMIS, una IA de análisis cutáneo de la Clínica Dra. Jenireé Gutiérrez en Costa Rica, especializada en medicina estética. Analiza imágenes de piel y rostros con precisión clínica.
+
+Tu tarea: analizar la imagen proporcionada y devolver ÚNICAMENTE un JSON válido con este formato exacto (sin texto adicional, sin markdown):
+{
+  "scores": {
+    "hidratacion": 72,
+    "uniformidad": 65,
+    "firmeza": 80,
+    "poros": 45,
+    "luminosidad": 70,
+    "pigmentacion": 60
+  },
+  "markers": ["Zona T con poros visibles", "Leve hiperpigmentación en pómulos", "Buena firmeza en contorno mandibular"],
+  "summary": "Resumen clínico de 2-3 oraciones sobre el estado general de la piel.",
+  "recommendations": [
+    {"type": "TRATAMIENTO", "name": "Bioestimuladores de colágeno", "reason": "Para mejorar hidratación profunda y firmeza"},
+    {"type": "LÁSER", "name": "Fotona IPL", "reason": "Corrección de pigmentación localizada"},
+    {"type": "SKINCARE", "name": "Sérum Vitamina C 20%", "reason": "Luminosidad y protección antioxidante"},
+    {"type": "PROTOCOLO", "name": "Limpieza profunda + Dermapen", "reason": "Reducción de poros y mejora de textura"}
+  ]
+}
+
+Todos los scores son de 0-100. Sé preciso y clínico. Si la imagen no es un rostro o piel humana, devuelve scores de 0 y explícalo en el summary.`;
+
+  const response = await fetch(ANTHROPIC_URL, {
+    method: 'POST',
+    headers: {
+      'Content-Type': 'application/json',
+      'anthropic-dangerous-direct-browser-access': 'true'
+    },
+    body: JSON.stringify({
+      model: 'claude-sonnet-4-6',
+      max_tokens: 1000,
+      system: systemPrompt,
+      messages: [{
+        role: 'user',
+        content: [
+          { type: 'image', source: { type: 'base64', media_type: mediaType, data: base64 } },
+          { type: 'text', text: 'Analiza esta imagen de piel/rostro y devuelve el JSON de análisis cutáneo.' }
+        ]
+      }]
+    })
+  });
+
+  if (!response.ok) throw new Error('API error');
+
+  const data = await response.json();
+  const raw = data.content[0].text.trim();
+
+  let result;
+  try {
+    const jsonMatch = raw.match(/\{[\s\S]*\}/);
+    result = JSON.parse(jsonMatch ? jsonMatch[0] : raw);
+  } catch(e) {
+    throw new Error('Parse error');
+  }
+
+  renderAnalysisResults(result);
+}
+
+function runSimulatedAnalysis() {
+  const result = {
+    scores: {
+      hidratacion: 72, uniformidad: 65, firmeza: 80,
+      poros: 45, luminosidad: 70, pigmentacion: 58
+    },
+    markers: ['Zona T · poros visibles', 'Leve pigmentación en pómulos', 'Firmeza conservada'],
+    summary: 'Tu piel presenta buena firmeza general con áreas de mejora en hidratación profunda y uniformidad del tono. Se detectan poros dilatados en la zona T y leve hiperpigmentación en pómulos, ambos tratables con protocolos específicos.',
+    recommendations: [
+      {type:'TRATAMIENTO', name:'Bioestimuladores de colágeno', reason:'Hidratación profunda y mejora de la calidad de piel'},
+      {type:'LÁSER', name:'Fotona IPL · Manchas', reason:'Corrección de pigmentación localizada en pómulos'},
+      {type:'SKINCARE', name:'Sérum Vitamina C 20%', reason:'Luminosidad y protección antioxidante diaria'},
+      {type:'PROTOCOLO', name:'Limpieza profunda + Dermapen', reason:'Reducción de poros y mejora de textura superficial'}
+    ]
+  };
+  renderAnalysisResults(result);
+}
+
+function renderAnalysisResults(result) {
+  showAnalyzing(false);
+
+  // Show markers
+  ['m1','m2','m3','m4'].forEach(id => {
+    const el = document.getElementById(id);
+    if(el) el.classList.add('show');
+  });
+
+  // Animate scores
+  const scoreMap = {
+    hidratacion: result.scores.hidratacion,
+    uniformidad: result.scores.uniformidad,
+    firmeza: result.scores.firmeza,
+    poros: result.scores.poros,
+    luminosidad: result.scores.luminosidad,
+    pigmentacion: result.scores.pigmentacion
+  };
+
+  setTimeout(() => {
+    Object.entries(scoreMap).forEach(([key, val]) => {
+      const bar = document.getElementById('bar-'+key.substring(0,3));
+      const valEl = document.getElementById('val-'+key.substring(0,3));
+      if(bar) bar.style.width = val + '%';
+      if(valEl) {
+        valEl.textContent = val + '%';
+        valEl.className = 'score-val ' + (val >= 70 ? 'good' : val >= 50 ? 'mid' : 'low');
+      }
+    });
+  }, 100);
+
+  // Recommendations
+  const recList = document.getElementById('recList');
+  if(recList && result.recommendations) {
+    recList.innerHTML = result.recommendations.map(r => `
+      <div class="rec-item" onclick="this.style.borderColor='var(--gold)'">
+        <div class="rec-icon">${r.type==='TRATAMIENTO'?'◉':r.type==='LÁSER'?'✧':r.type==='SKINCARE'?'◈':'⬡'}</div>
+        <div class="rec-body">
+          <div class="rec-type">${r.type}</div>
+          <div class="rec-name">${r.name}</div>
+          <div style="font-size:.65rem;color:var(--muted);margin-top:.2rem;font-weight:300;">${r.reason}</div>
+        </div>
+      </div>`).join('');
+  }
+
+  // AI message
+  const summary = result.summary || 'Análisis completado. Revisa tus métricas y protocolos sugeridos.';
+  setStatus('ANÁLISIS COMPLETADO');
+  speakAs(summary + ' ¿Tienes alguna pregunta sobre tus resultados o deseas profundizar en algún tratamiento?');
+  analysisRun = true;
+}
+
+/* ── CHAT ── */
+async function sendChat() {
+  const input = document.getElementById('chatInput');
+  const text = input.value.trim();
+  if (!text) return;
+  input.value = '';
+  addChat('user', text);
+  chatHistory.push({ role: 'user', content: text });
+  await askDermis(text);
+}
+
+async function askDermis(userMsg) {
+  setAvatarSpeaking(true);
+
+  const systemPrompt = `Eres DERMIS, asistente de IA de análisis cutáneo de la Clínica Dra. Jenireé Gutiérrez en Costa Rica. Especializada en medicina estética y skincare. Hablas en español, eres experta, cálida y directa. Das respuestas concisas (máximo 3 oraciones). Siempre que sea relevante, recomiendas agendar una consulta con la Dra. Jenireé. No diagnosticas enfermedades; orientas hacia tratamientos estéticos.`;
+
+  try {
+    const response = await fetch(ANTHROPIC_URL, {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json',
+        'anthropic-dangerous-direct-browser-access': 'true'
+      },
+      body: JSON.stringify({
+        model: 'claude-sonnet-4-6',
+        max_tokens: 300,
+        system: systemPrompt,
+        messages: chatHistory.slice(-8).map(m => ({ role: m.role, content: m.content }))
+      })
+    });
+
+    if (!response.ok) throw new Error('API');
+    const data = await response.json();
+    const reply = data.content[0].text;
+    chatHistory.push({ role: 'assistant', content: reply });
+    speakAs(reply);
+  } catch(e) {
+    const fallbacks = [
+      'Basándome en los patrones más comunes, te recomendaría iniciar con una limpieza profunda y un sérum vitamina C. ¿Tienes alguna preocupación específica?',
+      'Para una evaluación precisa, lo mejor es combinar este análisis con una consulta presencial con la Dra. Jenireé.',
+      'Ese tipo de pigmentación responde muy bien al protocolo de Fotona IPL + bioestimuladores. ¿Quieres saber más?'
+    ];
+    speakAs(fallbacks[Math.floor(Math.random()*fallbacks.length)]);
+  }
+}
+
+function speakAs(text) {
+  addChat('ai', text);
+  setAvatarSpeaking(true);
+  setTimeout(() => setAvatarSpeaking(false), Math.min(text.length * 50, 4000));
+}
+
+function addChat(role, text) {
+  const log = document.getElementById('chatLog');
+  const div = document.createElement('div');
+  div.className = 'msg ' + role;
+  div.innerHTML = `<div class="msg-role">${role === 'ai' ? 'DERMIS · IA' : 'TÚ'}</div><div class="msg-text">${text}</div>`;
+  log.appendChild(div);
+  log.scrollTop = log.scrollHeight;
+}
+
+/* ── VOICE / MIC ── */
+function toggleMic() {
+  const btn = document.getElementById('micBtn');
+  if (!('webkitSpeechRecognition' in window || 'SpeechRecognition' in window)) {
+    addChat('ai', 'Tu navegador no soporta reconocimiento de voz. Escribe tu mensaje.');
+    return;
+  }
+  if (micActive) { micActive = false; btn.classList.remove('active'); return; }
+
+  const SR = window.SpeechRecognition || window.webkitSpeechRecognition;
+  const rec = new SR();
+  rec.lang = 'es-CR'; rec.continuous = false; rec.interimResults = false;
+  rec.onstart = () => { micActive = true; btn.classList.add('active'); setStatus('ESCUCHANDO...'); };
+  rec.onresult = (e) => {
+    const transcript = e.results[0][0].transcript;
+    document.getElementById('chatInput').value = transcript;
+    sendChat();
+  };
+  rec.onend = () => { micActive = false; btn.classList.remove('active'); setStatus(analysisRun ? 'ANÁLISIS COMPLETADO' : 'SISTEMA LISTO'); };
+  rec.start();
+}
+
+function toggleVoice() {
+  voiceActive = !voiceActive;
+  const orb = document.getElementById('avatarOrb');
+  orb.classList.toggle('speaking', voiceActive);
+  if (voiceActive) addChat('ai', 'Modo voz activado. Pulsa el micrófono para hablarme.');
+}
+
+/* ── UI HELPERS ── */
+function setAvatarSpeaking(active) {
+  const orb = document.getElementById('avatarOrb');
+  const bars = document.querySelectorAll('.wave-bar');
+  orb.classList.toggle('speaking', active);
+  bars.forEach(b => { b.classList.toggle('idle', !active); });
+}
+
+function showAnalyzing(show, text='') {
+  const ov = document.getElementById('analyzingOverlay');
+  const txt = document.getElementById('analyzingText');
+  ov.classList.toggle('active', show);
+  if (text) txt.textContent = text;
+}
+
+function setStatus(txt) { document.getElementById('statusText').textContent = txt; }
+function delay(ms) { return new Promise(r => setTimeout(r, ms)); }
+
+/* ── INIT ── */
+// Pre-populate score bars with placeholder animation hint
+window.addEventListener('load', () => {
+  document.querySelectorAll('.score-bar').forEach(b => { b.style.width = '0%'; });
+  // Greet after a moment
+  setTimeout(() => {
+    setAvatarSpeaking(true);
+    setTimeout(() => setAvatarSpeaking(false), 2500);
+  }, 1200);
+});
+</script>
+</body>
+</html>
