@@ -1117,8 +1117,8 @@ function renderShopGrid(){
         <div class="shop-name">${name}</div>
         <div class="shop-desc">${desc}</div>
       </div>
-      <div class="shop-footer">
-        <div class="shop-price">$${p.price.toFixed(2)}<small>${unit}</small></div>
+   <div class="shop-footer">
+        <div class="shop-price">${p.price!=null?('$'+p.price.toFixed(2)):(isEn?'From $'+p.start.toFixed(2):'Desde $'+p.start.toFixed(2))}<small>${unit}</small></div>
         <button class="shop-add" onclick="cartAdd(SHOP_PRODUCTS.find(x=>x.id==='${p.id}'))">${addLbl}</button>
       </div>
     </div>`;
