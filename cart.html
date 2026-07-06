@@ -1,0 +1,634 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Tu Carrito | JG Clinic, Dra. Jenireé Gutiérrez</title>
+<meta name="description" content="Revisa tu pedido, elige tu sede y confirma tu compra en JG Clinic — Santa Ana Town Center y Liberia, Guanacaste.">
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
+<style>
+  *, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+  :root {
+    --gold: #C9A96E; --gold-light: #E8D5B0; --gold-dark: #A07840;
+    --rose: #F2C4CE; --rose-light: #FAF0F2; --rose-mid: #E8A8B8; --rose-deep: #C97088;
+    --off-white: #FDF8F5; --text-dark: #2A1F1A; --text-mid: #5C4A42; --text-light: #9B8880;
+    --font-display: 'Cormorant Garamond', Georgia, serif; --font-body: 'Jost', sans-serif;
+  }
+  html { scroll-behavior: smooth; }
+  body { font-family: var(--font-body); color: var(--text-dark); background: var(--off-white); overflow-x: hidden; min-height: 100vh; }
+
+  /* NAV */
+  nav { position: sticky; top: 0; left: 0; right: 0; z-index: 1000; display: flex; align-items: center; justify-content: space-between; padding: 1.1rem 3rem; gap: 1.5rem; background: rgba(253,248,245,0.97); backdrop-filter: blur(14px); border-bottom: 1px solid rgba(201,169,110,0.18); }
+  .nav-logo { font-family: var(--font-display); font-size: 1.05rem; font-weight: 300; color: var(--text-dark); text-decoration: none; letter-spacing: 0.07em; white-space: nowrap; }
+  .nav-logo span { color: var(--gold); font-style: italic; }
+  .nav-right { display: flex; align-items: center; gap: 1.2rem; }
+  .lang-toggle { display: flex; align-items: center; border: 1px solid rgba(201,169,110,0.5); overflow: hidden; }
+  .lang-btn { background: transparent; border: none; cursor: pointer; font-family: var(--font-body); font-size: 0.6rem; letter-spacing: 0.15em; text-transform: uppercase; padding: 0.35rem 0.7rem; color: var(--text-light); font-weight: 300; transition: all 0.25s; }
+  .lang-btn.active { background: var(--gold); color: #fff; }
+  .lang-sep { width: 1px; background: rgba(201,169,110,0.4); align-self: stretch; }
+  .nav-back { font-size: 0.65rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--text-mid); text-decoration: none; font-weight: 400; white-space: nowrap; display: flex; align-items: center; gap: .4rem; }
+  .nav-back:hover { color: var(--gold); }
+
+  /* SHARED */
+  .container { max-width: 1180px; margin: 0 auto; padding: 0 2rem; }
+  .section-eyebrow { font-size: .6rem; letter-spacing: .3em; text-transform: uppercase; color: var(--gold); font-weight: 400; margin-bottom: .9rem; display: flex; align-items: center; gap: .8rem; justify-content: center; }
+  .section-eyebrow::before { content:''; display:block; width:28px; height:1px; background:var(--gold); opacity:.55; }
+  .section-title { font-family: var(--font-display); font-size: clamp(1.9rem,4vw,3rem); font-weight: 300; line-height: 1.15; color: var(--text-dark); margin-bottom: .5rem; text-align:center; }
+  .section-title em { font-style: italic; color: var(--rose-deep); }
+  .page-lead { text-align:center; font-size: .9rem; color: var(--text-light); font-weight: 300; max-width: 480px; margin: 0 auto 2.6rem; line-height: 1.7; }
+  .btn-gold { display: inline-flex; align-items: center; gap: .5rem; background: linear-gradient(135deg, var(--gold) 0%, #A07840 100%); color: #fff; padding: .82rem 2.1rem; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; font-weight: 400; transition: all .35s; border: none; cursor: pointer; font-family: var(--font-body); }
+  .btn-gold:hover { transform:translateY(-2px); box-shadow:0 8px 28px rgba(201,169,110,0.38); }
+  .btn-gold-full { display:flex; align-items:center; justify-content:center; gap:.5rem; width:100%; background: linear-gradient(135deg, var(--gold) 0%, #A07840 100%); color:#fff; padding: .95rem 1.5rem; font-size:.68rem; letter-spacing:.2em; text-transform:uppercase; font-weight:400; border:none; cursor:pointer; font-family: var(--font-body); transition: all .3s; }
+  .btn-gold-full:hover:not(:disabled) { box-shadow:0 8px 24px rgba(201,169,110,.35); transform: translateY(-1px); }
+  .btn-gold-full:disabled { opacity:.4; cursor:not-allowed; }
+  .btn-outline { display: inline-flex; align-items: center; border: 1px solid var(--gold-light); color: var(--gold); padding: .82rem 2.1rem; font-size: .68rem; letter-spacing: .2em; text-transform: uppercase; text-decoration: none; font-weight: 300; transition: all .3s; font-family: var(--font-body); background: transparent; }
+  .btn-outline:hover { border-color: var(--gold); background: rgba(201,169,110,.06); }
+  .btn-outline-sm { display: inline-flex; align-items: center; gap:.4rem; border: 1px solid var(--gold-light); color: var(--text-mid); padding: .6rem 1.3rem; font-size: .62rem; letter-spacing: .16em; text-transform: uppercase; text-decoration: none; font-weight: 300; transition: all .25s; font-family: var(--font-body); background: transparent; cursor:pointer; }
+  .btn-outline-sm:hover { border-color: var(--gold); color: var(--gold); }
+  .btn-text-clear { background:none; border:none; font-family: var(--font-body); font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color: var(--text-light); cursor:pointer; text-decoration: underline; text-decoration-color: transparent; transition: color .25s; }
+  .btn-text-clear:hover { color: var(--rose-deep); text-decoration-color: var(--rose-deep); }
+
+  main { padding: 3rem 0 6rem; }
+
+  /* STEPS INDICATOR */
+  .steps-indicator { display:flex; align-items:center; justify-content:center; gap: .6rem; margin-bottom: 3.2rem; flex-wrap: wrap; }
+  .step-dot-wrap { display:flex; align-items:center; gap:.7rem; }
+  .step-dot { width: 34px; height: 34px; border-radius: 50%; border: 1.5px solid var(--gold-light); display:flex; align-items:center; justify-content:center; font-family: var(--font-display); font-size:.9rem; color: var(--text-light); background:#fff; transition: all .3s; flex-shrink:0; }
+  .step-dot.active { border-color: var(--gold); color:#fff; background: linear-gradient(135deg,var(--gold),var(--gold-dark)); box-shadow: 0 4px 14px rgba(201,169,110,.35); }
+  .step-dot.done { border-color: var(--gold); color: var(--gold); background:#fff; }
+  .step-label { font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color: var(--text-light); font-weight:300; }
+  .step-label.active { color: var(--text-dark); font-weight: 500; }
+  .step-line { width: 44px; height: 1px; background: var(--gold-light); }
+
+  .cart-step { display:none; }
+  .cart-step.active { display:block; animation: stepIn .4s ease; }
+  @keyframes stepIn { from{opacity:0; transform:translateY(10px);} to{opacity:1; transform:translateY(0);} }
+
+  /* CART LAYOUT */
+  .cart-layout, .checkout-layout { display:grid; grid-template-columns: 1.7fr 1fr; gap: 2.2rem; align-items:start; }
+
+  .cart-items-col { display:flex; flex-direction:column; gap:1rem; }
+  .cart-item { display:grid; grid-template-columns: 84px 1fr auto; gap:1.1rem; align-items:center; background:#fff; border:1px solid var(--gold-light); padding: 1rem; position:relative; }
+  .cart-item-thumb { width:84px; height:84px; border-radius: 2px; background: linear-gradient(135deg,var(--rose-light),var(--gold-light)); display:flex; align-items:center; justify-content:center; font-family: var(--font-display); font-size:1.8rem; color: rgba(201,169,110,.45); overflow:hidden; flex-shrink:0; }
+  .cart-item-thumb img { width:100%; height:100%; object-fit:cover; display:block; }
+  .cart-item-info { min-width:0; }
+  .cart-item-cat { font-size:.56rem; letter-spacing:.16em; text-transform:uppercase; color: var(--gold); font-weight:400; margin-bottom:.2rem; }
+  .cart-item-name { font-family: var(--font-display); font-size:1.05rem; font-weight:400; color: var(--text-dark); line-height:1.25; margin-bottom:.25rem; }
+  .cart-item-unit { font-size:.72rem; color: var(--text-light); font-weight:300; }
+  .cart-item-right { display:flex; flex-direction:column; align-items:flex-end; gap:.6rem; }
+  .cart-item-remove { background:none; border:none; color: var(--text-light); font-size:.9rem; cursor:pointer; line-height:1; padding:.1rem; transition: color .2s; }
+  .cart-item-remove:hover { color: var(--rose-deep); }
+  .qty-stepper { display:flex; align-items:center; border:1px solid var(--gold-light); }
+  .qty-stepper button { width:26px; height:26px; background:none; border:none; color: var(--text-mid); font-size:.85rem; cursor:pointer; font-family: var(--font-body); transition: background .2s; }
+  .qty-stepper button:hover { background: var(--off-white); color: var(--gold-dark); }
+  .qty-stepper span { min-width: 26px; text-align:center; font-size:.8rem; color: var(--text-dark); }
+  .cart-item-linetotal { font-family: var(--font-display); font-size:1.05rem; color: var(--text-dark); }
+
+  .cart-empty { text-align:center; padding: 4rem 1rem; background:#fff; border: 1px dashed var(--gold-light); }
+  .cart-empty-icon { font-size:2rem; color: var(--gold); margin-bottom:1rem; }
+  .cart-empty p { color: var(--text-light); font-size:.9rem; margin-bottom:1.6rem; font-weight:300; }
+
+  .cart-actions-row { display:flex; align-items:center; justify-content:space-between; margin-top: .6rem; flex-wrap:wrap; gap:1rem; }
+
+  /* SUMMARY CARD */
+  .summary-card { background:#fff; border:1px solid var(--gold-light); padding: 1.8rem 1.6rem; position: sticky; top: 90px; }
+  .summary-card h3 { font-family: var(--font-display); font-size:1.15rem; font-weight:400; color: var(--text-dark); margin-bottom:1.2rem; }
+  .summary-row { display:flex; justify-content:space-between; align-items:baseline; font-size:.82rem; color: var(--text-mid); margin-bottom:.7rem; font-weight:300; }
+  .summary-row.muted { color: var(--text-light); font-size:.74rem; }
+  .summary-divider { height:1px; background: var(--gold-light); margin: 1rem 0; }
+  .summary-row.total { font-family: var(--font-display); font-size:1.25rem; color: var(--text-dark); font-weight:400; margin-bottom:1.4rem; }
+  .summary-note { font-size:.68rem; color: var(--text-light); font-weight:300; line-height:1.6; margin-top:1rem; text-align:center; }
+
+  /* CHECKOUT FORM */
+  .checkout-form { background:#fff; border:1px solid var(--gold-light); padding: 2rem 1.8rem; display:flex; flex-direction:column; gap: 1.5rem; }
+  .checkout-form h3 { font-family: var(--font-display); font-size:1.15rem; font-weight:400; color: var(--text-dark); }
+  .sede-options { display:grid; grid-template-columns: 1fr 1fr; gap:.9rem; }
+  .sede-card { border:1px solid var(--gold-light); padding: 1rem; cursor:pointer; display:flex; gap:.7rem; align-items:flex-start; transition: all .25s; }
+  .sede-card:hover { border-color: var(--gold); }
+  .sede-card input { margin-top:.2rem; accent-color: var(--gold); }
+  .sede-card input:checked ~ .sede-text .sede-name { color: var(--gold-dark); }
+  .sede-card:has(input:checked) { border-color: var(--gold); background: var(--off-white); }
+  .sede-name { font-family: var(--font-display); font-size: .98rem; color: var(--text-dark); font-weight:400; margin-bottom:.15rem; }
+  .sede-addr { font-size:.72rem; color: var(--text-light); font-weight:300; line-height:1.5; }
+  .form-field { display:flex; flex-direction:column; gap:.4rem; }
+  .form-field label { font-size:.62rem; letter-spacing:.14em; text-transform:uppercase; color: var(--text-mid); font-weight:400; }
+  .form-field input, .form-field textarea { border:1px solid var(--gold-light); padding:.75rem .9rem; font-family: var(--font-body); font-size:.85rem; color: var(--text-dark); background: var(--off-white); outline:none; transition: border-color .25s; }
+  .form-field input:focus, .form-field textarea:focus { border-color: var(--gold); background:#fff; }
+  .form-field textarea { resize: vertical; min-height: 70px; }
+  .form-row-2 { display:grid; grid-template-columns: 1fr 1fr; gap: 1.1rem; }
+  .checkout-actions { display:flex; justify-content:space-between; gap:1rem; margin-top:.4rem; flex-wrap:wrap; }
+  .checkout-actions .btn-gold-full { flex:1; }
+  .field-error { font-size:.68rem; color: var(--rose-deep); font-weight:400; display:none; }
+  .form-field.invalid input, .form-field.invalid textarea { border-color: var(--rose-deep); }
+  .form-field.invalid .field-error { display:block; }
+
+  .mini-summary-list { display:flex; flex-direction:column; gap:.6rem; margin-bottom: 1rem; max-height: 220px; overflow-y:auto; }
+  .mini-summary-item { display:flex; justify-content:space-between; gap:.6rem; font-size:.76rem; color: var(--text-mid); font-weight:300; }
+  .mini-summary-item span:last-child { color: var(--text-dark); white-space:nowrap; }
+
+  /* CONFIRMATION */
+  .confirmation-card { max-width: 620px; margin: 0 auto; background:#fff; border:1px solid var(--gold-light); padding: 3rem 2.2rem; text-align:center; position:relative; overflow:hidden; }
+  .confirmation-card::before { content:''; position:absolute; inset:0; background: radial-gradient(ellipse 70% 50% at 50% -10%, rgba(201,169,110,.08), transparent 60%); pointer-events:none; }
+  .confirm-icon { font-size:2.4rem; color: var(--gold); margin-bottom:1rem; display:inline-block; animation: confirmPop .6s cubic-bezier(0.22,1,0.36,1); }
+  @keyframes confirmPop { 0%{transform:scale(.4) rotate(-20deg); opacity:0;} 60%{transform:scale(1.15) rotate(8deg); opacity:1;} 100%{transform:scale(1) rotate(0deg);} }
+  .confirmation-card h2 { font-family: var(--font-display); font-size: clamp(1.6rem,3vw,2.1rem); font-weight:300; color: var(--text-dark); margin-bottom:.6rem; }
+  .confirmation-card > p { font-size:.88rem; color: var(--text-mid); font-weight:300; margin-bottom: 1.8rem; }
+  .confirmation-card > p strong { color: var(--gold-dark); font-weight:500; letter-spacing:.03em; }
+  .confirm-summary { text-align:left; background: var(--off-white); border:1px solid var(--gold-light); padding: 1.4rem 1.5rem; margin-bottom: 2rem; }
+  .confirm-summary-row { display:flex; justify-content:space-between; font-size:.8rem; color: var(--text-mid); font-weight:300; padding: .4rem 0; border-bottom: 1px solid rgba(201,169,110,.15); }
+  .confirm-summary-row:last-child { border-bottom:none; }
+  .confirm-summary-row span:last-child { color: var(--text-dark); font-weight:400; text-align:right; }
+  .confirm-summary-row.grand { font-family: var(--font-display); font-size:1.1rem; padding-top:.8rem; }
+  .confirm-actions { display:flex; flex-direction:column; gap:.8rem; }
+
+  .reveal { opacity: 0; transform: translateY(18px); transition: opacity .6s ease, transform .6s ease; }
+  .reveal.visible { opacity: 1; transform: translateY(0); }
+
+  /* WA FLOAT */
+  .wa-float { position: fixed; bottom: 2rem; right: 2rem; z-index: 900; width: 52px; height: 52px; border-radius: 50%; background: #25D366; display: flex; align-items: center; justify-content: center; text-decoration: none; box-shadow: 0 4px 18px rgba(37,211,102,.33); transition: transform .3s; }
+  .wa-float:hover { transform: scale(1.1); }
+  .wa-float svg { width: 25px; height: 25px; fill: #fff; }
+
+  @media(max-width:900px) {
+    nav { padding: 1rem 1.4rem; }
+    .cart-layout, .checkout-layout { grid-template-columns: 1fr; }
+    .summary-card { position: static; }
+    .cart-item { grid-template-columns: 64px 1fr auto; gap:.8rem; padding:.8rem; }
+    .cart-item-thumb { width:64px; height:64px; font-size:1.4rem; }
+    .sede-options { grid-template-columns: 1fr; }
+    .form-row-2 { grid-template-columns: 1fr; }
+    .step-line { width: 22px; }
+  }
+  @media(max-width:520px) {
+    .container { padding: 0 1.2rem; }
+    .steps-indicator { gap:.35rem; }
+    .step-label { display:none; }
+    .checkout-actions { flex-direction: column; }
+    .checkout-actions .btn-outline-sm { width:100%; justify-content:center; }
+  }
+</style>
+</head>
+<body>
+
+<nav>
+  <a href="index.html" class="nav-logo">Dra. <span>Jenireé</span> Gutiérrez</a>
+  <div class="nav-right">
+    <div class="lang-toggle">
+      <button class="lang-btn active" onclick="setLang('es')">ES</button>
+      <div class="lang-sep"></div>
+      <button class="lang-btn" onclick="setLang('en')">EN</button>
+    </div>
+    <a href="index.html#tienda" class="nav-back" data-i18n="nav.back">← Seguir comprando</a>
+  </div>
+</nav>
+
+<main>
+  <div class="container">
+
+    <div class="reveal visible">
+      <div class="section-eyebrow" data-i18n="page.eyebrow">Tu pedido</div>
+      <h1 class="section-title" data-i18n-html="page.title">Revisa tu <em>carrito</em></h1>
+      <p class="page-lead" data-i18n="page.lead">Confirma los productos y tratamientos que deseas reservar. Un miembro del equipo dará seguimiento para coordinar tu cita.</p>
+    </div>
+
+    <!-- STEPS INDICATOR -->
+    <div class="steps-indicator" id="stepsIndicator">
+      <div class="step-dot-wrap">
+        <div class="step-dot" id="dot1">1</div>
+        <span class="step-label" id="lbl1" data-i18n="steps.cart">Carrito</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step-dot-wrap">
+        <div class="step-dot" id="dot2">2</div>
+        <span class="step-label" id="lbl2" data-i18n="steps.data">Tus datos</span>
+      </div>
+      <div class="step-line"></div>
+      <div class="step-dot-wrap">
+        <div class="step-dot" id="dot3">3</div>
+        <span class="step-label" id="lbl3" data-i18n="steps.confirm">Confirmación</span>
+      </div>
+    </div>
+
+    <!-- STEP 1: CART -->
+    <div class="cart-step active" id="step1">
+      <div class="cart-layout">
+        <div class="cart-items-col">
+          <div id="cartItemsList"></div>
+          <div class="cart-empty" id="cartEmpty" style="display:none;">
+            <div class="cart-empty-icon">✦</div>
+            <p data-i18n="empty.text">Tu carrito está vacío por ahora.</p>
+            <a href="index.html#tienda" class="btn-gold" data-i18n="empty.cta">Ir a la tienda</a>
+          </div>
+          <div class="cart-actions-row" id="cartActionsRow">
+            <a href="index.html#tienda" class="btn-outline-sm" data-i18n="cart.continueShopping">← Seguir comprando</a>
+            <button class="btn-text-clear" id="clearCartBtn" data-i18n="cart.clear">Vaciar carrito</button>
+          </div>
+        </div>
+        <aside>
+          <div class="summary-card">
+            <h3 data-i18n="summary.title">Resumen del pedido</h3>
+            <div class="summary-row"><span data-i18n="summary.subtotal">Subtotal</span><span id="sumSubtotal">$0</span></div>
+            <div class="summary-row muted"><span data-i18n="summary.pickup">Atención en sede</span><span data-i18n="summary.pickupVal">Sin costo adicional</span></div>
+            <div class="summary-divider"></div>
+            <div class="summary-row total"><span data-i18n="summary.total">Total estimado</span><span id="sumTotal">$0</span></div>
+            <button class="btn-gold-full" id="toStep2Btn" disabled data-i18n="summary.continue">Continuar →</button>
+            <p class="summary-note" data-i18n="summary.note">Los precios son referenciales. La Dra. Jenireé confirmará el monto final según la valoración de tu caso.</p>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- STEP 2: CHECKOUT FORM -->
+    <div class="cart-step" id="step2">
+      <div class="checkout-layout">
+        <form class="checkout-form" id="checkoutForm" novalidate>
+          <div>
+            <h3 data-i18n="form.sedeTitle">Elige tu sede</h3>
+            <div class="sede-options" style="margin-top:.9rem;">
+              <label class="sede-card">
+                <input type="radio" name="sede" value="santaana" checked>
+                <div class="sede-text">
+                  <div class="sede-name">Santa Ana Town Center</div>
+                  <div class="sede-addr" data-i18n="loc.sa.address">Local 14 y 15, Santa Ana, San José</div>
+                </div>
+              </label>
+              <label class="sede-card">
+                <input type="radio" name="sede" value="liberia">
+                <div class="sede-text">
+                  <div class="sede-name" data-i18n="loc.lib.name">Liberia, Guanacaste</div>
+                  <div class="sede-addr" data-i18n="loc.lib.address">Liberia centro, Guanacaste, Costa Rica</div>
+                </div>
+              </label>
+            </div>
+          </div>
+
+          <div>
+            <h3 data-i18n="form.dataTitle">Tus datos</h3>
+            <div style="display:flex; flex-direction:column; gap:1.1rem; margin-top:.9rem;">
+              <div class="form-field" id="fieldName">
+                <label data-i18n="form.name">Nombre completo *</label>
+                <input type="text" id="custName" autocomplete="name">
+                <span class="field-error" data-i18n="form.errorRequired">Este campo es obligatorio</span>
+              </div>
+              <div class="form-row-2">
+                <div class="form-field" id="fieldPhone">
+                  <label data-i18n="form.phone">Teléfono / WhatsApp *</label>
+                  <input type="tel" id="custPhone" autocomplete="tel" placeholder="+506 8888 8888">
+                  <span class="field-error" data-i18n="form.errorRequired">Este campo es obligatorio</span>
+                </div>
+                <div class="form-field" id="fieldEmail">
+                  <label data-i18n="form.email">Correo electrónico</label>
+                  <input type="email" id="custEmail" autocomplete="email">
+                </div>
+              </div>
+              <div class="form-field" id="fieldDate">
+                <label data-i18n="form.date">Fecha preferida (opcional)</label>
+                <input type="date" id="custDate">
+              </div>
+              <div class="form-field" id="fieldNotes">
+                <label data-i18n="form.notes">Notas adicionales (opcional)</label>
+                <textarea id="custNotes" data-i18n-placeholder="form.notesPh" placeholder="Alergias, horarios preferidos, dudas..."></textarea>
+              </div>
+            </div>
+          </div>
+
+          <div class="checkout-actions">
+            <button type="button" class="btn-outline-sm" id="backToStep1" data-i18n="form.back">← Volver al carrito</button>
+            <button type="submit" class="btn-gold-full" data-i18n="form.submit">✦ Confirmar pedido</button>
+          </div>
+        </form>
+
+        <aside>
+          <div class="summary-card">
+            <h3 data-i18n="summary.title">Resumen del pedido</h3>
+            <div class="mini-summary-list" id="miniSummaryList"></div>
+            <div class="summary-divider"></div>
+            <div class="summary-row total"><span data-i18n="summary.total">Total estimado</span><span id="sumTotal2">$0</span></div>
+          </div>
+        </aside>
+      </div>
+    </div>
+
+    <!-- STEP 3: CONFIRMATION -->
+    <div class="cart-step" id="step3">
+      <div class="confirmation-card reveal visible">
+        <div class="confirm-icon">✦</div>
+        <h2 data-i18n="confirm.title">¡Pedido recibido!</h2>
+        <p data-i18n-html="confirm.orderText">Tu número de pedido es <strong id="orderNumber">JG-000000</strong></p>
+        <div class="confirm-summary" id="confirmSummary"></div>
+        <div class="confirm-actions">
+          <a href="#" id="waSendBtn" class="btn-gold" target="_blank" data-i18n="confirm.sendWa">✦ Enviar pedido por WhatsApp</a>
+          <a href="index.html" class="btn-outline" data-i18n="confirm.backHome">Volver al inicio</a>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</main>
+
+<a class="wa-float" href="https://api.whatsapp.com/send/?phone=%2B50662987582" target="_blank">
+  <svg viewBox="0 0 24 24"><path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/></svg>
+</a>
+
+<script>
+/* ─── TRANSLATIONS ─── */
+const TR = {
+  es: {
+    'nav.back':'← Seguir comprando',
+    'page.eyebrow':'Tu pedido','page.title':'Revisa tu <em>carrito</em>',
+    'page.lead':'Confirma los productos y tratamientos que deseas reservar. Un miembro del equipo dará seguimiento para coordinar tu cita.',
+    'steps.cart':'Carrito','steps.data':'Tus datos','steps.confirm':'Confirmación',
+    'empty.text':'Tu carrito está vacío por ahora.','empty.cta':'Ir a la tienda',
+    'cart.continueShopping':'← Seguir comprando','cart.clear':'Vaciar carrito',
+    'summary.title':'Resumen del pedido','summary.subtotal':'Subtotal','summary.pickup':'Atención en sede','summary.pickupVal':'Sin costo adicional',
+    'summary.total':'Total estimado','summary.continue':'Continuar →',
+    'summary.note':'Los precios son referenciales. La Dra. Jenireé confirmará el monto final según la valoración de tu caso.',
+    'form.sedeTitle':'Elige tu sede','form.dataTitle':'Tus datos',
+    'form.name':'Nombre completo *','form.phone':'Teléfono / WhatsApp *','form.email':'Correo electrónico',
+    'form.date':'Fecha preferida (opcional)','form.notes':'Notas adicionales (opcional)',
+    'form.notesPh':'Alergias, horarios preferidos, dudas...',
+    'form.errorRequired':'Este campo es obligatorio',
+    'form.back':'← Volver al carrito','form.submit':'✦ Confirmar pedido',
+    'loc.sa.address':'Local 14 y 15, Santa Ana, San José',
+    'loc.lib.name':'Liberia, Guanacaste','loc.lib.address':'Liberia centro, Guanacaste, Costa Rica',
+    'confirm.title':'¡Pedido recibido!','confirm.orderText':'Tu número de pedido es <strong id="orderNumber"></strong>',
+    'confirm.sendWa':'✦ Enviar pedido por WhatsApp','confirm.backHome':'Volver al inicio',
+    'confirm.items':'Productos','confirm.sede':'Sede','confirm.customer':'Nombre','confirm.phone':'Teléfono','confirm.date':'Fecha preferida','confirm.total':'Total estimado',
+    'wa.greeting':'Hola, quiero confirmar mi pedido en JG Clinic.',
+  },
+  en: {
+    'nav.back':'← Continue shopping',
+    'page.eyebrow':'Your order','page.title':'Review your <em>cart</em>',
+    'page.lead':'Confirm the products and treatments you want to reserve. A team member will follow up to coordinate your appointment.',
+    'steps.cart':'Cart','steps.data':'Your details','steps.confirm':'Confirmation',
+    'empty.text':'Your cart is empty for now.','empty.cta':'Go to shop',
+    'cart.continueShopping':'← Continue shopping','cart.clear':'Clear cart',
+    'summary.title':'Order summary','summary.subtotal':'Subtotal','summary.pickup':'In-clinic service','summary.pickupVal':'No additional cost',
+    'summary.total':'Estimated total','summary.continue':'Continue →',
+    'summary.note':'Prices are indicative. Dr. Jenireé will confirm the final amount after assessing your case.',
+    'form.sedeTitle':'Choose your location','form.dataTitle':'Your details',
+    'form.name':'Full name *','form.phone':'Phone / WhatsApp *','form.email':'Email address',
+    'form.date':'Preferred date (optional)','form.notes':'Additional notes (optional)',
+    'form.notesPh':'Allergies, preferred times, questions...',
+    'form.errorRequired':'This field is required',
+    'form.back':'← Back to cart','form.submit':'✦ Confirm order',
+    'loc.sa.address':'Local 14 & 15, Santa Ana, San José',
+    'loc.lib.name':'Liberia, Guanacaste','loc.lib.address':'Downtown Liberia, Guanacaste, Costa Rica',
+    'confirm.title':'Order received!','confirm.orderText':'Your order number is <strong id="orderNumber"></strong>',
+    'confirm.sendWa':'✦ Send order via WhatsApp','confirm.backHome':'Back to home',
+    'confirm.items':'Items','confirm.sede':'Location','confirm.customer':'Name','confirm.phone':'Phone','confirm.date':'Preferred date','confirm.total':'Estimated total',
+    'wa.greeting':'Hi, I would like to confirm my order at JG Clinic.',
+  }
+};
+
+let lang = 'es';
+function setLang(l) {
+  lang = l;
+  document.querySelectorAll('.lang-btn').forEach(b => b.classList.toggle('active', b.textContent.toLowerCase() === l));
+  applyTR();
+  renderCartItems();
+  renderMiniSummary();
+}
+function t(k) { return (TR[lang] && TR[lang][k]) || TR.es[k] || k; }
+function applyTR() {
+  document.querySelectorAll('[data-i18n]').forEach(el => {
+    if (el.id === 'orderNumber') return;
+    const v = t(el.dataset.i18n); if (v) el.textContent = v;
+  });
+  document.querySelectorAll('[data-i18n-html]').forEach(el => {
+    const orderNumEl = document.getElementById('orderNumber');
+    const currentOrderNum = orderNumEl ? orderNumEl.textContent : '';
+    const v = t(el.dataset.i18nHtml);
+    if (v) el.innerHTML = v;
+    const newOrderNumEl = document.getElementById('orderNumber');
+    if (newOrderNumEl && currentOrderNum) newOrderNumEl.textContent = currentOrderNum;
+  });
+  document.querySelectorAll('[data-i18n-placeholder]').forEach(el => { const v = t(el.dataset.i18nPlaceholder); if (v) el.placeholder = v; });
+}
+
+/* ─── CART DATA (shared with index.html via sessionStorage) ─── */
+function cartGet(){ try{ return JSON.parse(sessionStorage.getItem('jg_cart')||'[]'); } catch(e){ return []; } }
+function cartSave(items){ sessionStorage.setItem('jg_cart', JSON.stringify(items)); }
+function unitPrice(item){ return item.price != null ? item.price : (item.start != null ? item.start : 0); }
+function isFromPrice(item){ return item.price == null && item.start != null; }
+function cartSubtotal(){ return cartGet().reduce((s,i)=> s + unitPrice(i)*i.qty, 0); }
+
+let currentStep = 1;
+
+function renderCartItems(){
+  const items = cartGet();
+  const list = document.getElementById('cartItemsList');
+  const empty = document.getElementById('cartEmpty');
+  const actionsRow = document.getElementById('cartActionsRow');
+  const toStep2 = document.getElementById('toStep2Btn');
+  const isEn = lang === 'en';
+
+  if (items.length === 0) {
+    list.innerHTML = '';
+    empty.style.display = 'block';
+    actionsRow.style.display = 'none';
+    toStep2.disabled = true;
+    updateSummary();
+    return;
+  }
+  empty.style.display = 'none';
+  actionsRow.style.display = 'flex';
+  toStep2.disabled = false;
+
+  list.innerHTML = items.map((item, idx) => {
+    const name = isEn ? (item.nameEn || item.name) : item.name;
+    const cat = isEn ? (item.type === 'service' ? 'Treatment' : 'Skincare') : (item.cat || '');
+    const up = unitPrice(item);
+    const unitLabel = isEn ? (item.unitEn || item.unit || '') : (item.unit || '');
+    const priceStr = isFromPrice(item)
+      ? (isEn ? 'From $' + Math.round(up) : 'Desde $' + Math.round(up))
+      : '$' + Math.round(up);
+    const lineTotal = '$' + Math.round(up * item.qty);
+    const thumbHtml = item.img
+      ? `<img src="${item.img}" alt="${name}" loading="lazy" onerror="var pr=this.parentNode;this.remove();if(pr){pr.textContent='${item.icon||'✦'}';}">`
+      : (item.icon || '✦');
+    return `<div class="cart-item" data-idx="${idx}">
+      <div class="cart-item-thumb">${thumbHtml}</div>
+      <div class="cart-item-info">
+        <div class="cart-item-cat">${cat}</div>
+        <div class="cart-item-name">${name}</div>
+        <div class="cart-item-unit">${priceStr}${unitLabel ? ' · ' + unitLabel : ''}</div>
+      </div>
+      <div class="cart-item-right">
+        <button class="cart-item-remove" onclick="removeItem(${idx})" aria-label="Remove">✕</button>
+        <div class="qty-stepper">
+          <button onclick="changeQty(${idx},-1)">−</button>
+          <span>${item.qty}</span>
+          <button onclick="changeQty(${idx},1)">+</button>
+        </div>
+        <div class="cart-item-linetotal">${lineTotal}</div>
+      </div>
+    </div>`;
+  }).join('');
+}
+
+function changeQty(idx, delta){
+  const items = cartGet();
+  if (!items[idx]) return;
+  items[idx].qty = Math.max(1, items[idx].qty + delta);
+  cartSave(items);
+  renderCartItems();
+  updateSummary();
+}
+function removeItem(idx){
+  const items = cartGet();
+  items.splice(idx,1);
+  cartSave(items);
+  renderCartItems();
+  updateSummary();
+}
+function clearCart(){
+  cartSave([]);
+  renderCartItems();
+  updateSummary();
+}
+document.getElementById('clearCartBtn').addEventListener('click', clearCart);
+
+function updateSummary(){
+  const subtotal = cartSubtotal();
+  const str = '$' + Math.round(subtotal);
+  const s1 = document.getElementById('sumSubtotal');
+  const s2 = document.getElementById('sumTotal');
+  const s3 = document.getElementById('sumTotal2');
+  if (s1) s1.textContent = str;
+  if (s2) s2.textContent = str;
+  if (s3) s3.textContent = str;
+}
+
+function renderMiniSummary(){
+  const items = cartGet();
+  const isEn = lang === 'en';
+  const list = document.getElementById('miniSummaryList');
+  if (!list) return;
+  list.innerHTML = items.map(item => {
+    const name = isEn ? (item.nameEn || item.name) : item.name;
+    const up = unitPrice(item);
+    const lineTotal = '$' + Math.round(up * item.qty);
+    return `<div class="mini-summary-item"><span>${name} × ${item.qty}</span><span>${lineTotal}</span></div>`;
+  }).join('');
+}
+
+/* ─── STEP NAVIGATION ─── */
+function goToStep(n){
+  currentStep = n;
+  document.querySelectorAll('.cart-step').forEach(el => el.classList.remove('active'));
+  document.getElementById('step'+n).classList.add('active');
+  [1,2,3].forEach(i => {
+    const dot = document.getElementById('dot'+i);
+    const lbl = document.getElementById('lbl'+i);
+    dot.classList.remove('active','done');
+    lbl.classList.remove('active');
+    if (i < n) { dot.classList.add('done'); dot.textContent = '✓'; }
+    else if (i === n) { dot.classList.add('active'); dot.textContent = i; lbl.classList.add('active'); }
+    else { dot.textContent = i; }
+  });
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+}
+
+document.getElementById('toStep2Btn').addEventListener('click', () => {
+  renderMiniSummary();
+  updateSummary();
+  goToStep(2);
+});
+document.getElementById('backToStep1').addEventListener('click', () => goToStep(1));
+
+/* ─── CHECKOUT FORM ─── */
+function validateField(inputId, fieldWrapId){
+  const input = document.getElementById(inputId);
+  const wrap = document.getElementById(fieldWrapId);
+  const valid = input.value.trim().length > 0;
+  wrap.classList.toggle('invalid', !valid);
+  return valid;
+}
+
+document.getElementById('checkoutForm').addEventListener('submit', function(e){
+  e.preventDefault();
+  const nameOk = validateField('custName','fieldName');
+  const phoneOk = validateField('custPhone','fieldPhone');
+  if (!nameOk || !phoneOk) return;
+
+  const items = cartGet();
+  if (items.length === 0) { goToStep(1); return; }
+
+  const sede = document.querySelector('input[name="sede"]:checked').value;
+  const sedeName = sede === 'liberia' ? 'Liberia, Guanacaste' : 'Santa Ana Town Center';
+  const custName = document.getElementById('custName').value.trim();
+  const custPhone = document.getElementById('custPhone').value.trim();
+  const custEmail = document.getElementById('custEmail').value.trim();
+  const custDate = document.getElementById('custDate').value;
+  const custNotes = document.getElementById('custNotes').value.trim();
+  const subtotal = cartSubtotal();
+  const orderNumber = generateOrderNumber();
+
+  const order = { orderNumber, sede, sedeName, custName, custPhone, custEmail, custDate, custNotes, items, subtotal, lang };
+  sessionStorage.setItem('jg_last_order', JSON.stringify(order));
+
+  renderConfirmation(order);
+  cartSave([]);
+  goToStep(3);
+});
+
+function generateOrderNumber(){
+  const d = new Date();
+  const y = d.getFullYear().toString().slice(-2);
+  const m = String(d.getMonth()+1).padStart(2,'0');
+  const day = String(d.getDate()).padStart(2,'0');
+  const rand = Math.floor(1000 + Math.random()*9000);
+  return `JG-${y}${m}${day}-${rand}`;
+}
+
+function renderConfirmation(order){
+  const isEn = order.lang === 'en';
+  document.getElementById('orderNumber').textContent = order.orderNumber;
+
+  const itemsHtml = order.items.map(item => {
+    const name = isEn ? (item.nameEn || item.name) : item.name;
+    const up = unitPrice(item);
+    return `<div class="confirm-summary-row"><span>${name} × ${item.qty}</span><span>$${Math.round(up*item.qty)}</span></div>`;
+  }).join('');
+
+  const dateRow = order.custDate
+    ? `<div class="confirm-summary-row"><span>${t('confirm.date')}</span><span>${order.custDate}</span></div>`
+    : '';
+
+  document.getElementById('confirmSummary').innerHTML = `
+    ${itemsHtml}
+    <div class="confirm-summary-row"><span>${t('confirm.sede')}</span><span>${order.sedeName}</span></div>
+    <div class="confirm-summary-row"><span>${t('confirm.customer')}</span><span>${order.custName}</span></div>
+    <div class="confirm-summary-row"><span>${t('confirm.phone')}</span><span>${order.custPhone}</span></div>
+    ${dateRow}
+    <div class="confirm-summary-row grand"><span>${t('confirm.total')}</span><span>$${Math.round(order.subtotal)}</span></div>
+  `;
+
+  const waLines = [];
+  waLines.push(isEn ? 'Hi, I would like to confirm my order at JG Clinic.' : 'Hola, quiero confirmar mi pedido en JG Clinic.');
+  waLines.push('');
+  waLines.push((isEn ? 'Order' : 'Pedido') + ': ' + order.orderNumber);
+  order.items.forEach(item => {
+    const name = isEn ? (item.nameEn || item.name) : item.name;
+    const up = unitPrice(item);
+    waLines.push(`• ${name} x${item.qty} - $${Math.round(up*item.qty)}`);
+  });
+  waLines.push((isEn ? 'Total' : 'Total') + ': $' + Math.round(order.subtotal));
+  waLines.push((isEn ? 'Location' : 'Sede') + ': ' + order.sedeName);
+  waLines.push((isEn ? 'Name' : 'Nombre') + ': ' + order.custName);
+  if (order.custDate) waLines.push((isEn ? 'Preferred date' : 'Fecha preferida') + ': ' + order.custDate);
+  if (order.custNotes) waLines.push((isEn ? 'Notes' : 'Notas') + ': ' + order.custNotes);
+
+  const waText = encodeURIComponent(waLines.join('\n'));
+  document.getElementById('waSendBtn').href = `https://api.whatsapp.com/send/?phone=%2B50662987582&text=${waText}`;
+}
+
+/* ─── INIT ─── */
+renderCartItems();
+updateSummary();
+</script>
+</body>
+</html>
