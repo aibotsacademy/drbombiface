@@ -520,7 +520,7 @@
   <a href="#sedes" onclick="toggleMenu()" data-i18n="nav.locations">Sedes</a>
   <a href="#proceso" onclick="toggleMenu()" data-i18n="nav.process">Proceso</a>
   <a href="#aprende" onclick="toggleMenu()" data-i18n="nav.learn">Aprende</a>
-  <a href="agendar2.html" target="_blank" onclick="toggleMenu()" data-i18n="nav.cta">Agendar Cita</a>
+  <a href="agendar.html" target="_blank" onclick="toggleMenu()" data-i18n="nav.cta">Agendar Cita</a>
 </div>
 
 <!-- HERO -->
@@ -536,7 +536,7 @@
     <h1 class="hero-title" data-i18n-html="hero.title">Bienvenida a la<br><em>Clínica Dra. Jenireé</em></h1>
     <p class="hero-sub" data-i18n="hero.sub">Donde la ciencia y la belleza se encuentran</p>
     <div class="hero-actions">
-      <a href="agendar2.html" class="btn-gold" target="_blank" data-i18n="hero.cta1">✦  Agendar mi cita</a>
+      <a href="agendar.html" class="btn-gold" target="_blank" data-i18n="hero.cta1">✦  Agendar mi cita</a>
       <a href="#servicios" class="btn-outline" data-i18n="hero.cta2">Ver servicios</a>
       <button class="hero-app-btn" onclick="showAppToast()"><span data-i18n="nav.app">App · Próximamente</span><span class="app-soon-dot"></span></button>
     </div>
@@ -591,7 +591,7 @@
       </div>
       <div class="proc-cta-footer">
         <p>La Dra. Jenireé diseñará un protocolo personalizado para ti.</p>
-        <a href="agendar2.html" class="proc-btn-gold">✦ &nbsp;Agendar consulta</a>
+        <a href="agendar.html" class="proc-btn-gold">✦ &nbsp;Agendar consulta</a>
       </div>
     </div>
   </div>
@@ -610,7 +610,7 @@
       <p class="svc-modal-text" id="modalText"></p>
       <ul class="svc-modal-bullets" id="modalBullets"></ul>
       <div class="svc-modal-actions">
-        <a href="agendar2.html" class="btn-modal-primary" target="_blank" id="modalCtaBook">✦  Agendar cita</a>
+        <a href="agendar.html" class="btn-modal-primary" target="_blank" id="modalCtaBook">✦  Agendar cita</a>
         <a href="#aprende" class="btn-modal-secondary" id="modalCtaLearn" onclick="closeSvcModalBtn()">Ver más →</a>
       </div>
     </div>
@@ -651,7 +651,7 @@
           <div class="credential-item"><div class="credential-dot"></div><div class="credential-text"><strong data-i18n="about.cred3.title">Formación continua internacional</strong><span data-i18n="about.cred3.text">Entrenamiento constante con líderes mundiales en bioestimulación, láser y armonización facial.</span></div></div>
         </div>
         <div style="margin-top:2.3rem;display:flex;gap:1rem;flex-wrap:wrap;">
-          <a href="agendar2.html" class="btn-gold" target="_blank" data-i18n="about.cta1">Agendar consulta</a>
+          <a href="agendar.html" class="btn-gold" target="_blank" data-i18n="about.cta1">Agendar consulta</a>
           <a href="https://www.instagram.com/dra.jenireegutierrez/" class="btn-outline" target="_blank" style="border-color:var(--gold-light);color:var(--text-mid);" data-i18n="about.cta2">Ver en Instagram</a>
         </div>
       </div>
@@ -845,7 +845,7 @@
           <li><a href="#sedes" data-i18n="nav.locations">Sedes</a></li>
           <li><a href="#aprende" data-i18n="nav.learn">Aprende</a></li>
           <li><a href="#newsletter">Newsletter</a></li>
-          <li><a href="agendar2.html" data-i18n="nav.cta">Agendar cita</a></li>
+          <li><a href="agendar.html" data-i18n="nav.cta">Agendar cita</a></li>
           <li><a href="https://www.amazon.com/shop/dra.jenireegutierrez">Amazon Shop</a></li>
         </ul>
       </div>
@@ -1301,7 +1301,7 @@ function renderProcModalContent(p, variant){
         <div class="proc-meta-item"><span class="proc-meta-label">Zonas</span><span class="proc-meta-val">${active.zona}</span></div>
       </div>
       <ul class="proc-modal-bullets">${active.bullets.map(b=>`<li>${b}</li>`).join('')}</ul>
-      <a href="agendar2.html" class="proc-modal-cta" style="background:linear-gradient(135deg,${ac},${ac}bb)">✦ &nbsp;Agendar cita · ${displayName}</a>
+      <a href="agendar.html" class="proc-modal-cta" style="background:linear-gradient(135deg,${ac},${ac}bb)">✦ &nbsp;Agendar cita · ${displayName}</a>
     </div>`;
   initBASlider();
 }
